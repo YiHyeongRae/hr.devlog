@@ -111,7 +111,7 @@ const Editor: Function = ({ setS3File }: any) => {
   useEffect(() => {
     setS3File(md);
     // console.log(md);
-  }, [md]);
+  }, [md, setS3File]);
 
   const deleteFile: Function = (e: React.MouseEvent) => {
     const answer = confirm(
