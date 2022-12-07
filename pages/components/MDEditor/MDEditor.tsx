@@ -174,7 +174,7 @@ const Editor: Function = ({ setS3File }: any) => {
             <th>파일 URL</th>
             <th>삭제</th>
           </tr>
-          {imgList.map((img, i) => {
+          {imgList?.map((img, i) => {
             return (
               <tr
                 key={i}

@@ -59,7 +59,7 @@ function MainCircleList(data: any) {
   };
   return (
     <CircleWrap>
-      {data.data.map((listItem: any) => {
+      {data?.data?.map((listItem: any) => {
         return (
           <CircleList key={listItem.no} onClick={() => goToContent(listItem)}>
             <ThunmbNail>썸네일</ThunmbNail>
