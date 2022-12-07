@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Image from "next/Image";
+import Image from "next/image";
 import GithubIcon from "../../public/assets/img/GitHub-Mark-Light-120px-plus.png";
 import Link from "next/link";
 
