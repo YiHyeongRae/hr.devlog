@@ -3,7 +3,7 @@ import MainCircleList from "./components/MainCircleList";
 import SEO from "./components/SEO";
 
 const Home: NextPage = ({ list }: any) => {
-  // console.log("이건가", list);
+  console.log("홈 서버사이드 리스트", list);
   return (
     <div className="content-wrap">
       <SEO title="HOME" />
