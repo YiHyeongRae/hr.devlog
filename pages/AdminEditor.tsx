@@ -53,7 +53,7 @@ const AdminEditor: NextPage = () => {
           },
         },
       });
-      await axios.post("http://localhost:3000/api/regist/postReg", {
+      await axios.post("https://hr-devlog.vercel.app/api/regist/postReg", {
         data: {
           urlKey: url,
         },

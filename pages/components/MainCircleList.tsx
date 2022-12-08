@@ -38,7 +38,7 @@ const ThunmbNailTitle = styled.div`
 `;
 
 function MainCircleList(data: any) {
-  console.log("메인 써클 리스트", data);
+  // console.log("메인 써클 리스트", data);
   const router = useRouter();
   // console.log("홈에서 받은 데이터", data);
 
