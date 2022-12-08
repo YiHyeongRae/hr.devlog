@@ -121,9 +121,9 @@ const Editor: Function = ({ setS3File }: any) => {
     if (answer) {
       const idx: any = e.currentTarget.getAttribute("data-idx");
       const s3 = new aws.S3({
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-        region: process.env.AWS_REGION,
+        accessKeyId: process.env.VERCEL_AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.VERCEL_AWS_SECRET_ACCESS_KEY,
+        region: process.env.VERCEL_AWS_REGION,
       });
 
       s3.deleteObject(
