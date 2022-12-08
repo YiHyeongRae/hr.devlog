@@ -52,10 +52,13 @@ function MainCircleList(data: any) {
   //   test();
   // }, []);
   const goToContent: Function = (content: any) => {
-    router.push({
-      pathname: `/${content.no}`,
-      query: { post_url: content.post_url },
-    });
+    router.push(
+      {
+        pathname: `/post/${content.no}`,
+        query: { post_url: content.post_url },
+      },
+      `/post/${content.no}`
+    );
   };
   return (
     <CircleWrap>

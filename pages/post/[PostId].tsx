@@ -4,6 +4,7 @@ import React from "react";
 import styled from "styled-components";
 import "@uiw/react-markdown-preview/markdown.css";
 import dynamic from "next/dynamic";
+import SEO from "../components/SEO";
 
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
@@ -64,7 +65,7 @@ const PostContainer = styled.div`
 
 const Post: NextPage = ({ data }: any) => {
   const router = useRouter();
-
+  // console.log("라우터체크", router);
   // const [postData, setPostData] = useState<any>();
 
   // console.log("??????", data);
@@ -92,6 +93,7 @@ const Post: NextPage = ({ data }: any) => {
 
   return (
     <PostWrap>
+      <SEO title={`${router.query.PostId}번 게시글`} />
       <PostHeader>
         <PostTitle>{`${router.query.PostId}번 게시글`}</PostTitle>
         <TagWrap>
@@ -125,7 +127,8 @@ export async function getServerSideProps(context: any) {
   // 환경변수로 node에서 허가되지 않은 인증TLS통신을 거부하지 않겠다고 설정
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   const url = context.query.post_url;
-
+  // console.log(context.query);
+  // console.log("?????", url);
   let postData;
   await fetch(url)
     .then((response) => response.text())
