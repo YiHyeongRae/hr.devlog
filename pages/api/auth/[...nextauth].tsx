@@ -69,7 +69,7 @@ export const authOptions = {
   },
   jwt: {
     maxAge: 6 * 60 * 60, // 6 hours
-    secret: "qwer",
+    secret: process.env.NEXTAUTH_JWT_SECRET,
   },
   pages: {
     signIn: "/login",
