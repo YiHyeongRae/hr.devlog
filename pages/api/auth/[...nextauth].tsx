@@ -17,18 +17,51 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials: any, req) {
-        // console.log("req::::", req);
-        // console.log("credentials : :::: : :::", credentials);
-
+        // Add logic here to look up the user from the credentials supplied
         if (credentials?.userId && credentials?.userPw) {
-          const admin = login(credentials?.userId, credentials?.userPw);
-          console.log("admin :::: ?");
-          return admin;
+          const user = login(credentials.userId, credentials.userPw).then(
+            (res: any) => {
+              if (res != null) {
+                console.log("userInfo:::", res);
+                const userSessionData = {
+                  id: res.user.id,
+                  name: res.user.nickname,
+                };
+                console.log("userSessionData", userSessionData);
+                return userSessionData;
+              } else {
+                return null;
+              }
+              // Any object returned will be saved in `user` property of the JWT
+            }
+          );
+          return user;
+          // Any object returned will be saved in `user` property of the JWT
         } else {
+          // If you return null then an error will be displayed advising the user to check their details.
           return null;
         }
       },
     }),
+    //   async authorize(credentials: any, req) {
+    //     // console.log("req::::", req);
+    //     // console.log("credentials : :::: : :::", credentials);
+
+    //     if (credentials?.userId && credentials?.userPw) {
+    //       const user = login(credentials?.userId, credentials?.userPw).then(
+    //         (res: any) => {
+    //           const userData = {
+    //             id: res.id,
+    //           };
+    //           return userData;
+    //         }
+    //       );
+    //     } else {
+    //       return null;
+    //     }
+    //   },
+
+    // }),
   ],
   session: {
     maxAge: 6 * 60 * 60, // 6 hours
@@ -36,56 +69,58 @@ export const authOptions = {
   },
   jwt: {
     maxAge: 6 * 60 * 60, // 6 hours
-    secret: "",
+    secret: "qwer",
   },
   pages: {
     signIn: "/login",
   },
   callbacks: {
     async signIn({ user, account }: any) {
-      // console.log("signIn : :::: : :::", user);
-      account.lastLogin = user.lastLogin;
+      console.log("signIn : :::: : :::", user, account);
       return true;
     },
     async redirect({ url, baseUrl }: any) {
+      // console.log("url,baseUrl", url, baseUrl);
       // Allows relative callback URLs
-      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      //if (url.startsWith("/")) return `${baseUrl}${url}`;
       // Allows callback URLs on the same origin
-      else if (new URL(url).origin === baseUrl) return url;
+      // else if (new URL(url).origin === baseUrl) return url;
       return baseUrl;
     },
     async jwt({ token, account }: any) {
       if (account) {
-        // console.log("account:::", account);
+        console.log("account:::", account, token);
         token.accessToken = account.access_token;
-        token.lastLogin = account.lastLogin;
       }
       return token;
     },
     async session({ session, token }: any) {
+      console.log("session,token :: ::::", session, token);
       session.accessToken = token.accessToken;
-      session.user.lastLogin = token.lastLogin;
 
       return session;
     },
   },
-  secret: process.env.NEXT_AUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 const login: Function = async (
   userId: string | undefined,
   userPw: string | undefined
 ) => {
-  try {
-    const res = await axios.post("http://localhost:3000/api/login", {
+  // console.log("이게 안들어오나 ?", userId, userPw);
+
+  const res = await axios.post("http://localhost:3000/api/user/login", {
+    loginData: {
       id: userId,
       pw: userPw,
-    });
-    console.log("res가 찍히나 ?", res);
-    return res;
-  } catch (error: any) {
-    console.log("error가 찍히나 ?", error);
-    return error;
+    },
+  });
+  if (res.data.loginState === true) {
+    console.log("res가 찍히나 ?", res.data);
+    return res.data;
+  } else {
+    return res.data.error;
   }
 };
 
