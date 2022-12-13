@@ -23,22 +23,37 @@ const TopContent = styled.p`
 `;
 
 function Nav() {
-  const [hidden, setHidden] = useState<string[]>([]);
+  const [hidden, setHidden] = useState<number>(0);
 
   const { status } = useSession();
-
+  const [clickLog, setClickLog] = useState<number>(0);
   // useEffect(() => {}, []);
   const EasterEgg: Function = () => {
     if (status === "authenticated") {
       signOut();
     } else {
-      Router.push("/login");
+      setClickLog(clickLog >= 5 ? 0 : clickLog + 1);
     }
   };
+
+  useEffect(() => {
+    if (clickLog === 5) {
+      setHidden(hidden + 1);
+    }
+
+    if (hidden > 2) {
+      setHidden(0);
+    }
+  }, [clickLog]);
+  console.log("hidden?", hidden);
   return (
     <TopBar>
       <TopContent style={{ marginRight: 25 }}>
-        <span onClick={() => EasterEgg()}>
+        <input
+          type="text"
+          style={clickLog === 5 ? { width: "100px" } : { width: 0 }}
+        />
+        <span style={{ marginLeft: 10 }} onClick={() => EasterEgg()}>
           {status === "authenticated" ? "!" : "?"}
         </span>
       </TopContent>
@@ -50,6 +65,15 @@ function Nav() {
           <Image width={25} height={25} src={GithubIcon} alt="github-icon" />
         </Link>
       </TopContent>
+      <style jsx>
+        {`
+          input {
+            padding: 0;
+            border: 0;
+            transition: all 0.3s linear;
+          }
+        `}
+      </style>
     </TopBar>
   );
 }
