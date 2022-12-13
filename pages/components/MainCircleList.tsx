@@ -40,7 +40,7 @@ const ThunmbNailTitle = styled.div`
 function MainCircleList(data: any) {
   // console.log("메인 써클 리스트", data);
   const router = useRouter();
-  // console.log("홈에서 받은 데이터", data);
+  console.log("홈에서 받은 데이터", data);
 
   // function test() {
   //   fetch("http://localhost:3000/api/selectDb")
@@ -60,6 +60,8 @@ function MainCircleList(data: any) {
       `/post/${content.no}`
     );
   };
+
+  // console.log("?????", data);
   return (
     <CircleWrap>
       {data?.data?.map((listItem: any) => {

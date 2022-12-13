@@ -27,6 +27,7 @@ const Login: Function = () => {
               onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
                 setUserId(e.target.value)
               }
+              autoComplete="off"
             />
           </p>
           <p>

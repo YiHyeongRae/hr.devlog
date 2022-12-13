@@ -1,6 +1,14 @@
 import axios from "axios";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import Hash from "../../components/Hash/Hash";
+
+interface userResData {
+  user: {
+    id: string | undefined;
+    nickname: string | undefined;
+  };
+}
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -19,16 +27,25 @@ export const authOptions = {
       async authorize(credentials: any, req) {
         // Add logic here to look up the user from the credentials supplied
         if (credentials?.userId && credentials?.userPw) {
-          const user = login(credentials.userId, credentials.userPw).then(
-            (res: any) => {
+          // 여기에 id조회해서 salt 가져오고 pw 해싱하는 구문 필요 ?
+          const hashedPw = await Hash.pwHasing(
+            credentials?.userId,
+            credentials?.userPw
+          ).then((res2: any) => {
+            return res2;
+          });
+
+          console.log("after pwHasing ======", hashedPw);
+          const user = login(credentials.userId, hashedPw).then(
+            (res: userResData) => {
               if (res != null) {
-                console.log("userInfo:::", res);
-                const userSessionData = {
+                //console.log("userInfo:::", res);
+                const userData = {
                   id: res.user.id,
                   name: res.user.nickname,
                 };
-                console.log("userSessionData", userSessionData);
-                return userSessionData;
+                //console.log("userData", userData);
+                return userData;
               } else {
                 return null;
               }
@@ -76,26 +93,26 @@ export const authOptions = {
   },
   callbacks: {
     async signIn({ user, account }: any) {
-      console.log("signIn : :::: : :::", user, account);
+      //console.log("signIn : :::: : :::", user, account);
       return true;
     },
     async redirect({ url, baseUrl }: any) {
       // console.log("url,baseUrl", url, baseUrl);
       // Allows relative callback URLs
-      //if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // if (url.startsWith("/")) return `${baseUrl}${url}`;
       // Allows callback URLs on the same origin
       // else if (new URL(url).origin === baseUrl) return url;
       return baseUrl;
     },
     async jwt({ token, account }: any) {
       if (account) {
-        console.log("account:::", account, token);
+        //console.log("account:::", account, token);
         token.accessToken = account.access_token;
       }
       return token;
     },
     async session({ session, token }: any) {
-      console.log("session,token :: ::::", session, token);
+      //console.log("session,token :: ::::", session, token);
       session.accessToken = token.accessToken;
 
       return session;
@@ -108,7 +125,7 @@ const login: Function = async (
   userId: string | undefined,
   userPw: string | undefined
 ) => {
-  // console.log("이게 안들어오나 ?", userId, userPw);
+  console.log("login id/pw ======", userId, userPw);
 
   const res = await axios.post("http://localhost:3000/api/user/login", {
     loginData: {
@@ -117,7 +134,7 @@ const login: Function = async (
     },
   });
   if (res.data.loginState === true) {
-    console.log("res가 찍히나 ?", res.data);
+    // console.log("res가 찍히나 ?", res.data);
     return res.data;
   } else {
     return res.data.error;
