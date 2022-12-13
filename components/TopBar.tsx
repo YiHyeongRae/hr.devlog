@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
-import GithubIcon from "../../public/assets/img/GitHub-Mark-Light-120px-plus.png";
+import GithubIcon from "../public/assets/img/GitHub-Mark-Light-120px-plus.png";
+
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import Router from "next/router";

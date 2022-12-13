@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import { useState } from "react";
 import { useS3Upload } from "next-s3-upload";
 import axios from "axios";
-import Editor from "./components/MDEditor/MDEditor";
+import Editor from "../components/MDEditor/MDEditor";
 import { ICommand } from "@uiw/react-md-editor/lib/commands";
 
 const AdminEditor: NextPage = () => {

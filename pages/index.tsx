@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
-import MainCircleList from "./components/MainCircleList";
-import SEO from "./components/SEO";
+import MainCircleList from "../components/MainCircleList";
+import SEO from "../components/SEO";
 import crypto from "crypto";
 import { useEffect } from "react";
 
