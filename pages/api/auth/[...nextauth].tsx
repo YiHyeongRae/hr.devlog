@@ -1,7 +1,7 @@
 import axios from "axios";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import Hash from "../../components/Hash/Hash";
+import Hash from "../../components/Atoms/Hash";
 
 interface userResData {
   user: {
