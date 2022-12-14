@@ -4,13 +4,16 @@ import MainCircleList from "../components/MainCircleList";
 import SEO from "../components/SEO";
 import crypto from "crypto";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { ModalType } from "../redux/slice/easterEggSlice";
 
 const Home: NextPage = ({ list }: any) => {
   // console.log("홈 서버사이드 리스트", list);
 
   const { data, status } = useSession();
 
-  console.log("로그인 정보", data, status);
+  const modal = useSelector((state: ModalType) => state.modal);
+  console.log("모다알", modal);
 
   return (
     <div className="content-wrap">

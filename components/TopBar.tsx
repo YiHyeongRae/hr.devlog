@@ -7,6 +7,8 @@ import GithubIcon from "../public/assets/img/GitHub-Mark-Light-120px-plus.png";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import Router from "next/router";
+import { useDispatch } from "react-redux";
+import { modalCounter } from "../redux/slice/easterEggSlice";
 
 const TopBar = styled.div`
   display: flex;
@@ -25,6 +27,7 @@ const TopContent = styled.p`
 `;
 
 function Nav() {
+  const dispatch = useDispatch();
   const [hidden, setHidden] = useState<number>(0);
 
   const { status } = useSession();
@@ -42,12 +45,12 @@ function Nav() {
     if (clickLog === 5) {
       setHidden(hidden + 1);
     }
-
     if (hidden > 2) {
       setHidden(0);
     }
+    dispatch(modalCounter(hidden));
   }, [clickLog]);
-  console.log("hidden?", hidden);
+  // console.log("hidden?", hidden);
   return (
     <TopBar>
       <TopContent style={{ marginRight: 25 }}>

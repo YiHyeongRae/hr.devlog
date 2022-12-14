@@ -10,6 +10,7 @@
     "vercel-deploy": "next build && next export"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.1",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
@@ -23,11 +24,14 @@
     "mysql2": "^2.3.3",
     "next": "13.0.5",
     "next-auth": "^4.18.3",
+    "next-redux-wrapper": "^8.0.0",
     "next-remove-imports": "^1.0.8",
     "next-s3-upload": "^0.2.6",
     "prismjs": "^1.29.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.0",
     "styled-components": "^5.3.6",
     "typescript": "4.9.3",
     "xlsx": "^0.18.5"
