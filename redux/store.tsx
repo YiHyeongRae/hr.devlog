@@ -13,7 +13,7 @@ import EasterEggSlice, { ModalType } from "./slice/easterEggSlice";
 
 // ### 리듀서 State 타입 정의
 export interface ReducerStates {
-  modal: ModalType;
+  modalStore: ModalType;
 }
 
 // ### 루트 리듀서 생성
@@ -32,7 +32,7 @@ const rootReducer = (
     // 슬라이스 통합
     default: {
       const combinedReducer = combineReducers({
-        modal: EasterEggSlice.reducer,
+        modalStore: EasterEggSlice.reducer,
 
         // [couterSlice.name]: couterSlice.reducer,
         // [numberSlice.name]: numberSlice.reducer
