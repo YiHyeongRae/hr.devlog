@@ -2,11 +2,11 @@ import crypto from "crypto";
 import axios from "axios";
 
 interface HashModules {
-  pwHasing: Function;
+  pwHashing: Function;
 }
 
 const Hash: HashModules = {
-  pwHasing: async (userId: string, unHashedPw: string) => {
+  pwHashing: async (userId: string, unHashedPw: string) => {
     const res = await axios.post("http://localhost:3000/api/user/salt", {
       loginData: { id: userId },
     });
