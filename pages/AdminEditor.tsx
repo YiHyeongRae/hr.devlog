@@ -111,3 +111,7 @@ const AdminEditor: NextPage = () => {
 };
 
 export default AdminEditor;
+
+AdminEditor.defaultProps = {
+  auth: true,
+};
