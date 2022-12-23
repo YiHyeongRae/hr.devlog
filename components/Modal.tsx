@@ -1,6 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { modalCounter } from "../redux/slice/easterEggSlice";
 
 const ModalWrapper = styled.div`
   width: 100%;
@@ -18,6 +21,8 @@ const ModalContent = styled.div`
 `;
 
 function Modal({ modal }: { modal: number }) {
+  const dispatch = useDispatch();
+  const router = useRouter();
   // console.log("모달 프롭스", modal);
   // const string = [
   //   "A",
@@ -59,11 +64,15 @@ function Modal({ modal }: { modal: number }) {
     }
     setTest(copyArr);
   }, []);
+  console.log("문제", test?.length);
+  const gimmickInput = useRef<any>(null);
 
   useEffect(() => {
     modal === 3
       ? (document.body.style.overflow = "hidden")
       : (document.body.style.overflow = "initial");
+
+    gimmickInput.current.focus();
   }, [modal]);
   const inputArr: string[] = [];
 
@@ -123,11 +132,32 @@ function Modal({ modal }: { modal: number }) {
       );
       keyRef.current[idx].style.backgroundColor = "#ff0";
       keyRef.current[idx].style.color = "#000";
+
+      if (test.length === inputArr.length) {
+        const checkArr = JSON.stringify(test) === JSON.stringify(inputArr);
+
+        checkArr
+          ? [router.push("/login"), dispatch(modalCounter(0))]
+          : [router.reload(), dispatch(modalCounter(0))];
+      }
     } else if (test && test[idx] !== inputArr[idx]) {
+      for (let i = 0; i < keyRef.current.length; i++) {
+        keyRef.current[i].style.backgroundColor = "#000";
+        keyRef.current[i].style.color = "#fff";
+      }
       inputArr.splice(0);
+      const copyArr = [];
+      while (string.length >= 1) {
+        var mnf = string.splice(
+          Math.floor(Math.random() * string.length),
+          1
+        )[0];
+        copyArr.push(mnf);
+      }
+      setTest(copyArr);
     }
-    console.log(test);
-    console.log(inputArr, idx);
+    console.log("테스트", test);
+    console.log("inputArr, idx", inputArr, idx);
   };
 
   // useEffect(() => {
@@ -142,6 +172,7 @@ function Modal({ modal }: { modal: number }) {
   return (
     <ModalWrapper
       style={modal === 3 ? { display: "block" } : { display: "none" }}
+      onClick={() => gimmickInput.current.focus()}
     >
       <ModalContent>
         <h2 style={{ textAlign: "center", fontSize: 40, marginBottom: 60 }}>
@@ -172,9 +203,11 @@ function Modal({ modal }: { modal: number }) {
           }}
         >
           <input
+            className="gimmick-input"
+            ref={gimmickInput}
             onKeyDown={(e) => playGimmick(e)}
-            style={{ width: "100%" }}
             readOnly
+            style={{ backgroundColor: "#000", border: 0, outline: "none" }}
           />
         </div>
       </ModalContent>

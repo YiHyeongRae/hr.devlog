@@ -91,7 +91,7 @@ export const authOptions = {
       return true;
     },
     async redirect({ url, baseUrl }: any) {
-      // console.log("url,baseUrl", url, baseUrl);
+      console.log("url,baseUrl", url, baseUrl);
       // Allows relative callback URLs
       //if (url.startsWith("/")) return `${baseUrl}${url}`;
       // Allows callback URLs on the same origin

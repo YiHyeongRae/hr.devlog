@@ -14,6 +14,9 @@ const Login: Function = () => {
   const [userId, setUserId] = useState<string | undefined>();
   const [userPw, setUserPw] = useState<string | undefined>();
 
+  const enterLogin: Function = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.keyCode === 13 ? signIn("admin", { userId, userPw }) : {};
+  };
   return (
     <div className="content-wrap">
       <form>
@@ -28,6 +31,7 @@ const Login: Function = () => {
                 setUserId(e.target.value)
               }
               autoComplete="off"
+              onKeyDown={(e) => enterLogin(e)}
             />
           </p>
           <p>
@@ -38,6 +42,7 @@ const Login: Function = () => {
               onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
                 setUserPw(e.target.value)
               }
+              onKeyDown={(e) => enterLogin(e)}
             />
           </p>
           <p>
