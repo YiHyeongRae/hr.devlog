@@ -6,7 +6,7 @@ import GithubIcon from "../public/assets/img/GitHub-Mark-Light-120px-plus.png";
 
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { modalCounter } from "../redux/slice/easterEggSlice";
 
@@ -28,6 +28,7 @@ const TopContent = styled.p`
 
 function Nav() {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [hidden, setHidden] = useState<number>(0);
 
   const { status } = useSession();
@@ -53,15 +54,29 @@ function Nav() {
   // console.log("hidden?", hidden);
   return (
     <TopBar>
+      <TopContent>
+        <span
+          style={
+            status === "authenticated"
+              ? { display: "block", marginRight: 10, cursor: "pointer" }
+              : { display: "none", marginRight: 10 }
+          }
+          onClick={() => router.push("/AdminEditor")}
+        >
+          게시글 작성
+        </span>
+      </TopContent>
       <TopContent style={{ marginRight: 25 }}>
         <input
           type="text"
           style={clickLog === 5 ? { width: "100px" } : { width: 0 }}
         />
+
         <span style={{ marginLeft: 10 }} onClick={() => EasterEgg()}>
           {status === "authenticated" ? "!" : "?"}
         </span>
       </TopContent>
+
       <TopContent style={{ marginRight: 25 }}>
         개발 기록을 남기는 공간
       </TopContent>
