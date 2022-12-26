@@ -158,7 +158,7 @@ const Editor: Function = ({ setS3File }: any) => {
 
       <table
         summary="uploaded-img-list"
-        style={{ width: "50%", margin: "20px 0" }}
+        style={{ width: "100%", margin: "20px 0" }}
       >
         <thead>
           <tr>
