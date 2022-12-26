@@ -150,10 +150,12 @@ const Editor: Function = ({ setS3File }: any) => {
   return (
     <div>
       <input
+        className="file-input"
         ref={fileInput}
         type="file"
         onChange={(e) => handleFileChange(e)}
       />
+
       <table
         summary="uploaded-img-list"
         style={{ width: "50%", margin: "20px 0" }}
@@ -254,7 +256,7 @@ const Editor: Function = ({ setS3File }: any) => {
 
           
           }
-          input{
+          .file-input{
             display:none;
           }
           tbody tr th{

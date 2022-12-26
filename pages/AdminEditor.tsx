@@ -1,6 +1,6 @@
 // import TuiEditor from "./components/ToastEditor";
 import type { NextPage } from "next";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useS3Upload } from "next-s3-upload";
 import axios from "axios";
 import Editor from "../components/MDEditor/MDEditor";
@@ -63,13 +63,26 @@ const AdminEditor: NextPage = () => {
     }
   };
   // console.log(S3File);
+
+  const [postTitle, setPostTitle] = useState<string>();
+  const [postTag, setPostTag] = useState<string[]>();
+
+  const handlePostTitle: Function = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {};
+
+  const handlePostTag: Function = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("태그 핸들러", e.currentTarget.value);
+    // console.log("split", e.currentTarget.value.split(","));
+
+    let splitArr = [];
+    splitArr = e.currentTarget.value.split(",");
+    setPostTag(splitArr);
+  };
   return (
     <>
       <h2>ADMIN EDITOR</h2>
-      <ul>
-        <li>Editor : TOAST UI EDITOR</li>
-        <li>TOAST UI EDITOR를 이용해서 html 문서를 추출 합니다.</li>
-      </ul>
+
       {/* <div style={{ margin: "20px" }}>
         <TuiEditor
           initialValue="Hello World!"
@@ -78,6 +91,20 @@ const AdminEditor: NextPage = () => {
       </div> */}
       <div data-color-mode="dark">
         <div className="wmde-markdown-var"> </div>
+        <div className="title-editor">
+          <p>
+            <label>제목</label>
+            <input
+              type="text"
+              onChange={(e) => setPostTitle(e.currentTarget.value)}
+            />
+          </p>
+          <p>
+            <label>태그</label>
+            <input type="text" onChange={(e) => handlePostTag(e)} />
+          </p>
+        </div>
+
         <Editor setS3File={setS3File} />
       </div>
       <div style={{ textAlign: "center", marginBottom: 20 }}>
@@ -92,6 +119,22 @@ const AdminEditor: NextPage = () => {
 
       <style jsx>
         {`
+          .title-editor {
+            width: 50%;
+            margin-left: 20px;
+          }
+          .title-editor p {
+            display: flex;
+            margin-bottom: 10px;
+          }
+          .title-editor label {
+            margin-right: 10px;
+            line-height: 27.5px;
+          }
+          .title-editor input {
+            width: 50%;
+          }
+
           h2 {
             margin: 20px 0;
             text-align: center;
@@ -103,6 +146,13 @@ const AdminEditor: NextPage = () => {
           li {
             margin-bottom: 10px;
             font-family: MapleLight;
+          }
+          input {
+            outline: none;
+            background-color: #111;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 5px;
           }
         `}
       </style>
