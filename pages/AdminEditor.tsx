@@ -6,6 +6,49 @@ import axios from "axios";
 import Editor from "../components/MDEditor/MDEditor";
 import { ICommand } from "@uiw/react-md-editor/lib/commands";
 import Image from "next/image";
+import styled from "styled-components";
+import AutoHeightImage from "../components/AutoHeightImage";
+
+const ImageWrapper = styled.div`
+  position: relative;
+  & > span {
+    position: unset !important;
+  }
+`;
+
+const CircleWrap = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  list-style: none;
+  margin: 50px 0;
+`;
+
+const CircleList = styled.li`
+  box-sizing: border-box;
+  box-shadow: 0 0 10px #333;
+  cursor: pointer;
+  border-radius: 10px;
+`;
+
+const ThunmbNail = styled.div`
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 300px;
+  border-radius: 10px 10px 0 0;
+
+  border: 1px solid #999;
+  // animation: fadeInOut 5s linear infinite;
+`;
+
+const ThunmbNailTitle = styled.div`
+  text-align: center;
+  width: 100%;
+  padding: 25px;
+  font-size: 16px;
+`;
 
 const AdminEditor: NextPage = () => {
   const title3: ICommand = {
@@ -68,10 +111,6 @@ const AdminEditor: NextPage = () => {
   const [postTitle, setPostTitle] = useState<string>();
   const [postTag, setPostTag] = useState<string[]>();
 
-  const handlePostTitle: Function = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {};
-
   const handlePostTag: Function = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log("태그 핸들러", e.currentTarget.value);
     // console.log("split", e.currentTarget.value.split(","));
@@ -95,12 +134,19 @@ const AdminEditor: NextPage = () => {
     <>
       <h2>ADMIN EDITOR</h2>
 
-      {/* <div style={{ margin: "20px" }}>
-        <TuiEditor
-          initialValue="Hello World!"
-          onChange={(e) => setPostDesc(e)}
-        />
-      </div> */}
+      <CircleWrap>
+        <CircleList>
+          <ThunmbNail>
+            <Image
+              src={thumbNail}
+              alt={"이미지"}
+              layout="fill"
+              style={{ borderRadius: "10px 10px 0 0 " }}
+            />
+          </ThunmbNail>
+          <ThunmbNailTitle>{postTitle || "타이틀"}</ThunmbNailTitle>
+        </CircleList>
+      </CircleWrap>
       <div data-color-mode="dark">
         <div className="wmde-markdown-var"> </div>
         <div className="title-editor">
@@ -124,9 +170,6 @@ const AdminEditor: NextPage = () => {
               onChange={(e) => fileTest(e)}
               ref={thumnailInput}
             />
-            <span>
-              <Image src={thumbNail} alt={"이미지"} width={100} height={100} />
-            </span>
           </p>
         </div>
 
