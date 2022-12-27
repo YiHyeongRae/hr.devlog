@@ -1,10 +1,11 @@
 // import TuiEditor from "./components/ToastEditor";
 import type { NextPage } from "next";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useS3Upload } from "next-s3-upload";
 import axios from "axios";
 import Editor from "../components/MDEditor/MDEditor";
 import { ICommand } from "@uiw/react-md-editor/lib/commands";
+import Image from "next/image";
 
 const AdminEditor: NextPage = () => {
   const title3: ICommand = {
@@ -79,6 +80,17 @@ const AdminEditor: NextPage = () => {
     splitArr = e.currentTarget.value.split(",");
     setPostTag(splitArr);
   };
+
+  const [thumbNail, setThumbNail] = useState<any>();
+  const thumnailInput = useRef<any>(null);
+  const fileTest: Function = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = thumnailInput.current.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setThumbNail(reader.result);
+    };
+  };
   return (
     <>
       <h2>ADMIN EDITOR</h2>
@@ -103,6 +115,19 @@ const AdminEditor: NextPage = () => {
             <label>태그</label>
             <input type="text" onChange={(e) => handlePostTag(e)} />
           </p>
+          <p>
+            <label>썸네일</label>
+            <input
+              id="thumb-nail"
+              type="file"
+              accept="image/*"
+              onChange={(e) => fileTest(e)}
+              ref={thumnailInput}
+            />
+            <span>
+              <Image src={thumbNail} alt={"이미지"} width={100} height={100} />
+            </span>
+          </p>
         </div>
 
         <Editor setS3File={setS3File} />
@@ -120,7 +145,7 @@ const AdminEditor: NextPage = () => {
       <style jsx>
         {`
           .title-editor {
-            width: 50%;
+            margin-right: 20px;
             margin-left: 20px;
           }
           .title-editor p {
@@ -130,9 +155,12 @@ const AdminEditor: NextPage = () => {
           .title-editor label {
             margin-right: 10px;
             line-height: 27.5px;
+            flex-grow: 0;
+            width: 10%;
           }
           .title-editor input {
-            width: 50%;
+            flex-grow: 1;
+            text-indent: 15px;
           }
 
           h2 {
