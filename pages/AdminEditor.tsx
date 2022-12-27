@@ -9,13 +9,6 @@ import Image from "next/image";
 import styled from "styled-components";
 import AutoHeightImage from "../components/AutoHeightImage";
 
-const ImageWrapper = styled.div`
-  position: relative;
-  & > span {
-    position: unset !important;
-  }
-`;
-
 const CircleWrap = styled.ul`
   display: flex;
   flex-wrap: wrap;
@@ -26,6 +19,8 @@ const CircleWrap = styled.ul`
 `;
 
 const CircleList = styled.li`
+  width: 500px;
+
   box-sizing: border-box;
   box-shadow: 0 0 10px #333;
   cursor: pointer;
@@ -35,7 +30,7 @@ const CircleList = styled.li`
 const ThunmbNail = styled.div`
   position: relative;
   box-sizing: border-box;
-  width: 100%;
+  width: 500px;
   height: 300px;
   border-radius: 10px 10px 0 0;
 
@@ -46,10 +41,24 @@ const ThunmbNail = styled.div`
 const ThunmbNailTitle = styled.div`
   text-align: center;
   width: 100%;
-  padding: 25px;
+
   font-size: 16px;
 `;
 
+const TagWrap = styled.ul`
+  margin-top: 25px;
+`;
+
+const PostTag = styled.li`
+  display: inline-block;
+  font-size: 10px;
+  font-family: "MapleLight";
+  padding: 10px;
+  background-color: #333;
+  border-radius: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+`;
 const AdminEditor: NextPage = () => {
   const title3: ICommand = {
     name: "title3",
@@ -109,7 +118,7 @@ const AdminEditor: NextPage = () => {
   // console.log(S3File);
 
   const [postTitle, setPostTitle] = useState<string>();
-  const [postTag, setPostTag] = useState<string[]>();
+  const [tag, setTag] = useState<string[]>();
 
   const handlePostTag: Function = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log("태그 핸들러", e.currentTarget.value);
@@ -117,7 +126,7 @@ const AdminEditor: NextPage = () => {
 
     let splitArr = [];
     splitArr = e.currentTarget.value.split(",");
-    setPostTag(splitArr);
+    setTag(splitArr);
   };
 
   const [thumbNail, setThumbNail] = useState<any>();
@@ -133,7 +142,9 @@ const AdminEditor: NextPage = () => {
   return (
     <>
       <h2>ADMIN EDITOR</h2>
-
+      <p style={{ textAlign: "center", fontSize: 20 }}>
+        홈에서 보여지는 카드 모양 미리보기
+      </p>
       <CircleWrap>
         <CircleList>
           <ThunmbNail>
@@ -144,7 +155,15 @@ const AdminEditor: NextPage = () => {
               style={{ borderRadius: "10px 10px 0 0 " }}
             />
           </ThunmbNail>
-          <ThunmbNailTitle>{postTitle || "타이틀"}</ThunmbNailTitle>
+          <div style={{ padding: "25px" }}>
+            <ThunmbNailTitle>{postTitle || "타이틀"}</ThunmbNailTitle>
+            <TagWrap>
+              {tag &&
+                tag.map((tag: any, i: any) => {
+                  return <PostTag key={i}>{tag}</PostTag>;
+                })}
+            </TagWrap>
+          </div>
         </CircleList>
       </CircleWrap>
       <div data-color-mode="dark">
