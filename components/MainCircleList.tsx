@@ -13,9 +13,13 @@ const CircleWrap = styled.ul`
 `;
 
 const CircleList = styled.li`
-  padding-right: 10px;
-  padding-left: 10px;
-  padding-bottom: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  flex-basis: 220px;
+  padding: 30px;
+  box-sizing: border-box;
+  box-shadow: 0 0 10px #333;
   cursor: pointer;
 `;
 
@@ -68,7 +72,9 @@ function MainCircleList(data: any) {
         return (
           <CircleList key={listItem.no} onClick={() => goToContent(listItem)}>
             <ThunmbNail>썸네일</ThunmbNail>
-            <ThunmbNailTitle>타이틀</ThunmbNailTitle>
+            <ThunmbNailTitle>
+              타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀
+            </ThunmbNailTitle>
           </CircleList>
         );
       })}
