@@ -35,7 +35,9 @@ export async function getServerSideProps(ctx: any) {
   // const res = await fetch("http://localhost:3000/api/selectDb");
   // const res = await fetch("https://hr-devlog.vercel.app/api/selectDb");
   // const res = await axios.get("http://localhost:3000/api/selectDb");
-  const res = await axios.get("https://hr-devlog.vercel.app/api/selectDb");
+  const res = await axios.get(
+    process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
+  );
   // console.log("getServerSideProps RES.data", res.data);
   const data = res.data;
 

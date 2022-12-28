@@ -6,6 +6,7 @@ import "@uiw/react-markdown-preview/markdown.css";
 import dynamic from "next/dynamic";
 import SEO from "../../components/SEO";
 import { server } from "../../common/config";
+import axios from "axios";
 
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
@@ -129,8 +130,12 @@ export async function getServerSideProps(context: any) {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
   // const res = await fetch("http://localhost:3000/api/selectDb");
-  const res = await fetch("https://hr-devlog.vercel.app/api/selectDb");
-  const data = await res.json();
+  // const res = await fetch("https://hr-devlog.vercel.app/api/selectDb");
+
+  const res = await axios.get(
+    process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
+  );
+  const data = await res.data;
 
   const url = data[context.query.PostId].post_url;
   let postData;
