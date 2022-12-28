@@ -27,17 +27,17 @@ const Home: NextPage = ({ list }: any) => {
 };
 
 export async function getServerSideProps(ctx: any) {
-  // const res = await fetch("https://hr-devlog.vercel.app/api/selectDb");
-
-  const res = await fetch(server + "/api/selectDb");
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
+  );
+  console.log(
+    "이거 어떻게 되는지 한번 보자",
+    process.env.NEXT_PUBLIC_ORIGIN_HOST
+  );
   // const res = await fetch("http://localhost:3000/api/selectDb");
-
   // const res = await fetch(`https://hr-devlog.vercel.app/api/selectDb`);
 
   const data = await res.json();
-  // console.log(":::::", res);
-
-  // console.log(":::::",context);
   return {
     props: { list: data }, // will be passed to the page component as props
   };
