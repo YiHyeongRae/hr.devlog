@@ -142,12 +142,19 @@ const login: Function = async (
 ) => {
   //console.log("login id/pw ======", userId, userPw);
 
-  const res = await axios.post("http://localhost:3000/api/user/login", {
+  const res = await axios.post("https://hr-devlog.vercel.app/api/user/login", {
     loginData: {
       id: userId,
       pw: userPw,
     },
   });
+
+  // const res = await axios.post("http://localhost:3000/api/user/login", {
+  //   loginData: {
+  //     id: userId,
+  //     pw: userPw,
+  //   },
+  // });
   if (res.data.loginState === true) {
     // console.log("res가 찍히나 ?", res.data);
     return res.data;

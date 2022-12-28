@@ -127,15 +127,11 @@ const Post: NextPage = ({ data }: any) => {
 export async function getServerSideProps(context: any) {
   // 환경변수로 node에서 허가되지 않은 인증TLS통신을 거부하지 않겠다고 설정
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-  // const url = context.query.post_url;
-  // console.log("1:::::", context.query);
-  // console.log("2:::::", context);
-  // console.log("?????", url);
 
+  // const res = await fetch("http://localhost:3000/api/selectDb");
   const res = await fetch("https://hr-devlog.vercel.app/api/selectDb");
   const data = await res.json();
-  // console.log("2:::::", context.query.PostId);
-  // console.log("::::::::", await res.json());
+
   const url = data[context.query.PostId].post_url;
   let postData;
   await fetch(url)

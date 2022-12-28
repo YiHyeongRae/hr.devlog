@@ -58,17 +58,7 @@ const PostTag = styled.li`
 function MainCircleList(data: any) {
   // console.log("메인 써클 리스트", data);
   const router = useRouter();
-  console.log("홈에서 받은 데이터", data);
 
-  // function test() {
-  //   fetch("http://localhost:3000/api/selectDb")
-  //     .then((res) => console.log("!!!", res))
-  //     .then((data) => console.log("???", data));
-  // }
-
-  // useEffect(() => {
-  //   test();
-  // }, []);
   const goToContent: Function = (content: any) => {
     router.push(
       {
