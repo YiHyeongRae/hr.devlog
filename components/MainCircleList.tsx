@@ -56,7 +56,7 @@ const PostTag = styled.li`
   margin-bottom: 10px;
 `;
 function MainCircleList(data: any) {
-  // console.log("메인 써클 리스트", data);
+  console.log("메인 써클 리스트", data);
   const router = useRouter();
 
   const goToContent: Function = (content: any) => {
@@ -76,14 +76,7 @@ function MainCircleList(data: any) {
         data?.data?.map((listItem: any) => {
           return (
             <CircleList key={listItem.no} onClick={() => goToContent(listItem)}>
-              <ThunmbNail>
-                {/* <Image
-                  src={"/"}
-                  alt={"이미지"}
-                  layout="fill"
-                  style={{ borderRadius: "10px 10px 0 0 " }}
-                /> */}
-              </ThunmbNail>
+              <ThunmbNail></ThunmbNail>
               <div style={{ padding: "25px" }}>
                 <ThunmbNailTitle>
                   타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀
@@ -101,6 +94,15 @@ function MainCircleList(data: any) {
         })}
     </CircleWrap>
   );
+}
+
+{
+  /* <Image
+src={"/"}
+alt={"이미지"}
+layout="fill"
+style={{ borderRadius: "10px 10px 0 0 " }}
+/> */
 }
 
 export default MainCircleList;
