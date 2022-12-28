@@ -64,7 +64,7 @@ function Modal({ modal }: { modal: number }) {
     }
     setTest(copyArr);
   }, []);
-  console.log("문제", test?.length);
+  // console.log("문제", test?.length);
   const gimmickInput = useRef<any>(null);
 
   useEffect(() => {
