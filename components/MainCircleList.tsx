@@ -72,7 +72,7 @@ function MainCircleList(data: any) {
   // console.log("?????", data);
   return (
     <CircleWrap>
-      {/* {data &&
+      {data &&
         data?.data?.map((listItem: any) => {
           return (
             <CircleList key={listItem.no} onClick={() => goToContent(listItem)}>
@@ -91,7 +91,7 @@ function MainCircleList(data: any) {
               </div>
             </CircleList>
           );
-        })} */}
+        })}
     </CircleWrap>
   );
 }

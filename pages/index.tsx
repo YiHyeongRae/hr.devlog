@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { ReducerStates } from "../redux/store";
 import Modal from "../components/Modal";
 import { server } from "../common/config";
-import axios from "axios";
 
 const Home: NextPage = ({ list }: any) => {
   // console.log("홈 서버사이드 리스트", list);
