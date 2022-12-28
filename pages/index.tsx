@@ -30,7 +30,7 @@ const Home: NextPage = ({ list }: any) => {
 export async function getServerSideProps(ctx: any) {
   // const res = await fetch("https://hr-devlog.vercel.app/api/selectDb");
 
-  const res = await fetch(`${server}/api/selectDb`);
+  const res = await fetch(`https://hr-devlog.vercel.app/api/selectDb`);
 
   const data = await res.json();
   // console.log(":::::", res);
