@@ -5,6 +5,7 @@ import styled from "styled-components";
 import "@uiw/react-markdown-preview/markdown.css";
 import dynamic from "next/dynamic";
 import SEO from "../../components/SEO";
+import { server } from "../../common/config";
 
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
@@ -131,7 +132,7 @@ export async function getServerSideProps(context: any) {
   // console.log("2:::::", context);
   // console.log("?????", url);
 
-  const res = await fetch("http://localhost:3000/api/selectDb");
+  const res = await fetch(`${server}/api/selectDb`);
   const data = await res.json();
   // console.log("2:::::", context.query.PostId);
   // console.log("::::::::", await res.json());
