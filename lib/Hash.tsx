@@ -7,9 +7,12 @@ interface HashModules {
 
 const Hash: HashModules = {
   pwHashing: async (userId: string, unHashedPw: string) => {
-    const res = await axios.post("https://hr-devlog.vercel.app/api/user/salt", {
-      loginData: { id: userId },
-    });
+    const res = await axios.post(
+      process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/user/salt",
+      {
+        loginData: { id: userId },
+      }
+    );
     // const res = await axios.post("http://localhost:3000/api/user/salt", {
     //   loginData: { id: userId },
     // });

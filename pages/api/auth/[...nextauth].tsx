@@ -2,7 +2,6 @@ import axios from "axios";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import Hash from "../../../lib/Hash";
-import { getToken } from "next-auth/jwt";
 
 interface userResData {
   user: {
@@ -142,12 +141,15 @@ const login: Function = async (
 ) => {
   //console.log("login id/pw ======", userId, userPw);
 
-  const res = await axios.post("https://hr-devlog.vercel.app/api/user/login", {
-    loginData: {
-      id: userId,
-      pw: userPw,
-    },
-  });
+  const res = await axios.post(
+    process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/user/login",
+    {
+      loginData: {
+        id: userId,
+        pw: userPw,
+      },
+    }
+  );
 
   // const res = await axios.post("http://localhost:3000/api/user/login", {
   //   loginData: {
