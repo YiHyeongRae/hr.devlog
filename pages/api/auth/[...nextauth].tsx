@@ -71,7 +71,7 @@ export const authOptions = {
   },
   jwt: {
     maxAge: 6 * 60 * 60, // 6 hours
-    secret: process.env.NEXTAUTH_JWT_SECRET,
+    secret: process.env.VERCEL_NEXTAUTH_JWT_SECRET,
   },
   pages: {
     signIn: "/login",
@@ -135,7 +135,7 @@ export const authOptions = {
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.VERCEL_NEXTAUTH_SECRET,
 };
 
 const login: Function = async (
