@@ -33,11 +33,11 @@ export async function getServerSideProps(ctx: any) {
   // );
 
   // const res = await fetch("http://localhost:3000/api/selectDb");
-  // const res = await fetch("https://hr-devlog.vercel.app/api/selectDb");
+  const res = await fetch("https://hr-devlog.vercel.app/api/selectDb");
   // const res = await axios.get("http://localhost:3000/api/selectDb");
-  const res = await axios.get("https://hr-devlog.vercel.app/api/selectDb");
-
-  const data = res.data;
+  // const res = await axios.get("https://hr-devlog.vercel.app/api/selectDb");
+  // console.log("getServerSideProps RES.data", res.data);
+  const data = res.json();
 
   // console.log(
   //   "이거 어떻게 되는지 한번 보자",

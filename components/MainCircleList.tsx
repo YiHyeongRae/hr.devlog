@@ -56,7 +56,7 @@ const PostTag = styled.li`
   margin-bottom: 10px;
 `;
 function MainCircleList(data: any) {
-  console.log("메인 써클 리스트", data);
+  // console.log("메인 써클 리스트", data);
   const router = useRouter();
 
   const goToContent: Function = (content: any) => {
@@ -72,7 +72,7 @@ function MainCircleList(data: any) {
   // console.log("?????", data);
   return (
     <CircleWrap>
-      {data &&
+      {/* {data &&
         data?.data?.map((listItem: any) => {
           return (
             <CircleList key={listItem.no} onClick={() => goToContent(listItem)}>
@@ -91,7 +91,7 @@ function MainCircleList(data: any) {
               </div>
             </CircleList>
           );
-        })}
+        })} */}
     </CircleWrap>
   );
 }
