@@ -5,7 +5,6 @@ import SEO from "../components/SEO";
 import { useSelector } from "react-redux";
 import { ReducerStates } from "../redux/store";
 import Modal from "../components/Modal";
-import { server } from "../common/config";
 import axios from "axios";
 
 const Home: NextPage = ({ list }: any) => {
@@ -20,6 +19,7 @@ const Home: NextPage = ({ list }: any) => {
 
   return (
     <div className="content-wrap">
+      <div>{`로그인 상태 ${status}`}</div>
       <SEO title="HOME" />
       <MainCircleList data={list} />
       <Modal modal={modal} />
