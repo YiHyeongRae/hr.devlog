@@ -2,11 +2,9 @@ import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import MainCircleList from "../components/MainCircleList";
 import SEO from "../components/SEO";
-
 import { useSelector } from "react-redux";
 import { ReducerStates } from "../redux/store";
 import Modal from "../components/Modal";
-import { server } from "../common/config";
 
 const Home: NextPage = ({ list }: any) => {
   // console.log("홈 서버사이드 리스트", list);
