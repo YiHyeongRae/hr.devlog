@@ -131,11 +131,8 @@ export async function getServerSideProps(context: any) {
   // console.log("1:::::", context.query);
   // console.log("2:::::", context);
   // console.log("?????", url);
-  const res = await fetch(
-    process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
-  );
 
-  // const res = await fetch(`https://hr-devlog.vercel.app/api/selectDb`);
+  const res = await fetch("https://hr-devlog.vercel.app/api/selectDb");
   const data = await res.json();
   // console.log("2:::::", context.query.PostId);
   // console.log("::::::::", await res.json());

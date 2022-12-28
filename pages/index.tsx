@@ -32,7 +32,7 @@ export async function getServerSideProps(ctx: any) {
   // );
 
   // const res = await fetch("http://localhost:3000/api/selectDb");
-  const res = await fetch(`https://hr-devlog.vercel.app/api/selectDb`);
+  const res = await fetch("https://hr-devlog.vercel.app/api/selectDb");
 
   const data = await res.json();
 
