@@ -5,6 +5,7 @@ import SEO from "../components/SEO";
 import { useSelector } from "react-redux";
 import { ReducerStates } from "../redux/store";
 import Modal from "../components/Modal";
+import { server } from "../common/config";
 
 const Home: NextPage = ({ list }: any) => {
   // console.log("홈 서버사이드 리스트", list);
@@ -28,7 +29,10 @@ const Home: NextPage = ({ list }: any) => {
 export async function getServerSideProps(ctx: any) {
   // const res = await fetch("https://hr-devlog.vercel.app/api/selectDb");
 
-  const res = await fetch(`https://hr-devlog.vercel.app/api/selectDb`);
+  const res = await fetch(server + "/api/selectDb");
+  // const res = await fetch("http://localhost:3000/api/selectDb");
+
+  // const res = await fetch(`https://hr-devlog.vercel.app/api/selectDb`);
 
   const data = await res.json();
   // console.log(":::::", res);

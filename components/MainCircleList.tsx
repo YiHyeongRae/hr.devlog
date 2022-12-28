@@ -78,51 +78,37 @@ function MainCircleList(data: any) {
       `/post/${content.no}`
     );
   };
-
+  const tag: any = [];
   // console.log("?????", data);
   return (
     <CircleWrap>
-      {data?.data?.map((listItem: any) => {
-        return (
-          <CircleList key={listItem.no} onClick={() => goToContent(listItem)}>
-            <ThunmbNail>
-              <Image
-                src={"/"}
-                alt={"이미지"}
-                layout="fill"
-                style={{ borderRadius: "10px 10px 0 0 " }}
-              />
-            </ThunmbNail>
-            <div style={{ padding: "25px" }}>
-              <ThunmbNailTitle>
-                타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀
-              </ThunmbNailTitle>
-              <TagWrap>
-                {/* {tag &&
-                tag.map((tag: any, i: any) => {
-                  return <PostTag key={i}>{tag}</PostTag>;
-                })} */}
-              </TagWrap>
-            </div>
-          </CircleList>
-        );
-      })}
-      {/* <CircleList onClick={() => goToContent(1)}>
-        <ThunmbNail>썸네일</ThunmbNail>
-        <ThunmbNailTitle>타이틀</ThunmbNailTitle>
-      </CircleList>
-      <CircleList onClick={() => goToContent(1)}>
-        <ThunmbNail>썸네일</ThunmbNail>
-        <ThunmbNailTitle>타이틀</ThunmbNailTitle>
-      </CircleList>
-      <CircleList onClick={() => goToContent(1)}>
-        <ThunmbNail>썸네일</ThunmbNail>
-        <ThunmbNailTitle>타이틀</ThunmbNailTitle>
-      </CircleList>
-      <CircleList onClick={() => goToContent(1)}>
-        <ThunmbNail>썸네일</ThunmbNail>
-        <ThunmbNailTitle>타이틀</ThunmbNailTitle>
-      </CircleList> */}
+      {data &&
+        data?.data?.map((listItem: any) => {
+          return (
+            <CircleList key={listItem.no} onClick={() => goToContent(listItem)}>
+              <ThunmbNail>
+                <Image
+                  src={"/"}
+                  alt={"이미지"}
+                  layout="fill"
+                  style={{ borderRadius: "10px 10px 0 0 " }}
+                />
+              </ThunmbNail>
+              <div style={{ padding: "25px" }}>
+                <ThunmbNailTitle>
+                  타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀
+                </ThunmbNailTitle>
+                <TagWrap>
+                  {tag &&
+                    tag &&
+                    tag.map((tag: any, i: any) => {
+                      return <PostTag key={i}>{tag}</PostTag>;
+                    })}
+                </TagWrap>
+              </div>
+            </CircleList>
+          );
+        })}
     </CircleWrap>
   );
 }
