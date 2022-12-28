@@ -87,12 +87,12 @@ function MainCircleList(data: any) {
           return (
             <CircleList key={listItem.no} onClick={() => goToContent(listItem)}>
               <ThunmbNail>
-                <Image
+                {/* <Image
                   src={"/"}
                   alt={"이미지"}
                   layout="fill"
                   style={{ borderRadius: "10px 10px 0 0 " }}
-                />
+                /> */}
               </ThunmbNail>
               <div style={{ padding: "25px" }}>
                 <ThunmbNailTitle>
