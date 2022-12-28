@@ -4,11 +4,11 @@ const db = require("../../../common/config/db");
 
 export default function login(req: NextApiRequest, res: NextApiResponse) {
   // console.log("로그인~", req.body.loginData.id);
-  console.log(
-    "로그인 api id/pw ======",
-    req.body.loginData.id,
-    req.body.loginData.pw
-  );
+  // console.log(
+  //   "로그인 api id/pw ======",
+  //   req.body.loginData.id,
+  //   req.body.loginData.pw
+  // );
 
   // const url = req.body.urlData;
   db.query(
