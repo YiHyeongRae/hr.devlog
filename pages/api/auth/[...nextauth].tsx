@@ -39,7 +39,7 @@ export const authOptions = {
           const user = login(credentials.userId, hashedPw).then(
             (res: userResData) => {
               if (res != null) {
-                // console.log("userLogin :::", res);
+                console.log("로그인 에러 체크 [nextAuth]-authorize", res);
                 const userData = {
                   id: res.user.id,
                   name: res.user.nickname,
@@ -87,6 +87,9 @@ export const authOptions = {
       //  picture: 'user.jpeg'
       //  image:'userImage.jpeg'
       // }
+
+      console.log("로그인 에러 체크 [nextAuth]-signIn", user, account);
+
       return true;
     },
     async redirect({ url, baseUrl }: any) {
@@ -129,6 +132,8 @@ export const authOptions = {
       // session.user.test = token.test;
 
       // session.accessToken = token.accessToken;
+      console.log("로그인 에러 체크 [nextAuth]-session", session);
+
       return session;
     },
   },
@@ -157,6 +162,7 @@ const login: Function = async (
   //     pw: userPw,
   //   },
   // });
+  console.log("로그인 에러 체크 [nextAuth]-login func", res);
   if (res.data.loginState === true) {
     // console.log("res가 찍히나 ?", res.data);
     return res.data;

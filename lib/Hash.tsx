@@ -19,7 +19,7 @@ const Hash: HashModules = {
     // console.log("Hash res", res);
     const salt = res.data[0].salt;
 
-    console.log("Hash Salt ======", salt);
+    // console.log("Hash Salt ======", salt);
     return new Promise(async (resolve, reject) => {
       crypto.pbkdf2(unHashedPw, salt, 1000, 64, "sha512", (err, key) => {
         if (err) reject(err);
