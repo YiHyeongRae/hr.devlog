@@ -10,8 +10,6 @@ import axios from "axios";
 const Home: NextPage = ({ list }: any) => {
   // console.log("홈 서버사이드 리스트", list);
 
-  const { data, status } = useSession();
-
   const modal = useSelector(
     (state: ReducerStates) => state.modalStore.modalState
   );
@@ -19,7 +17,6 @@ const Home: NextPage = ({ list }: any) => {
 
   return (
     <div className="content-wrap">
-      <div>{`로그인 상태 ${status}`}</div>
       <SEO title="HOME" />
       <MainCircleList data={list} />
       <Modal modal={modal} />

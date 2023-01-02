@@ -40,7 +40,7 @@ export const authOptions = {
           const user = login(credentials.userId, hashedPw).then(
             (res: userResData) => {
               if (res != null) {
-                console.log("로그인 에러 체크 [nextAuth]-authorize", res);
+                // console.log("로그인 에러 체크 [nextAuth]-authorize", res);
                 const userData = {
                   id: res.user.id,
                   name: res.user.nickname,
@@ -65,7 +65,7 @@ export const authOptions = {
       },
     }),
   ],
-  debug: true,
+  // debug: true,
   session: {
     maxAge: 6 * 60 * 60, // 6 hours
     updateAge: 1 * 60 * 60, // 1 hours
@@ -90,7 +90,7 @@ export const authOptions = {
       //  image:'userImage.jpeg'
       // }
 
-      console.log("로그인 에러 체크 [nextAuth]-signIn", user, account);
+      // console.log("로그인 에러 체크 [nextAuth]-signIn", user, account);
 
       return true;
     },
@@ -125,7 +125,7 @@ export const authOptions = {
     async session({ session, token }: any) {
       const sessions = await getSession();
 
-      console.log("session,token :: ::::", session, token);
+      // console.log("session,token :: ::::", session, token);
       session.token = token;
       // session 에서 기본적으로 user 반환 {email,image,name 최소 정보만 제공하도록 default}
       // 독스에서는 user 객체 수정은 session 콜백에서 하라고 되있네요
@@ -136,7 +136,7 @@ export const authOptions = {
       // session.user.test = token.test;
 
       // session.accessToken = token.accessToken;
-      console.log("로그인 에러 체크 [nextAuth]-session", session);
+      // console.log("로그인 에러 체크 [nextAuth]-session", session);
 
       return session;
     },
