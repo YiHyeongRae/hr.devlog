@@ -64,7 +64,7 @@ export const authOptions = {
       },
     }),
   ],
-
+  debug: true,
   session: {
     maxAge: 6 * 60 * 60, // 6 hours
     updateAge: 1 * 60 * 60, // 1 hours
