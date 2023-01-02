@@ -23,7 +23,7 @@
     "eslint-config-next": "13.0.5",
     "mysql2": "^2.3.3",
     "next": "13.0.5",
-    "next-auth": "^4.18.3",
+    "next-auth": "^4.18.7",
     "next-redux-wrapper": "^8.0.0",
     "next-remove-imports": "^1.0.8",
     "next-s3-upload": "^0.2.6",

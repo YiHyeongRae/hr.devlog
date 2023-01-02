@@ -1,6 +1,7 @@
 import axios from "axios";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { getSession } from "next-auth/react";
 import Hash from "../../../lib/Hash";
 
 interface userResData {
@@ -122,6 +123,8 @@ export const authOptions = {
       return token;
     },
     async session({ session, token }: any) {
+      const sessions = await getSession();
+
       console.log("session,token :: ::::", session, token);
       session.token = token;
       // session 에서 기본적으로 user 반환 {email,image,name 최소 정보만 제공하도록 default}
