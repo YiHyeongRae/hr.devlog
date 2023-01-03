@@ -11,6 +11,10 @@ const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
 });
 
+const Comment = dynamic(() => import("../../components/Comment"), {
+  ssr: false,
+});
+
 const PostWrap = styled.div`
   padding: 30px;
   display: flex;
@@ -119,6 +123,7 @@ const Post: NextPage = ({ data }: any) => {
           ialValue={""} />
         </div> */}
         <MarkdownPreview source={data} />
+        <Comment />
       </PostContainer>
     </PostWrap>
   );

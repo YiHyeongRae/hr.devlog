@@ -1,3 +1,7 @@
+.utterances {
+  max-width: 95% !important;
+  margin:50px auto !important;
+}
 .content-wrap{
 
   padding:40px 0;

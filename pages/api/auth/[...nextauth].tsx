@@ -104,7 +104,8 @@ export const authOptions = {
     },
     async jwt({ token, account, user }: any) {
       if (account) {
-        console.log("account, token user :::", account, token, user);
+        token.accessToken = account.access_token;
+        // console.log("account, token user :::", account, token, user);
         // token 반환값
         // token{
         //  name: '이형래',
@@ -123,10 +124,9 @@ export const authOptions = {
       return token;
     },
     async session({ session, token }: any) {
-      const sessions = await getSession();
-
       // console.log("session,token :: ::::", session, token);
       session.token = token;
+
       // session 에서 기본적으로 user 반환 {email,image,name 최소 정보만 제공하도록 default}
       // 독스에서는 user 객체 수정은 session 콜백에서 하라고 되있네요
 
@@ -166,7 +166,7 @@ const login: Function = async (
   //     pw: userPw,
   //   },
   // });
-  console.log("로그인 에러 체크 [nextAuth]-login func", res);
+  // console.log("로그인 에러 체크 [nextAuth]-login func", res);
   if (res.data.loginState === true) {
     // console.log("res가 찍히나 ?", res.data);
     return res.data;
