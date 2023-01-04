@@ -106,11 +106,14 @@ const AdminEditor: NextPage = () => {
           },
         },
       });
-      await axios.post("https://hr-devlog.vercel.app/api/regist/postReg", {
-        data: {
-          urlKey: url,
-        },
-      });
+      await axios.post(
+        process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/regist/postReg",
+        {
+          data: {
+            urlKey: url,
+          },
+        }
+      );
     } catch (error: any) {
       alert("업로드에 실패했습니다.");
     }

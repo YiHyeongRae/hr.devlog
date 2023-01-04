@@ -14,9 +14,26 @@ const Home: NextPage = ({ list }: any) => {
     (state: ReducerStates) => state.modalStore.modalState
   );
   // console.log("모다알", modal);
-
+  const apiPostTest: Function = async () => {
+    console.log(1);
+    try {
+      await axios.post(
+        process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/regist/postReg",
+        {
+          data: {
+            postTitle: "2번글 테스트 제목입니다",
+            postTag: "태그 테스트, 태그테스트2, 태그태그태그, 태그",
+            urlKey: "test.url.com",
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="content-wrap">
+      <div onClick={() => apiPostTest()}>api test 입니다.</div>
       <SEO title="HOME" />
       <MainCircleList data={list} />
       <Modal modal={modal} />

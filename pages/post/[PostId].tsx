@@ -135,7 +135,10 @@ export async function getServerSideProps(context: any) {
 
   // const res = await fetch("http://localhost:3000/api/selectDb");
   // const res = await fetch("https://hr-devlog.vercel.app/api/selectDb");
-
+  // console.log("콘텍스트", context);
+  // console.log(context.req)
+  // console.log(context.res)
+  // 파라미터로 넣기 ? Host: <host>:<port>
   const res = await axios.get(
     process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
   );
@@ -143,6 +146,9 @@ export async function getServerSideProps(context: any) {
 
   const url = data[context.query.PostId].post_url;
   let postData;
+  // const asdf = await axios.post(url);
+
+  // console.log("axios ========== ", asdf);
   await fetch(url)
     .then((response) => response.text())
     .then((data: any) => {
