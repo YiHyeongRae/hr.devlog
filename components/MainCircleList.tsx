@@ -1,7 +1,7 @@
 import axios from "axios";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 
@@ -58,7 +58,7 @@ const PostTag = styled.li`
 function MainCircleList(data: any) {
   // console.log("메인 써클 리스트", data);
   const router = useRouter();
-
+  console.log(data);
   const goToContent: Function = (content: any) => {
     router.push(
       {
@@ -68,23 +68,20 @@ function MainCircleList(data: any) {
       `/post/${content.no}`
     );
   };
-  const tag: any = [];
-  // console.log("?????", data);
+
   return (
     <CircleWrap>
       {data &&
         data?.data?.map((listItem: any) => {
+          const mnfTag = listItem.post_tag.split(",");
           return (
             <CircleList key={listItem.no} onClick={() => goToContent(listItem)}>
               <ThunmbNail></ThunmbNail>
               <div style={{ padding: "25px" }}>
-                <ThunmbNailTitle>
-                  타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀
-                </ThunmbNailTitle>
+                <ThunmbNailTitle>{listItem.post_title}</ThunmbNailTitle>
                 <TagWrap>
-                  {tag &&
-                    tag &&
-                    tag.map((tag: any, i: any) => {
+                  {mnfTag &&
+                    mnfTag.map((tag: any, i: any) => {
                       return <PostTag key={i}>{tag}</PostTag>;
                     })}
                 </TagWrap>

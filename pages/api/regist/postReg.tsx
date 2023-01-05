@@ -20,15 +20,15 @@ const db = require("../../../common/config/db");
 
 export default function postReg(req: NextApiRequest, res: NextApiResponse) {
   console.log("postReg console =====", req);
-  // db.query(
-  //   `INSERT INTO blog_post (post_url) VALUES ("${req.body.data.urlKey.url}")`,
-  //   function (err: any, result: any) {
-  //     if (err) {
-  //       console.log("인서트 에러", err);
-  //     } else {
-  //       console.log("인서트 성공 ?", result);
-  //       // res.json("인서트 제이슨", result);
-  //     }
-  //   }
-  // );
+  db.query(
+    `INSERT INTO blog_post (post_title,post_tag,post_url) VALUES ("${req.body.data.postTitle}","${req.body.data.postTag}","${req.body.data.urlKey}")`,
+    function (err: any, result: any) {
+      if (err) {
+        console.log("인서트 에러", err);
+      } else {
+        console.log("인서트 성공 ?", result);
+        // res.json("인서트 제이슨", result);
+      }
+    }
+  );
 }

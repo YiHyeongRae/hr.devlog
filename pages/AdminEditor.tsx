@@ -93,10 +93,15 @@ const AdminEditor: NextPage = () => {
     day < 10 ? `0${day}` : day
   }.txt`;
 
+  const [postTitle, setPostTitle] = useState<string>();
+  const [postTag, setPostTag] = useState<string>();
+
+  const [tag, setTag] = useState<string[]>();
+
   const { uploadToS3 } = useS3Upload();
   const handleFileChange = async () => {
     try {
-      let url = await uploadToS3(S3File, {
+      const url = await uploadToS3(S3File, {
         endpoint: {
           request: {
             headers: {},
@@ -106,30 +111,32 @@ const AdminEditor: NextPage = () => {
           },
         },
       });
+      console.log("? url object? ?", url);
       await axios.post(
         process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/regist/postReg",
         {
           data: {
-            urlKey: url,
+            postTitle: postTitle,
+            postTag: postTag,
+            urlKey: url.url,
           },
         }
       );
     } catch (error: any) {
+      console.log(error);
       alert("업로드에 실패했습니다.");
     }
   };
   // console.log(S3File);
 
-  const [postTitle, setPostTitle] = useState<string>();
-  const [tag, setTag] = useState<string[]>();
-
   const handlePostTag: Function = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("태그 핸들러", e.currentTarget.value);
+    // console.log("태그 핸들러", e.currentTarget.value);
     // console.log("split", e.currentTarget.value.split(","));
 
     let splitArr = [];
     splitArr = e.currentTarget.value.split(",");
     setTag(splitArr);
+    setPostTag(e.currentTarget.value);
   };
 
   const [thumbNail, setThumbNail] = useState<any>();
@@ -152,7 +159,7 @@ const AdminEditor: NextPage = () => {
         <CircleList>
           <ThunmbNail>
             <Image
-              src={thumbNail}
+              src={thumbNail || "/"}
               alt={"이미지"}
               layout="fill"
               style={{ borderRadius: "10px 10px 0 0 " }}
