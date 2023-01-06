@@ -127,12 +127,8 @@ const AdminEditor: NextPage = () => {
       alert("업로드에 실패했습니다.");
     }
   };
-  // console.log(S3File);
 
   const handlePostTag: Function = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log("태그 핸들러", e.currentTarget.value);
-    // console.log("split", e.currentTarget.value.split(","));
-
     let splitArr = [];
     splitArr = e.currentTarget.value.split(",");
     setTag(splitArr);

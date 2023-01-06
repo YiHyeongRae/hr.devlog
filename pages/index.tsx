@@ -52,15 +52,9 @@ export async function getServerSideProps(ctx: any) {
   const res = await axios.get(
     process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
   );
-  // console.log("getServerSideProps RES.data", res.data);
+
   const data = res.data;
 
-  // console.log(
-  //   "이거 어떻게 되는지 한번 보자",
-  //   process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
-  // );
-  // console.log("res", res);
-  // console.log("데이타", data);
   return {
     props: { list: data }, // will be passed to the page component as props
   };

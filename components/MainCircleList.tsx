@@ -56,7 +56,6 @@ const PostTag = styled.li`
   margin-bottom: 10px;
 `;
 function MainCircleList(data: any) {
-  // console.log("메인 써클 리스트", data);
   const router = useRouter();
   console.log(data);
   const goToContent: Function = (content: any) => {
