@@ -79,7 +79,6 @@ const Editor: Function = ({ setS3File }: any) => {
 
   const handleFileChange = async (e: React.ChangeEvent<any>) => {
     try {
-      // console.log(e.target.files[0]);
       const res = await uploadToS3(fileInput?.current.files[0], {
         endpoint: {
           request: {

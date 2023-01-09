@@ -79,7 +79,6 @@ export const authOptions = {
   },
   callbacks: {
     async signIn({ user, account }: any) {
-      // console.log("signIn : :::: : :::", user, account);
       // credential provider에서 return 해준 user 찍힘
       // user{
       //  id: 'admin',
@@ -89,9 +88,6 @@ export const authOptions = {
       //  picture: 'user.jpeg'
       //  image:'userImage.jpeg'
       // }
-
-      // console.log("로그인 에러 체크 [nextAuth]-signIn", user, account);
-
       return true;
     },
     async redirect({ url, baseUrl }: any) {
@@ -105,7 +101,6 @@ export const authOptions = {
     async jwt({ token, account, user }: any) {
       if (account) {
         token.accessToken = account.access_token;
-        // console.log("account, token user :::", account, token, user);
         // token 반환값
         // token{
         //  name: '이형래',
@@ -124,7 +119,6 @@ export const authOptions = {
       return token;
     },
     async session({ session, token }: any) {
-      // console.log("session,token :: ::::", session, token);
       session.token = token;
 
       // session 에서 기본적으로 user 반환 {email,image,name 최소 정보만 제공하도록 default}
@@ -136,7 +130,6 @@ export const authOptions = {
       // session.user.test = token.test;
 
       // session.accessToken = token.accessToken;
-      // console.log("로그인 에러 체크 [nextAuth]-session", session);
 
       return session;
     },
