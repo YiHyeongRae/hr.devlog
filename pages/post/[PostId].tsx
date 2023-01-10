@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import "@uiw/react-markdown-preview/markdown.css";
 import dynamic from "next/dynamic";
@@ -68,7 +68,8 @@ const PostContainer = styled.div`
 //   color: #ccc;
 // `;
 
-const Post: NextPage = ({ data }: any) => {
+const Post: NextPage = ({ data, data2 }: any) => {
+  console.log("???", data2);
   const router = useRouter();
   // console.log("라우터체크", router);
   // const [postData, setPostData] = useState<any>();
@@ -95,25 +96,21 @@ const Post: NextPage = ({ data }: any) => {
   //     );
   //   }
   // }
-
+  // useEffect(() => {
+  //   console.log(data2[0].post_tag);
+  //   const
+  // }, []);
   return (
     <PostWrap>
       <SEO title={`${router.query.PostId}번 게시글`} />
       <PostHeader>
         <PostTitle>{`${router.query.PostId}번 게시글`}</PostTitle>
         <TagWrap>
-          <PostTag>태그1</PostTag>
-          <PostTag>태그1</PostTag>
-          <PostTag>태그1</PostTag>
-          <PostTag>태그1</PostTag>
-          <PostTag>태그1</PostTag>
-          <PostTag>태그1</PostTag>
-          <PostTag>태그1</PostTag>
-          <PostTag>태그1</PostTag>
-          <PostTag>태그1</PostTag>
-          <PostTag>태그1</PostTag>
-          <PostTag>태그1</PostTag>
-          <PostTag>태그1</PostTag>
+          {data2 &&
+            data2.map((tags: any, i: any) => {
+              console.log(tags);
+              return <PostTag key={i}>{tags}</PostTag>;
+            })}
         </TagWrap>
       </PostHeader>
       <PostContainer>
@@ -152,8 +149,15 @@ export async function getServerSideProps(context: any) {
       postData = data;
     });
 
+  const res2 = await axios.get(
+    process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
+  );
+
+  const tagArr = await res2.data[0].post_tag.split(",");
+  const data2 = tagArr;
+
   return {
-    props: { data: postData }, // will be passed to the page component as props
+    props: { data: postData, data2: data2 }, // will be passed to the page component as props
   };
 }
 
