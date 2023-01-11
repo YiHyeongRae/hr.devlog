@@ -68,8 +68,8 @@ const PostContainer = styled.div`
 //   color: #ccc;
 // `;
 
-const Post: NextPage = ({ data, data2 }: any) => {
-  console.log("???", data2);
+const Post: NextPage = ({ data, data2, data3 }: any) => {
+  console.log("???", data3);
   const router = useRouter();
   // console.log("라우터체크", router);
   // const [postData, setPostData] = useState<any>();
@@ -102,9 +102,9 @@ const Post: NextPage = ({ data, data2 }: any) => {
   // }, []);
   return (
     <PostWrap>
-      <SEO title={`${router.query.PostId}번 게시글`} />
+      <SEO title={`${data3}`} />
       <PostHeader>
-        <PostTitle>{`${router.query.PostId}번 게시글`}</PostTitle>
+        <PostTitle>{`${data3}`}</PostTitle>
         <TagWrap>
           {data2 &&
             data2.map((tags: any, i: any) => {
@@ -152,12 +152,12 @@ export async function getServerSideProps(context: any) {
   const res2 = await axios.get(
     process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
   );
-
   const tagArr = await res2.data[0].post_tag.split(",");
   const data2 = tagArr;
+  const data3 = res2.data[0].post_title;
 
   return {
-    props: { data: postData, data2: data2 }, // will be passed to the page component as props
+    props: { data: postData, data2: data2, data3: data3 }, // will be passed to the page component as props
   };
 }
 
