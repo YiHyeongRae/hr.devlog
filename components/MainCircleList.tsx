@@ -9,9 +9,11 @@ const CircleWrap = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   list-style: none;
   margin: 50px 0;
+  row-gap: 50px;
+  column-gap: 50px;
 `;
 
 const CircleList = styled.li`
@@ -57,7 +59,7 @@ const PostTag = styled.li`
 `;
 function MainCircleList(data: any) {
   const router = useRouter();
-  console.log(data);
+  // console.log(data);
   const goToContent: Function = (content: any) => {
     router.push(
       {
