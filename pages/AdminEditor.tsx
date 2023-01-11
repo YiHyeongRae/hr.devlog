@@ -111,8 +111,8 @@ const AdminEditor: NextPage = () => {
           },
         },
       });
-      console.log("? url object? ?", url);
-      await axios.post(
+      // console.log("? url object? ?", url);
+      const response = await axios.post(
         process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/regist/postReg",
         {
           data: {
@@ -122,6 +122,7 @@ const AdminEditor: NextPage = () => {
           },
         }
       );
+      // console.log("504?", response);
     } catch (error: any) {
       console.log(error);
       alert("업로드에 실패했습니다.");
