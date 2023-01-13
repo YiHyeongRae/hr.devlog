@@ -69,7 +69,7 @@ const PostContainer = styled.div`
 // `;
 
 const Post: NextPage = ({ data, data2, data3 }: any) => {
-  console.log("???", data3);
+  console.log("data,data2,data3", data, data2, data3);
   const router = useRouter();
   // console.log("라우터체크", router);
   // const [postData, setPostData] = useState<any>();
@@ -139,6 +139,8 @@ export async function getServerSideProps(context: any) {
   );
   const data = await res.data;
 
+  // console.log("context-data", data);
+
   const url = data[context.query.PostId].post_url;
   let postData;
   // const asdf = await axios.post(url);
@@ -152,9 +154,10 @@ export async function getServerSideProps(context: any) {
   const res2 = await axios.get(
     process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
   );
-  const tagArr = await res2.data[0].post_tag.split(",");
+
+  const tagArr = await res2.data[context.query.PostId].post_tag.split(",");
   const data2 = tagArr;
-  const data3 = res2.data[0].post_title;
+  const data3 = res2.data[context.query.PostId].post_title;
 
   return {
     props: { data: postData, data2: data2, data3: data3 }, // will be passed to the page component as props

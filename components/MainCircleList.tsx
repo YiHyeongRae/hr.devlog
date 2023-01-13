@@ -60,23 +60,30 @@ const PostTag = styled.li`
 function MainCircleList(data: any) {
   const router = useRouter();
   // console.log(data);
-  const goToContent: Function = (content: any) => {
+  const goToContent: Function = (content: any, index: any) => {
+    // console.log("content", content);
+    // console.log("url", content.post_url);
+    // console.log("index", index);
     router.push(
       {
-        pathname: `/post/${content.no}`,
+        pathname: `/post/${index}`,
         query: { post_url: content.post_url },
       },
-      `/post/${content.no}`
+      `/post/${index}`
     );
   };
 
   return (
     <CircleWrap>
       {data &&
-        data?.data?.map((listItem: any) => {
+        data?.data?.map((listItem: any, i: any) => {
           const mnfTag = listItem.post_tag.split(",");
+          //  console.log("listItem", listItem);
           return (
-            <CircleList key={listItem.no} onClick={() => goToContent(listItem)}>
+            <CircleList
+              key={listItem.no}
+              onClick={() => goToContent(listItem, i)}
+            >
               <ThunmbNail></ThunmbNail>
               <div style={{ padding: "25px" }}>
                 <ThunmbNailTitle>{listItem.post_title}</ThunmbNailTitle>
