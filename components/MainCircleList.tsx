@@ -32,7 +32,7 @@ const ThunmbNail = styled.div`
   height: 300px;
   border-radius: 10px 10px 0 0;
 
-  border: 1px solid #999;
+  border-bottom: 1px solid #333;
   // animation: fadeInOut 5s linear infinite;
 `;
 

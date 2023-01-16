@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { ReducerStates } from "../redux/store";
 import Modal from "../components/Modal";
 import axios from "axios";
+import SideTagNav from "../components/SideTagNav";
 
 const Home: NextPage = ({ list }: any) => {
   // console.log("홈 서버사이드 리스트", list);
@@ -17,6 +18,7 @@ const Home: NextPage = ({ list }: any) => {
   return (
     <div className="content-wrap">
       <SEO title="HOME" />
+      <SideTagNav />
       <MainCircleList data={list} />
       <Modal modal={modal} />
     </div>
