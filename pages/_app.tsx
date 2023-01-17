@@ -24,7 +24,22 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 
     // Session is being fetched, or no user.
     // If no user, useEffect() will redirect.
-    return <div style={{ height: "100vh" }}>is Loading . . . </div>;
+    return (
+      <div style={{ height: "100vh" }}>
+        <div
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%,-50%)",
+            textAlign: "center",
+          }}
+        >
+          This Page Require Authorized ! But You Are Unauthorized ! Please Sign
+          In -
+        </div>
+      </div>
+    );
   }
 
   return (
