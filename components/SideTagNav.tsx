@@ -40,15 +40,19 @@ function SideTagNav() {
           <TagChildNavWrap>
             <TagChildNavItem>React</TagChildNavItem>
             <TagChildNavItem>NextJs</TagChildNavItem>
+            <TagChildNavItem>Javascript</TagChildNavItem>
           </TagChildNavWrap>
         </SideTagNavItem>
         <SideTagNavItem>
           [ Back-End ]
           <TagChildNavWrap>
             <TagChildNavItem>Mysql</TagChildNavItem>
-            <TagChildNavItem>S3</TagChildNavItem>
-            <TagChildNavItem>RDS</TagChildNavItem>
+            <TagChildNavItem>AWS-S3</TagChildNavItem>
+            <TagChildNavItem>AWS-RDS</TagChildNavItem>
           </TagChildNavWrap>
+        </SideTagNavItem>
+        <SideTagNavItem style={{ cursor: "pointer" }}>
+          [ Contact ]
         </SideTagNavItem>
       </SideTagNavWrap>
     </>
