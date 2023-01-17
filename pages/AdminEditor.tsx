@@ -112,16 +112,15 @@ const AdminEditor: NextPage = () => {
         },
       });
       // console.log("? url object? ?", url);
-      const response = await axios.post(
-        process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/regist/postReg",
-        {
+      const response = await axios
+        .post(process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/regist/postReg", {
           data: {
             postTitle: postTitle,
             postTag: postTag,
             urlKey: url.url,
           },
-        }
-      );
+        })
+        .then(() => alert("업로드가 완료됐습니다."));
       // console.log("504?", response);
     } catch (error: any) {
       console.log(error);
