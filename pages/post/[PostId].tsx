@@ -68,8 +68,8 @@ const PostContainer = styled.div`
 //   color: #ccc;
 // `;
 
-const Post: NextPage = ({ data, data2, data3 }: any) => {
-  console.log("data,data2,data3", data, data2, data3);
+const Post: NextPage = ({ post, tag, title }: any) => {
+  console.log("data,data2,data3", post, tag, title);
   const router = useRouter();
   // console.log("라우터체크", router);
   // const [postData, setPostData] = useState<any>();
@@ -102,12 +102,12 @@ const Post: NextPage = ({ data, data2, data3 }: any) => {
   // }, []);
   return (
     <PostWrap>
-      <SEO title={`${data3}`} />
+      <SEO title={`${title}`} />
       <PostHeader>
-        <PostTitle>{`${data3}`}</PostTitle>
+        <PostTitle>{`${title}`}</PostTitle>
         <TagWrap>
-          {data2 &&
-            data2.map((tags: any, i: any) => {
+          {tag &&
+            tag.map((tags: any, i: any) => {
               console.log(tags);
               return <PostTag key={i}>{tags}</PostTag>;
             })}
@@ -119,7 +119,7 @@ const Post: NextPage = ({ data, data2, data3 }: any) => {
           <TuiViewer init
           ialValue={""} />
         </div> */}
-        <MarkdownPreview source={data} />
+        <MarkdownPreview source={post} />
         <Comment />
       </PostContainer>
     </PostWrap>
@@ -156,11 +156,11 @@ export async function getServerSideProps(context: any) {
   );
 
   const tagArr = await res2.data[context.query.PostId].post_tag.split(",");
-  const data2 = tagArr;
-  const data3 = res2.data[context.query.PostId].post_title;
+  const tags = tagArr;
+  const title = res2.data[context.query.PostId].post_title;
 
   return {
-    props: { data: postData, data2: data2, data3: data3 }, // will be passed to the page component as props
+    props: { post: postData, tag: tags, title: title }, // will be passed to the page component as props
   };
 }
 
