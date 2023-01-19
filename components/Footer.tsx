@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 const FooterWrap = styled.div`
-  padding: 30px;
-  border-top: 1px solid #333;
-  font-size: 16px;
+  background-color: #0076c8;
+  font-size: 10px;
   text-align: center;
 `;
 

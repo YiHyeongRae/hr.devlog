@@ -1,15 +1,21 @@
-import Image from "next/image";
+import Image, { ImageProps } from "next/image";
 import styled from "styled-components";
 
-const Img = styled(Image)`
-  height: auto !important;
-  position: relative !important;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  border-radius: 15px;
+const AutoHeightImageWrapper = styled.div`
+  width: 100%;
+  & > span {
+    position: unset !important;
+    img {
+      height: auto !important;
+      position: relative !important;
+    }
+  }
 `;
 
-const AutoHeightImage = ({ src, alt }: { src: string; alt: string }) => {
-  return <Img src={src} layout="fill" alt={alt} />;
+const AutoHeightImage = ({ ...props }: ImageProps) => {
+  <AutoHeightImageWrapper>
+    <Image layout="fill" {...props} />
+  </AutoHeightImageWrapper>;
 };
 
 export default AutoHeightImage;
