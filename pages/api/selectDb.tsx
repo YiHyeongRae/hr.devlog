@@ -7,10 +7,10 @@ export default async function selectDb(
 ) {
   db.query(`SELECT * FROM blog_post`, function (err: any, result: any) {
     if (err) {
-      console.log(err);
+      // console.log(err);
       res.send(err);
     } else {
-      console.log("결과는 ?", result);
+      // console.log("결과는 ?", result);
       res.json(result);
     }
   });

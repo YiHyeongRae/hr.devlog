@@ -16,42 +16,39 @@ const Comment = dynamic(() => import("../../components/Comment"), {
 });
 
 const PostWrap = styled.div`
-  padding: 30px;
   display: flex;
-  /* flex-direction: column; */
-  flex-wrap: wrap;
+  width: 100%;
+  flex-direction: column;
+  background-color: #1e1e1f;
 `;
 
 const PostHeader = styled.div`
   width: 100%;
-  border-bottom: 1px solid #aaa;
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
 `;
 
 const PostTitle = styled.h2`
   width: 100%;
   font-size: 25px;
+  padding: 16px 0;
   font-weight: 700;
   color: #fff;
+  font-family: "MapleLight";
 `;
-const TagWrap = styled.ul`
-  margin: 25px 0;
-`;
+const TagWrap = styled.ul``;
 
 const PostTag = styled.li`
   display: inline-block;
-  font-size: 10px;
-  font-family: "MapleLight";
-  padding: 10px;
-  background-color: #333;
-  border-radius: 10px;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin: 0 6px;
+  color: #00c4ff;
 `;
 
 const PostContainer = styled.div`
   width: 100%;
   font-family: "MapleLight";
-  margin-top: 25px;
+  padding: 16px;
 `;
 
 // const ContentBox = styled.div`
@@ -69,7 +66,7 @@ const PostContainer = styled.div`
 // `;
 
 const Post: NextPage = ({ post, tag, title }: any) => {
-  console.log("data,data2,data3", post, tag, title);
+  // console.log("data,data2,data3", post, tag, title);
   const router = useRouter();
   // console.log("라우터체크", router);
   // const [postData, setPostData] = useState<any>();
@@ -104,14 +101,38 @@ const Post: NextPage = ({ post, tag, title }: any) => {
     <PostWrap>
       <SEO title={`${title}`} />
       <PostHeader>
-        <PostTitle>{`${title}`}</PostTitle>
-        <TagWrap>
-          {tag &&
-            tag.map((tags: any, i: any) => {
-              console.log(tags);
-              return <PostTag key={i}>{tags}</PostTag>;
-            })}
-        </TagWrap>
+        <PostTitle>
+          <span style={{ color: "#d082c4" }}>Import</span>{" "}
+          <span style={{ color: "#88deff" }}>{`${title}`}</span>{" "}
+          <span style={{ color: "#d082c4" }}>From</span>{" "}
+          <span style={{ color: "#d88e74" }}>{`"../HR-DEVLOG";`}</span>
+        </PostTitle>
+        <div
+          style={{
+            display: "flex",
+            fontFamily: "MapleLight",
+            fontSize: "14px",
+          }}
+        >
+          <p style={{ color: "#379edc", marginRight: "6px" }}>{`const`}</p>
+          <p style={{ color: "#ea68dc" }}>{`{`}</p>
+          <TagWrap>
+            {tag &&
+              tag.map((tags: any, i: any) => {
+                //  dconsole.log(tags);
+                return (
+                  <PostTag key={i}>
+                    {tag.length - 1 === i ? `${tags}` : `${tags},`}
+                  </PostTag>
+                );
+              })}
+          </TagWrap>
+          <p style={{ color: "#ea68dc", marginRight: "6px" }}>{`}`}</p>
+          <p style={{ marginRight: "6px" }}>=</p>
+          <p style={{ color: "#d7d89f" }}>{`useHRDEVLOG`}</p>
+          <p style={{ color: "#ea68dc" }}>( )</p>
+          <p>{`;`}</p>
+        </div>
       </PostHeader>
       <PostContainer>
         {/* <Content />
@@ -120,7 +141,7 @@ const Post: NextPage = ({ post, tag, title }: any) => {
           ialValue={""} />
         </div> */}
         <MarkdownPreview source={post} />
-        <Comment />
+        {/* <Comment /> */}
       </PostContainer>
     </PostWrap>
   );
@@ -140,7 +161,6 @@ export async function getServerSideProps(context: any) {
   const data = await res.data;
 
   // console.log("context-data", data);
-
   const url = data[context.query.PostId].post_url;
   let postData;
   // const asdf = await axios.post(url);

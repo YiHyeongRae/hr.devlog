@@ -8,10 +8,10 @@
   background-color: #fff;
 }
 
-/* 
-.wmde-markdown ol, .wmde-markdown ul{
-  list-style-type:i
-} */
+
+.wmde-markdown {
+  background-color:   #1e1e1f !important;
+}
 
 @keyframes fadeInOut {
   0% {

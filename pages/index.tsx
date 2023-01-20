@@ -35,6 +35,8 @@ const WelcomeText = styled.div`
 const StackWrap = styled.ul`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 `;
 
 const TechStack = styled.li`

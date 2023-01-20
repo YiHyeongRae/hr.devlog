@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
 
@@ -11,6 +12,7 @@ const SideWrap = styled.div`
 const SideTagWrap = styled.ul`
   width: 50px;
   display: flex;
+
   flex-direction: column;
   background-color: #323233;
 `;
@@ -51,11 +53,42 @@ const SideListTitle = styled.li`
 const SideListItem = styled.li`
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   cursor: pointer;
   list-style-type: none;
 `;
-function SideTagNav() {
+
+const PostListWrap = styled.ul`
+  width: 100%;
+`;
+const PostTitle = styled.li`
+  list-style-type: none;
+  font-family: "MapleLight";
+  text-indent: 16px;
+`;
+interface SideTagNavTypes {
+  data: Array<object>;
+  selectedPost: Function;
+}
+function SideTagNav({ data, selectedPost }: SideTagNavTypes) {
+  // console.log("sideTageNav", data);
+  const router = useRouter();
+
+  const selectPost: Function = (
+    e: React.MouseEvent<HTMLLIElement>,
+    content: any,
+    index: number
+  ) => {
+    e.stopPropagation(), selectedPost(index);
+    router.push(
+      {
+        pathname: `/post/${index}`,
+        query: { post_url: content.post_url },
+      },
+      `/post/${index}`
+    );
+  };
   return (
     <SideWrap>
       <SideTagWrap>
@@ -127,6 +160,24 @@ function SideTagNav() {
             />
           </svg>
         </SideListTitle>
+
+        {/* <SideListItem>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            style={{ width: "14px" }}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M8.25 4.5l7.5 7.5-7.5 7.5"
+            />
+          </svg>
+          <p>열려 있는 편집기</p>
+        </SideListItem> */}
         <SideListItem>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -142,24 +193,25 @@ function SideTagNav() {
               d="M8.25 4.5l7.5 7.5-7.5 7.5"
             />
           </svg>
-          열려 있는 편집기
-        </SideListItem>
-        <SideListItem>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            style={{ width: "14px" }}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M8.25 4.5l7.5 7.5-7.5 7.5"
-            />
-          </svg>
-          HR.DEVLOG
+          <p>HR.DEVLOG</p>
+          <PostListWrap>
+            {data &&
+              data?.map((data: any, i) => {
+                return (
+                  <PostTitle
+                    key={i}
+                    onClick={(e) => selectPost(e, data, i)}
+                    style={
+                      router.asPath.substring(6) === String(i)
+                        ? { color: "#deb77f", backgroundColor: "#1e1e1f" }
+                        : { color: "#909090" }
+                    }
+                  >
+                    {data.post_title}
+                  </PostTitle>
+                );
+              })}
+          </PostListWrap>
         </SideListItem>
       </SideListWrap>
     </SideWrap>
