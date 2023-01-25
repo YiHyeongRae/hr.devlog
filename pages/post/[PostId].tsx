@@ -159,9 +159,15 @@ export async function getServerSideProps(context: any) {
     process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
   );
   const data = await res.data;
+  // console.log("res", res);
+  // console.log("data", data);
 
-  // console.log("context-data", data);
-  const url = data[context.query.PostId].post_url;
+  const searchPost = data.filter(
+    (item: any) => item.no === Number(context.query.PostId)
+  );
+  // console.log("써치", searchPost);
+  // console.log("context-data", context);
+  const url = searchPost[0].post_url;
   let postData;
   // const asdf = await axios.post(url);
 
@@ -171,17 +177,21 @@ export async function getServerSideProps(context: any) {
       postData = data;
     });
 
-  const res2 = await axios.get(
-    process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
-  );
-
-  const tagArr = await res2.data[context.query.PostId].post_tag.split(",");
+  // const res2 = await axios.get(
+  //   process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
+  // );
+  // console.log("res2?", res2);
+  const tagArr = searchPost[0].post_tag.split(",");
   const tags = tagArr;
-  const title = res2.data[context.query.PostId].post_title;
+  const title = searchPost[0].post_title;
 
   return {
     props: { post: postData, tag: tags, title: title }, // will be passed to the page component as props
   };
+
+  // return {
+  //   props: {},
+  // };
 }
 
 export default Post;

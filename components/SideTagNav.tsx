@@ -197,12 +197,13 @@ function SideTagNav({ data, selectedPost }: SideTagNavTypes) {
           <PostListWrap>
             {data &&
               data?.map((data: any, i) => {
+                // console.log("data", data);
                 return (
                   <PostTitle
                     key={i}
-                    onClick={(e) => selectPost(e, data, i)}
+                    onClick={(e) => selectPost(e, data, data.no)}
                     style={
-                      router.asPath.substring(6) === String(i)
+                      router.asPath.substring(6) === String(data.no)
                         ? { color: "#deb77f", backgroundColor: "#1e1e1f" }
                         : { color: "#909090" }
                     }
