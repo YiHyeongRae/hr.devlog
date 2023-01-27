@@ -69,9 +69,9 @@ const PostTitle = styled.li`
 `;
 interface SideTagNavTypes {
   data: Array<object>;
-  selectedPost: Function;
+  boardTap: Function;
 }
-function SideTagNav({ data, selectedPost }: SideTagNavTypes) {
+function SideTagNav({ data, boardTap }: SideTagNavTypes) {
   // console.log("sideTageNav", data);
   const router = useRouter();
 
@@ -80,7 +80,7 @@ function SideTagNav({ data, selectedPost }: SideTagNavTypes) {
     content: any,
     index: number
   ) => {
-    e.stopPropagation(), selectedPost(index);
+    e.stopPropagation(), boardTap(index);
     router.push(
       {
         pathname: `/post/${index}`,
