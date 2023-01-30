@@ -134,6 +134,23 @@ function Layout({ children }: any) {
       `/post/${index.substring(6)}`
     );
   };
+
+  const deletePost: Function = (index: number) => {
+    // console.log("받아온 tap.no", index);
+    const newArr = [...BoardTap];
+    const getCookieTapState: any = getCookie("TapState");
+
+    const filtering: any = newArr.filter((item: any) => item.no !== index);
+    // console.log("필터링", filtering);
+    //console.log("delete filtering", filtering);
+    setBoardTap(filtering);
+    const parseJsonArr = JSON.parse(getCookieTapState);
+    //  console.log("delete cookie parse", parseJsonArr);
+    const filteringCookie = parseJsonArr.filter((item: any) => item !== index);
+    // console.log(filteringCookie);
+    setCookie("TapState", JSON.stringify(filteringCookie));
+    router.push(filtering.length === 0 ? "/" : `/post/${filtering[0].no}`);
+  };
   return (
     <div className="Layout">
       <Header />
@@ -151,8 +168,9 @@ function Layout({ children }: any) {
             <TapWrap>
               {BoardTap &&
                 BoardTap.map((tap: any, i: any) => {
-                  // console.log("tap", tap);
+                  console.log("tap", tap);
                   // console.log("substring", router.asPath.substring(6));
+
                   return (
                     <TapTitle
                       key={i}
@@ -183,7 +201,7 @@ function Layout({ children }: any) {
                           cursor: "pointer",
                         }}
                         onClick={(e) => {
-                          e.stopPropagation();
+                          [e.stopPropagation(), deletePost(tap.no)];
                         }}
                       >
                         <path
