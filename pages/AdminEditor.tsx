@@ -75,7 +75,18 @@ const TagTitle = styled.div`
 
   align-items: center;
   font-size: 16px;
-  padding: 16px 0;
+  margin-bottom: 6px;
+  font-weight: 700;
+  color: #fff;
+  font-family: "MapleLight";
+`;
+
+const ImgTitle = styled.div`
+  display: flex;
+
+  align-items: center;
+  font-size: 16px;
+  margin-bottom: 6px;
   font-weight: 700;
   color: #fff;
   font-family: "MapleLight";
@@ -166,6 +177,8 @@ const AdminEditor: NextPage = () => {
       setThumbNail(reader.result);
     };
   };
+
+  const [imgList, setImgList] = useState(["blabla.jpg", "abcdef.jpeg"]);
   return (
     <>
       {/* <h2>ADMIN EDITOR</h2> */}
@@ -219,20 +232,22 @@ const AdminEditor: NextPage = () => {
             <p style={{ color: "#d082c4", flexShrink: 0 }}>export</p>
             <p style={{ color: "#379edc", marginRight: "6px" }}>&nbsp;const</p>
             <p style={{ color: "#ea68dc" }}>{`{`}</p>
-            <input
-              type="text"
-              onChange={(e) => handlePostTag(e)}
-              placeholder="TAG OF POST"
-              style={{
-                color: "#00c4ff",
-                border: 0,
-                display: "inline-block",
-                background: "none",
-                fontSize: 16,
-                margin: "0 6px",
-                textAlign: "center",
-              }}
-            />{" "}
+            <p style={{ display: "flex" }}>
+              <input
+                type="text"
+                onChange={(e) => handlePostTag(e)}
+                placeholder="TAG OF POST"
+                style={{
+                  color: "#00c4ff",
+                  border: 0,
+                  width: "100%",
+                  background: "none",
+                  fontSize: 16,
+                  margin: "0 6px",
+                  textAlign: "center",
+                }}
+              />
+            </p>{" "}
             <p style={{ color: "#ea68dc", marginRight: "6px" }}>{`}`}</p>
             <p style={{ marginRight: "6px" }}>=</p>
             <p style={{ color: "#d7d89f" }}>{`setHrDevLogRds`}</p>
@@ -241,6 +256,19 @@ const AdminEditor: NextPage = () => {
             {/* <span style={{ color: "#d082c4" }}>From</span>{" "}
             <span style={{ color: "#d88e74" }}>{`"../HR-DEVLOG";`}</span> */}
           </TagTitle>
+          {imgList.map((url: string, i: number) => {
+            return (
+              <ImgTitle key={i}>
+                {" "}
+                <p style={{ color: "#d082c4" }}>Import</p>{" "}
+                <p style={{ color: "#88deff", margin: "0 6px" }}>{`${url}`}</p>{" "}
+                <p style={{ color: "#d082c4" }}>from</p>{" "}
+                <p
+                  style={{ color: "#d88e74", marginLeft: "6px" }}
+                >{`"../Hr-Devlog-S3";`}</p>
+              </ImgTitle>
+            );
+          })}
 
           {/* <p>
             <label>썸네일</label>
@@ -274,7 +302,6 @@ const AdminEditor: NextPage = () => {
           }
 
           .title-editor input {
-            flex-grow: 0;
             border: 0;
             outline: none;
           }
