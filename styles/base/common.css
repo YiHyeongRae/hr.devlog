@@ -10,7 +10,15 @@
 
 
 .wmde-markdown {
-  background-color:   #1e1e1f !important;
+  background-color:   #1E1E24 !important;
+}
+.w-md-editor{
+  background-color:   #1E1E24 !important;
+
+}
+.w-md-editor-toolbar {
+  background-color:   #1E1E24 !important;
+
 }
 
 @keyframes fadeInOut {

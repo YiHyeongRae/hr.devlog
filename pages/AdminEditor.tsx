@@ -59,6 +59,27 @@ const PostTag = styled.li`
   margin-right: 10px;
   margin-bottom: 10px;
 `;
+const PostTitle = styled.div`
+  display: flex;
+
+  align-items: center;
+  width: 100%;
+  font-size: 25px;
+  padding: 16px 0;
+  font-weight: 700;
+  color: #fff;
+  font-family: "MapleLight";
+`;
+const TagTitle = styled.div`
+  display: flex;
+
+  align-items: center;
+  font-size: 16px;
+  padding: 16px 0;
+  font-weight: 700;
+  color: #fff;
+  font-family: "MapleLight";
+`;
 const AdminEditor: NextPage = () => {
   const title3: ICommand = {
     name: "title3",
@@ -147,8 +168,8 @@ const AdminEditor: NextPage = () => {
   };
   return (
     <>
-      <h2>ADMIN EDITOR</h2>
-      <p style={{ textAlign: "center", fontSize: 20 }}>
+      {/* <h2>ADMIN EDITOR</h2> */}
+      {/* <p style={{ textAlign: "center", fontSize: 20 }}>
         홈에서 보여지는 카드 모양 미리보기
       </p>
       <CircleWrap>
@@ -171,22 +192,57 @@ const AdminEditor: NextPage = () => {
             </TagWrap>
           </div>
         </CircleList>
-      </CircleWrap>
+      </CircleWrap> */}
       <div data-color-mode="dark">
         <div className="wmde-markdown-var"> </div>
         <div className="title-editor">
-          <p>
-            <label>제목</label>
+          <PostTitle>
+            <p style={{ color: "#d082c4", flexShrink: 0 }}>export default</p>
             <input
               type="text"
+              placeholder="TITLE OF POST"
               onChange={(e) => setPostTitle(e.currentTarget.value)}
-            />
-          </p>
-          <p>
-            <label>태그</label>
-            <input type="text" onChange={(e) => handlePostTag(e)} />
-          </p>
-          <p>
+              style={{
+                color: "#88deff",
+                border: 0,
+                flexGrow: 0,
+                background: "none",
+                fontSize: 25,
+                margin: "0 6px",
+                flexBasis: 100,
+              }}
+            />{" "}
+            {/* <span style={{ color: "#d082c4" }}>From</span>{" "}
+            <span style={{ color: "#d88e74" }}>{`"../HR-DEVLOG";`}</span> */}
+          </PostTitle>
+          <TagTitle>
+            <p style={{ color: "#d082c4", flexShrink: 0 }}>export</p>
+            <p style={{ color: "#379edc", marginRight: "6px" }}>&nbsp;const</p>
+            <p style={{ color: "#ea68dc" }}>{`{`}</p>
+            <input
+              type="text"
+              onChange={(e) => handlePostTag(e)}
+              placeholder="TAG OF POST"
+              style={{
+                color: "#00c4ff",
+                border: 0,
+                display: "inline-block",
+                background: "none",
+                fontSize: 16,
+                margin: "0 6px",
+                textAlign: "center",
+              }}
+            />{" "}
+            <p style={{ color: "#ea68dc", marginRight: "6px" }}>{`}`}</p>
+            <p style={{ marginRight: "6px" }}>=</p>
+            <p style={{ color: "#d7d89f" }}>{`setHrDevLogRds`}</p>
+            <p style={{ color: "#ea68dc" }}>( )</p>
+            <p>{`;`}</p>
+            {/* <span style={{ color: "#d082c4" }}>From</span>{" "}
+            <span style={{ color: "#d88e74" }}>{`"../HR-DEVLOG";`}</span> */}
+          </TagTitle>
+
+          {/* <p>
             <label>썸네일</label>
             <input
               id="thumb-nail"
@@ -195,12 +251,12 @@ const AdminEditor: NextPage = () => {
               onChange={(e) => fileTest(e)}
               ref={thumnailInput}
             />
-          </p>
+          </p> */}
         </div>
 
         <Editor setS3File={setS3File} />
       </div>
-      <div style={{ textAlign: "center", marginBottom: 20 }}>
+      {/* <div style={{ textAlign: "center", marginBottom: 20 }}>
         <button
           style={{ padding: 25 }}
           type="button"
@@ -208,7 +264,7 @@ const AdminEditor: NextPage = () => {
         >
           게시글 업로드
         </button>
-      </div>
+      </div> */}
 
       <style jsx>
         {`
@@ -216,21 +272,15 @@ const AdminEditor: NextPage = () => {
             margin-right: 20px;
             margin-left: 20px;
           }
-          .title-editor p {
-            display: flex;
-            margin-bottom: 10px;
-          }
-          .title-editor label {
-            margin-right: 10px;
-            line-height: 27.5px;
-            flex-grow: 0;
-            width: 10%;
-          }
-          .title-editor input {
-            flex-grow: 1;
-            text-indent: 15px;
-          }
 
+          .title-editor input {
+            flex-grow: 0;
+            border: 0;
+            outline: none;
+          }
+          .title-editor input::placeholder {
+            color: #88deff;
+          }
           h2 {
             margin: 20px 0;
             text-align: center;
@@ -242,13 +292,6 @@ const AdminEditor: NextPage = () => {
           li {
             margin-bottom: 10px;
             font-family: MapleLight;
-          }
-          input {
-            outline: none;
-            background-color: #111;
-            border: 1px solid #fff;
-            color: #fff;
-            padding: 5px;
           }
         `}
       </style>

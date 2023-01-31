@@ -213,7 +213,6 @@ const Editor: Function = ({ setS3File }: any) => {
         })}
       </ul> */}
       <MDEditor
-        height="100vh"
         value={md}
         onChange={setMd}
         commands={[
