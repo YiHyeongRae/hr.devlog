@@ -120,7 +120,7 @@ function Layout({ children }: any) {
     // console.log("????", index);
     // console.log(data);
     // console.log("?", index.substring(6));
-    console.log("selectPost");
+    // console.log("selectPost");
     const search = data.filter(
       (item: any) => item.no === Number(index.substring(6))
     );
@@ -168,7 +168,7 @@ function Layout({ children }: any) {
             <TapWrap>
               {BoardTap &&
                 BoardTap.map((tap: any, i: any) => {
-                  console.log("tap", tap);
+                  // console.log("tap", tap);
                   // console.log("substring", router.asPath.substring(6));
 
                   return (

@@ -60,11 +60,16 @@ const Login: Function = () => {
           form {
             display: flex;
             justify-content: center;
+            align-items: center;
+            height: calc(100vh - 91.5px);
           }
           fieldset {
             display: flex;
             flex-basis: 300px;
             flex-direction: column;
+            justify-content: center;
+
+            align-items: center;
           }
           legend {
             text-align: center;
