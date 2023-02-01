@@ -1,6 +1,8 @@
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import TopBar from "./TopBar";
+import { signOut } from "next-auth/react";
 
 const HeaderWrap = styled.div`
   display: flex;
@@ -49,6 +51,15 @@ const FuncIcons = styled.li`
 
 const Header = () => {
   const router = useRouter();
+  const { data: session, status } = useSession();
+
+  const logins: Function = () => {
+    if (status !== "authenticated") {
+      router.push("/login");
+    } else {
+      signOut();
+    }
+  };
   return (
     <HeaderWrap>
       <TrafficLightWrap>
@@ -91,7 +102,7 @@ const Header = () => {
             />
           </svg>
         </FuncIcons>
-        <FuncIcons onClick={() => router.push("/login")}>
+        <FuncIcons onClick={() => logins()}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -99,7 +110,11 @@ const Header = () => {
             strokeWidth={1.5}
             stroke="currentColor"
             className="w-6 h-6"
-            style={{ width: "20px", height: "20px" }}
+            style={{
+              width: "20px",
+              height: "20px",
+              color: status === "authenticated" ? "#d7d89f" : "",
+            }}
           >
             <path
               strokeLinecap="round"
