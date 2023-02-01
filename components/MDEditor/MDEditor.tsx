@@ -34,7 +34,11 @@ const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
   ssr: false,
 });
 
-const Editor: Function = ({ setS3File }: any) => {
+interface EditorTypes {
+  setS3File: Function;
+  setImportImgList: Function;
+}
+const Editor: Function = ({ setS3File, setImportImgList }: EditorTypes) => {
   const { uploadToS3 } = useS3Upload();
   const [imgList, setImgList] = useState<Array<string>>([]);
   const [imgKey, setImgKey] = useState<Array<string>>([]);

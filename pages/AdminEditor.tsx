@@ -178,7 +178,10 @@ const AdminEditor: NextPage = () => {
     };
   };
 
-  const [imgList, setImgList] = useState(["blabla.jpg", "abcdef.jpeg"]);
+  const [importImgList, setImportImgList] = useState([
+    "blabla.jpg",
+    "abcdef.jpeg",
+  ]);
   return (
     <>
       {/* <h2>ADMIN EDITOR</h2> */}
@@ -256,19 +259,22 @@ const AdminEditor: NextPage = () => {
             {/* <span style={{ color: "#d082c4" }}>From</span>{" "}
             <span style={{ color: "#d88e74" }}>{`"../HR-DEVLOG";`}</span> */}
           </TagTitle>
-          {imgList.map((url: string, i: number) => {
-            return (
-              <ImgTitle key={i}>
-                {" "}
-                <p style={{ color: "#d082c4" }}>Import</p>{" "}
-                <p style={{ color: "#88deff", margin: "0 6px" }}>{`${url}`}</p>{" "}
-                <p style={{ color: "#d082c4" }}>from</p>{" "}
-                <p
-                  style={{ color: "#d88e74", marginLeft: "6px" }}
-                >{`"../Hr-Devlog-S3";`}</p>
-              </ImgTitle>
-            );
-          })}
+          {importImgList &&
+            importImgList.map((url: string, i: number) => {
+              return (
+                <ImgTitle key={i}>
+                  {" "}
+                  <p style={{ color: "#d082c4" }}>Import</p>{" "}
+                  <p
+                    style={{ color: "#88deff", margin: "0 6px" }}
+                  >{`${url}`}</p>{" "}
+                  <p style={{ color: "#d082c4" }}>from</p>{" "}
+                  <p
+                    style={{ color: "#d88e74", marginLeft: "6px" }}
+                  >{`"../Hr-Devlog-S3";`}</p>
+                </ImgTitle>
+              );
+            })}
 
           {/* <p>
             <label>썸네일</label>
@@ -282,7 +288,7 @@ const AdminEditor: NextPage = () => {
           </p> */}
         </div>
 
-        <Editor setS3File={setS3File} />
+        <Editor setS3File={setS3File} setImportImgList={setImportImgList} />
       </div>
       {/* <div style={{ textAlign: "center", marginBottom: 20 }}>
         <button
