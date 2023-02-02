@@ -113,7 +113,7 @@ const Header = () => {
             style={{
               width: "20px",
               height: "20px",
-              color: status === "authenticated" ? "#d7d89f" : "",
+              color: status === "authenticated" ? "#d7d89f" : "#fff",
             }}
           >
             <path

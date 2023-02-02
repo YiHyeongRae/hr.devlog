@@ -32,12 +32,10 @@ export const authOptions = {
           const hashedPw = await Hash.pwHashing(
             credentials?.userId,
             credentials?.userPw
-          ).then((res2: any) => {
-            return res2;
-          });
+          );
 
           //console.log("after pwHasing ======", hashedPw);
-          const user = login(credentials.userId, hashedPw).then(
+          const user = await login(credentials.userId, hashedPw).then(
             (res: userResData) => {
               if (res != null) {
                 // console.log("로그인 에러 체크 [nextAuth]-authorize", res);
@@ -56,6 +54,7 @@ export const authOptions = {
               // Any object returned will be saved in `user` property of the JWT
             }
           );
+
           return user;
           // Any object returned will be saved in `user` property of the JWT
         } else {
