@@ -1,4 +1,5 @@
 import { useSession, signIn, signOut } from "next-auth/react";
+import Router from "next/router";
 import React, { useEffect, useState } from "react";
 
 const Login: Function = () => {
@@ -16,6 +17,12 @@ const Login: Function = () => {
 
   const enterLogin: Function = (e: React.KeyboardEvent<HTMLInputElement>) => {
     e.keyCode === 13 ? signIn("admin", { userId, userPw }) : {};
+  };
+  const login: Function = async () => {
+    await signIn("admin", { userId, userPw, redirect: false }).then(
+      (result: any) =>
+        result.status === 401 ? alert("비밀번호 또는 아이디가 틀렸습니다") : ""
+    );
   };
   return (
     <div className="content-wrap">
@@ -46,10 +53,7 @@ const Login: Function = () => {
             />
           </p>
           <p>
-            <button
-              onClick={() => signIn("admin", { userId, userPw })}
-              type="button"
-            >
+            <button onClick={() => login()} type="button">
               로그인
             </button>
           </p>

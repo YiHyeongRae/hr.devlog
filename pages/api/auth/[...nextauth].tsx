@@ -77,7 +77,8 @@ export const authOptions = {
     signIn: "/login",
   },
   callbacks: {
-    async signIn({ user, account }: any) {
+    async signIn({ user, account, profile, email, credentials }: any) {
+      console.log(user, account, profile, email, credentials);
       // credential provider에서 return 해준 user 찍힘
       // user{
       //  id: 'admin',
