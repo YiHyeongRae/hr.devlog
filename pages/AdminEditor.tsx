@@ -91,6 +91,29 @@ const ImgTitle = styled.div`
   color: #fff;
   font-family: "MapleLight";
 `;
+
+const ContentWrap = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+`;
+
+const TapWrap = styled.ul`
+  background-color: #2c2d2d;
+  display: flex;
+`;
+const TapTitle = styled.li`
+  list-style-type: none;
+  font-family: "MapleLight";
+  font-size: 12px;
+  line-height: 37.5px;
+
+  border-right: 1px solid #252526;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 16px;
+`;
 const AdminEditor: NextPage = () => {
   const title3: ICommand = {
     name: "title3",
@@ -209,6 +232,34 @@ const AdminEditor: NextPage = () => {
           </div>
         </CircleList>
       </CircleWrap> */}
+      <TapWrap>
+        <TapTitle
+          style={{
+            cursor: "pointer",
+          }}
+        >
+          <p>작성중인 게시글</p>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            style={{
+              width: "18px",
+              height: "18px",
+              margin: "0 10px",
+              cursor: "pointer",
+            }}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </TapTitle>
+      </TapWrap>
       <div data-color-mode="dark">
         <div className="wmde-markdown-var"> </div>
         <div className="title-editor">

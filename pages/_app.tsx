@@ -27,7 +27,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     return (
       <div
         style={{
-          height: "calc(100vh - 91.5px)",
+          height: "calc(100vh - 54px)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",

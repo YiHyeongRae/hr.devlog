@@ -165,55 +165,60 @@ function Layout({ children }: any) {
         <SideTagNav data={data} boardTap={boardTapHandler} />
         {
           <ContentWrap>
-            <TapWrap>
-              {BoardTap &&
-                BoardTap.map((tap: any, i: any) => {
-                  // console.log("tap", tap);
-                  // console.log("substring", router.asPath.substring(6));
+            {router.pathname !== "/AdminEditor" ? (
+              <TapWrap>
+                {BoardTap &&
+                  BoardTap.map((tap: any, i: any) => {
+                    // console.log("tap", tap);
+                    // console.log("substring", router.asPath.substring(6));
 
-                  return (
-                    <TapTitle
-                      key={i}
-                      style={{
-                        cursor: "pointer",
-                        color:
-                          router.asPath.substring(6) === String(tap.no)
-                            ? "#deb77f"
-                            : "#909090",
-                        backgroundColor:
-                          router.asPath.substring(6) === String(tap.no)
-                            ? "#1e1e1f"
-                            : "",
-                      }}
-                      onClick={() => selectPost(`/post/${tap.no}`)}
-                    >
-                      <p>{tap.post_title}</p>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
+                    return (
+                      <TapTitle
+                        key={i}
                         style={{
-                          width: "18px",
-                          height: "18px",
-                          margin: "0 10px",
                           cursor: "pointer",
+                          color:
+                            router.asPath.substring(6) === String(tap.no)
+                              ? "#deb77f"
+                              : "#909090",
+                          backgroundColor:
+                            router.asPath.substring(6) === String(tap.no)
+                              ? "#1e1e1f"
+                              : "",
                         }}
-                        onClick={(e) => {
-                          [e.stopPropagation(), deletePost(tap.no)];
-                        }}
+                        onClick={() => selectPost(`/post/${tap.no}`)}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </TapTitle>
-                  );
-                })}
-            </TapWrap>
+                        <p>{tap.post_title}</p>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          style={{
+                            width: "18px",
+                            height: "18px",
+                            margin: "0 10px",
+                            cursor: "pointer",
+                          }}
+                          onClick={(e) => {
+                            [e.stopPropagation(), deletePost(tap.no)];
+                          }}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </TapTitle>
+                    );
+                  })}
+              </TapWrap>
+            ) : (
+              <></>
+            )}
+
             {children}
           </ContentWrap>
         }
