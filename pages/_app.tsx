@@ -15,7 +15,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     const isUser = !!session?.user;
     useEffect(() => {
       if (status === "loading") return; // Do nothing while loading
-      if (!isUser) signIn(); // If not authenticated, force log in
+      if (!isUser) setTimeout(() => signIn(), 5000); // If not authenticated, force log in
     }, [isUser, status]);
 
     if (isUser) {
@@ -25,18 +25,30 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     // Session is being fetched, or no user.
     // If no user, useEffect() will redirect.
     return (
-      <div style={{ height: "100vh" }}>
+      <div
+        style={{
+          height: "calc(100vh - 91.5px)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+        }}
+      >
         <div
           style={{
-            position: "absolute",
-            left: "50%",
-            top: "50%",
-            transform: "translate(-50%,-50%)",
+            textAlign: "center",
+            marginBottom: "12px",
+          }}
+        >
+          This Page Require Authorized, But You Are Unauthorized ! Please
+          SignIn.
+        </div>
+        <div
+          style={{
             textAlign: "center",
           }}
         >
-          This Page Require Authorized ! But You Are Unauthorized ! Please Sign
-          In -
+          Routing SignIn Page in 3 seconds.
         </div>
       </div>
     );
