@@ -151,7 +151,7 @@ const Editor: Function = ({ setS3File, setImportImgList }: EditorTypes) => {
   };
 
   return (
-    <div>
+    <div style={{ marginTop: "50px" }}>
       <input
         className="file-input"
         ref={fileInput}
@@ -159,7 +159,7 @@ const Editor: Function = ({ setS3File, setImportImgList }: EditorTypes) => {
         onChange={(e) => handleFileChange(e)}
       />
 
-      <table
+      {/* <table
         summary="uploaded-img-list"
         style={{ width: "100%", margin: "20px 0" }}
       >
@@ -198,7 +198,7 @@ const Editor: Function = ({ setS3File, setImportImgList }: EditorTypes) => {
             );
           })}
         </tbody>
-      </table>
+      </table> */}
       {/* <ul>
         <li style={{ color: "#fedcba", border: 0 }}>업로드된 사진 리스트</li>
         {imgList.map((img, i) => {
