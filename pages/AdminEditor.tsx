@@ -204,6 +204,18 @@ const AdminEditor: NextPage = () => {
   const [importImgList, setImportImgList] = useState([
     "blabla.jpg",
     "abcdef.jpeg",
+    "blabla.jpg",
+    "abcdef.jpeg",
+    "blabla.jpg",
+    "abcdef.jpeg",
+    "blabla.jpg",
+    "abcdef.jpeg",
+    "blabla.jpg",
+    "abcdef.jpeg",
+    "blabla.jpg",
+    "abcdef.jpeg",
+    "blabla.jpg",
+    "abcdef.jpeg",
   ]);
   return (
     <>
@@ -310,6 +322,22 @@ const AdminEditor: NextPage = () => {
             {/* <span style={{ color: "#d082c4" }}>From</span>{" "}
             <span style={{ color: "#d88e74" }}>{`"../HR-DEVLOG";`}</span> */}
           </TagTitle>
+
+          {/* <p>
+            <label>썸네일</label>
+            <input
+              id="thumb-nail"
+              type="file"
+              accept="image/*"
+              onChange={(e) => fileTest(e)}
+              ref={thumnailInput}
+            />
+          </p> */}
+        </div>
+        <div
+          className="title-editor"
+          style={{ height: "60px", overflowY: "scroll" }}
+        >
           {importImgList &&
             importImgList.map((url: string, i: number) => {
               return (
@@ -326,17 +354,6 @@ const AdminEditor: NextPage = () => {
                 </ImgTitle>
               );
             })}
-
-          {/* <p>
-            <label>썸네일</label>
-            <input
-              id="thumb-nail"
-              type="file"
-              accept="image/*"
-              onChange={(e) => fileTest(e)}
-              ref={thumnailInput}
-            />
-          </p> */}
         </div>
 
         <Editor setS3File={setS3File} setImportImgList={setImportImgList} />

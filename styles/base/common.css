@@ -14,6 +14,8 @@
 }
 .w-md-editor{
   background-color:   #1E1E24 !important;
+  height:500px !important;
+  margin:0 20px !important;
 
 }
 .w-md-editor-toolbar {
