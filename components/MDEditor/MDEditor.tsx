@@ -100,7 +100,7 @@ const Editor: Function = ({ setS3File, setImportImgList }: EditorTypes) => {
       const copyKeyArr = imgKey;
       copyImgArr.push(res.url);
       copyKeyArr.push(res.key);
-      setImgList(copyImgArr);
+      setImportImgList(copyImgArr);
       setImgKey(copyKeyArr);
     } catch (error: any) {
       console.log(error);
@@ -143,7 +143,7 @@ const Editor: Function = ({ setS3File, setImportImgList }: EditorTypes) => {
 
       copyImgList.splice(idx, 1);
 
-      setImgList(copyImgList);
+      setImportImgList(copyImgList);
       setMd(replaceMd);
     } else {
       alert("삭제가 취소되었습니다.");
