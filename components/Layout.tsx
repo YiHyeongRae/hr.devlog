@@ -9,7 +9,7 @@ import Header from "./Header";
 import SideTagNav from "./SideTagNav";
 import { getCookie, setCookie } from "cookies-next";
 import loadConfig from "next/dist/server/config";
-import Loading from "./Loading";
+import Loading from "./loading";
 const fetcher = (url: any) => fetch(url).then((r) => r.json());
 
 const ContentWrap = styled.div`
@@ -33,6 +33,33 @@ const TapTitle = styled.li`
   align-items: center;
   justify-content: center;
   padding-left: 16px;
+`;
+
+const SmallSpinner = styled.p`
+  display: inline-block;
+  margin: 14px 0;
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(232, 235, 237, 0.5);
+  border-top: 4px solid #0066b8;
+  border-radius: 50%;
+
+  animation: spin 1s linear infinite;
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
+const SpinnerWrap = styled.div`
+  height: calc(100vh - 42px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 function Layout({ children }: any) {
@@ -156,18 +183,9 @@ function Layout({ children }: any) {
     router.push(filtering.length === 0 ? "/" : `/post/${filtering[0].no}`);
   };
   return isLoading ? (
-    <div
-      style={{
-        color: "#f00",
-        fontSize: "30px",
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <p>is loadConfig...</p>
-    </div>
+    <SpinnerWrap>
+      <SmallSpinner />
+    </SpinnerWrap>
   ) : (
     <div className="Layout">
       <Header />
@@ -235,7 +253,7 @@ function Layout({ children }: any) {
             ) : (
               <></>
             )}
-            <Suspense fallback={<Loading />}> {children}</Suspense>
+            {children}
           </ContentWrap>
         }
       </div>

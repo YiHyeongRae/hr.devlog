@@ -6,7 +6,10 @@ import wrapper from "../redux/store";
 import { Provider } from "react-redux";
 
 import { SessionProvider, signIn, useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
+import Loading from "../components/loading";
+import { useRouter } from "next/router";
+import styled from "styled-components";
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const { store } = wrapper.useWrappedStore(pageProps);
@@ -54,11 +57,25 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     );
   }
 
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    router.events.on("routeChangeStart", () => setLoading(true));
+    router.events.on("routeChangeComplete", () => setLoading(false));
+    router.events.on("routeChangeError", () => setLoading(false));
+    return () => {
+      router.events.off("routeChangeStart", () => setLoading(true));
+      router.events.off("routeChangeComplete", () => setLoading(false));
+      router.events.off("routeChangeError", () => setLoading(false));
+    };
+  }, [router.events]);
   return (
     <SessionProvider session={session}>
       <Provider store={store}>
         <Layout>
-          {Component.defaultProps?.auth ? (
+          {loading ? (
+            <Loading />
+          ) : Component.defaultProps?.auth ? (
             <Auth>
               <Component {...pageProps} />
             </Auth>
