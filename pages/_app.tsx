@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 
 import { SessionProvider, signIn, useSession } from "next-auth/react";
 import { Suspense, useEffect, useState } from "react";
-import Loading from "../components/loading";
+import Loading from "../components/Loading";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
