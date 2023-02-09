@@ -6,12 +6,13 @@ import "@uiw/react-markdown-preview/markdown.css";
 import dynamic from "next/dynamic";
 import SEO from "../../components/SEO";
 import axios from "axios";
+// import Comment from "../../components/Comment";
 
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
 });
 
-const Comment = dynamic(() => import("../../components/Comment"), {
+const Comments = dynamic(() => import("../../components/Comments"), {
   ssr: false,
 });
 
@@ -141,7 +142,7 @@ const Post: NextPage = ({ post, tag, title }: any) => {
           ialValue={""} />
         </div> */}
         <MarkdownPreview source={post} />
-        {/* <Comment /> */}
+        <Comments />
       </PostContainer>
     </PostWrap>
   );
