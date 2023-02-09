@@ -49,7 +49,7 @@ const TechStack = styled.li`
   font-size: 10px;
 `;
 
-const Home: NextPage = ({ list }: any) => {
+const Home = () => {
   // console.log("홈 서버사이드 리스트", list);
 
   const modal = useSelector(

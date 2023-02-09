@@ -6,15 +6,15 @@ import "@uiw/react-markdown-preview/markdown.css";
 import dynamic from "next/dynamic";
 import SEO from "../../components/SEO";
 import axios from "axios";
-// import Comment from "../../components/Comment";
+import Comments from "../../components/Comments";
 
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
 });
 
-const Comments = dynamic(() => import("../../components/Comments"), {
-  ssr: false,
-});
+// const Comments = dynamic(() => import("../../components/Comments"), {
+//   ssr: false,
+// });
 
 const PostWrap = styled.div`
   display: flex;
