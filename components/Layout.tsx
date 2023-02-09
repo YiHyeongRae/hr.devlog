@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import styled from "styled-components";
 import useSWRImmutable from "swr/immutable";
 import useSWR from "swr";
@@ -9,6 +9,7 @@ import Header from "./Header";
 import SideTagNav from "./SideTagNav";
 import { getCookie, setCookie } from "cookies-next";
 import loadConfig from "next/dist/server/config";
+import Loading from "./Loading";
 const fetcher = (url: any) => fetch(url).then((r) => r.json());
 
 const ContentWrap = styled.div`
@@ -234,8 +235,7 @@ function Layout({ children }: any) {
             ) : (
               <></>
             )}
-
-            {children}
+            <Suspense fallback={<Loading />}> {children}</Suspense>
           </ContentWrap>
         }
       </div>
