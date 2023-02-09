@@ -9,7 +9,7 @@ import Header from "./Header";
 import SideTagNav from "./SideTagNav";
 import { getCookie, setCookie } from "cookies-next";
 import loadConfig from "next/dist/server/config";
-import Loading from "./loading";
+
 const fetcher = (url: any) => fetch(url).then((r) => r.json());
 
 const ContentWrap = styled.div`
