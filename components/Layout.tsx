@@ -8,6 +8,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import SideTagNav from "./SideTagNav";
 import { getCookie, setCookie } from "cookies-next";
+import loadConfig from "next/dist/server/config";
 const fetcher = (url: any) => fetch(url).then((r) => r.json());
 
 const ContentWrap = styled.div`
@@ -43,6 +44,8 @@ function Layout({ children }: any) {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
+
+  console.log(isLoading);
 
   const [BoardTap, setBoardTap] = useState<Array<object>>([]);
   // console.log("boardTap?", BoardTap);
@@ -151,7 +154,20 @@ function Layout({ children }: any) {
     setCookie("TapState", JSON.stringify(filteringCookie));
     router.push(filtering.length === 0 ? "/" : `/post/${filtering[0].no}`);
   };
-  return (
+  return isLoading ? (
+    <div
+      style={{
+        color: "#f00",
+        fontSize: "30px",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <p>is loadConfig...</p>
+    </div>
+  ) : (
     <div className="Layout">
       <Header />
       {/* <Nav /> */}
