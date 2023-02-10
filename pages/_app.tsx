@@ -13,12 +13,24 @@ import styled from "styled-components";
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const { store } = wrapper.useWrappedStore(pageProps);
+
+  const [timer, setTimer] = useState(3);
   function Auth({ children }: any) {
     const { data: session, status } = useSession();
     const isUser = !!session?.user;
     useEffect(() => {
       if (status === "loading") return; // Do nothing while loading
-      if (!isUser) setTimeout(() => signIn(), 5000); // If not authenticated, force log in
+      if (!isUser) {
+        const dec = setInterval(() => {
+          setTimer(timer - 1);
+        }, 1000);
+
+        if (timer === 0) {
+          clearInterval(dec);
+          signIn();
+        }
+      }
+      // setTimeout(() => signIn(), 5000); // If not authenticated, force log in
     }, [isUser, status]);
 
     if (isUser) {
@@ -51,7 +63,8 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
             textAlign: "center",
           }}
         >
-          Routing SignIn Page in 3 seconds.
+          Routing SignIn Page in{" "}
+          <span style={{ fontSize: "25px" }}>{timer}</span> seconds.
         </div>
       </div>
     );
