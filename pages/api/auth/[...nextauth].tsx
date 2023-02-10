@@ -164,7 +164,7 @@ const login: Function = async (
     // console.log("res가 찍히나 ?", res.data);
     return res.data;
   } else {
-    return res.data.error;
+    return alert("비밀번호 또는 아이디가 틀렸습니다"), res.data.error;
   }
 };
 

@@ -1,5 +1,5 @@
 import { useSession, signIn, signOut } from "next-auth/react";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 const Login: Function = () => {
@@ -18,10 +18,15 @@ const Login: Function = () => {
   const enterLogin: Function = (e: React.KeyboardEvent<HTMLInputElement>) => {
     e.keyCode === 13 ? signIn("admin", { userId, userPw }) : {};
   };
+
+  const router = useRouter();
   const login: Function = async () => {
     await signIn("admin", { userId, userPw, redirect: false }).then(
-      (result: any) =>
-        result.status === 401 ? alert("비밀번호 또는 아이디가 틀렸습니다") : ""
+      (result: any) => {
+        result.status === 401
+          ? alert("비밀번호 또는 아이디가 틀렸습니다")
+          : router.push("/");
+      }
     );
   };
   return (
