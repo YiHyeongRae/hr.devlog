@@ -5,7 +5,7 @@ import styled from "styled-components";
 const SideWrap = styled.div`
   display: flex;
   width: 200px;
-  height: 100%;
+  height: calc(100vh - 32px);
   flex-grow: 0;
 `;
 
@@ -28,7 +28,7 @@ const SideTagItem = styled.li`
 `;
 
 const SideListWrap = styled.ul`
-  height: calc(100vh - 54px);
+  /* height: calc(100vh - 54px); */
   flex-basis: 150px;
   line-height: 24px;
   font-size: 12px;

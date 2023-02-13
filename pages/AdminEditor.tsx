@@ -358,7 +358,7 @@ const AdminEditor: NextPage = () => {
 
         <Editor setS3File={setS3File} setImportImgList={setImportImgList} />
       </div>
-      {/* <div style={{ textAlign: "center", marginBottom: 20 }}>
+      <div style={{ textAlign: "center", marginBottom: 20 }}>
         <button
           style={{ padding: 25 }}
           type="button"
@@ -366,7 +366,7 @@ const AdminEditor: NextPage = () => {
         >
           게시글 업로드
         </button>
-      </div> */}
+      </div>
 
       <style jsx>
         {`

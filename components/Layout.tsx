@@ -15,6 +15,8 @@ const fetcher = (url: any) => fetch(url).then((r) => r.json());
 const ContentWrap = styled.div`
   display: flex;
   width: 100%;
+  height: calc(100vh - 32px);
+  overflow-y: scroll;
   flex-direction: column;
 `;
 
