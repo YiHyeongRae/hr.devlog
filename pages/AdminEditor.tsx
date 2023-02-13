@@ -141,7 +141,7 @@ const AdminEditor: NextPage = () => {
 
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
-  const day = date.getDay();
+  const day = date.getDate();
   const getTime = date.getTime();
 
   const uniqName = `${getTime}:${year}-${month < 10 ? `0${month}` : month}-${
