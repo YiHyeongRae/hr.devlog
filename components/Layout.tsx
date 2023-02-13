@@ -75,8 +75,6 @@ function Layout({ children }: any) {
     revalidateOnReconnect: false,
   });
 
-  console.log(isLoading);
-
   const [BoardTap, setBoardTap] = useState<Array<object>>([]);
   // console.log("boardTap?", BoardTap);
   const boardTapHandler: Function = (index: number) => {
