@@ -1,42 +1,32 @@
 .utterances {
   max-width: 95% !important;
-  margin:50px auto !important;
+  margin: 50px auto !important;
 }
 
-
-.toastui-editor-main{
+.toastui-editor-main {
   background-color: #fff;
 }
 
-
 .wmde-markdown {
-  background-color:   #1E1E24 !important;
+  background-color: #1e1e1f !important;
 }
-.w-md-editor{
-  background-color:   #1E1E24 !important;
-  height:500px !important;
-  margin:0 20px !important;
-
+.w-md-editor {
+  background-color: #1e1e24 !important;
+  height: 500px !important;
+  margin: 0 20px !important;
 }
 .w-md-editor-toolbar {
-  background-color:   #1E1E24 !important;
-
+  background-color: #1e1e24 !important;
 }
 
 @keyframes fadeInOut {
   0% {
-    border-color: rgba(255,255,255,0.3);
-    
+    border-color: rgba(255, 255, 255, 0.3);
   }
-  50%{
-    border-color: rgba(255,255,255,0.7);
-
-
+  50% {
+    border-color: rgba(255, 255, 255, 0.7);
   }
   100% {
-    border-color: rgba(255,255,255,0.3);
-  
-
-
+    border-color: rgba(255, 255, 255, 0.3);
   }
 }
