@@ -10,6 +10,7 @@
     "vercel-deploy": "next build && next export"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^13.1.6",
     "@next/font": "^13.1.6",
     "@reduxjs/toolkit": "^1.9.1",
     "@types/node": "18.11.9",
