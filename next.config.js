@@ -7,6 +7,10 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  i18n: {
+    locales: ["ko"],
+    defaultLocale: "ko",
+  },
 };
 
 module.exports = removeImports({
