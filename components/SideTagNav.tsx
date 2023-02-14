@@ -82,10 +82,16 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
     index: number
   ) => {
     e.stopPropagation(), boardTap(index);
+    // router.push(
+    //   {
+    //     pathname: `/post/${index}`,
+    //     query: { post_url: content.post_url },
+    //   },
+    //   `/post/${index}`
+    // );
     router.push(
       {
         pathname: `/post/${index}`,
-        query: { post_url: content.post_url },
       },
       `/post/${index}`
     );

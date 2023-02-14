@@ -157,10 +157,16 @@ function Layout({ children }: any) {
     );
     //console.log(search);
     // console.log(index);
+    // router.push(
+    //   {
+    //     pathname: `/post/${index.substring(6)}`,
+    //     query: { post_url: search[0].post_url },
+    //   },
+    //   `/post/${index.substring(6)}`
+    // );
     router.push(
       {
         pathname: `/post/${index.substring(6)}`,
-        query: { post_url: search[0].post_url },
       },
       `/post/${index.substring(6)}`
     );
