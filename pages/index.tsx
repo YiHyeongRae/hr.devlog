@@ -162,23 +162,4 @@ const Home = () => {
   );
 };
 
-// export async function getServerSideProps(ctx: any) {
-//   // const res = await fetch(
-//   //   process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
-//   // );
-
-//   // const res = await fetch("http://localhost:3000/api/selectDb");
-//   // const res = await fetch("https://hr-devlog.vercel.app/api/selectDb");
-//   // const res = await axios.get("http://localhost:3000/api/selectDb");
-//   const res = await axios.get(
-//     process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
-//   );
-
-//   const data = res.data;
-
-//   return {
-//     props: { list: data }, // will be passed to the page component as props
-//   };
-// }
-
 export default Home;
