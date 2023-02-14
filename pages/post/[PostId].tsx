@@ -6,14 +6,15 @@ import "@uiw/react-markdown-preview/markdown.css";
 import dynamic from "next/dynamic";
 import SEO from "../../components/SEO";
 import axios from "axios";
+import Comments from "../../components/Comments";
 
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
 });
 
-const Comments = dynamic(() => import("../../components/Comments"), {
-  ssr: false,
-});
+// const Comments = dynamic(() => import("../../components/Comments"), {
+//   ssr: false,
+// });
 
 const PostWrap = styled.div`
   display: flex;
@@ -97,7 +98,7 @@ const Post: NextPage = ({ post, tag, title }: any) => {
   );
 };
 
-export async function getStaticPaths({ params }: any) {
+export async function getStaticPaths() {
   const res = await axios.get(
     process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
   );
