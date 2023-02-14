@@ -156,7 +156,7 @@ export async function getStaticPaths({ params }: any) {
   const paths = pathRes.map((path: any) => ({
     params: { PostId: path.no.toString() },
   }));
-  console.log("pathRes", paths);
+  // console.log("pathRes", paths);
   return {
     paths,
     fallback: false,
@@ -166,7 +166,7 @@ export async function getStaticPaths({ params }: any) {
 export async function getStaticProps(context: any) {
   // 환경변수로 node에서 허가되지 않은 인증TLS통신을 거부하지 않겠다고 설정
 
-  console.log("static", context);
+  // console.log("static", context);
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
   // const res = await fetch("http://localhost:3000/api/selectDb");
