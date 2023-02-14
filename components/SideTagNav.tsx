@@ -66,6 +66,7 @@ const PostTitle = styled.li`
   list-style-type: none;
   font-family: "MapleLight";
   text-indent: 16px;
+  color: #909090;
 `;
 interface SideTagNavTypes {
   data: Array<object>;
@@ -187,7 +188,7 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
                     style={
                       router.asPath.substring(6) === String(data.no)
                         ? { color: "#deb77f", backgroundColor: "#1e1e1f" }
-                        : { color: "#909090" }
+                        : {}
                     }
                   >
                     {data.post_title}
