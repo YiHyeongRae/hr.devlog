@@ -6,15 +6,14 @@ import "@uiw/react-markdown-preview/markdown.css";
 import dynamic from "next/dynamic";
 import SEO from "../../components/SEO";
 import axios from "axios";
-import Comments from "../../components/Comments";
 
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
 });
 
-// const Comments = dynamic(() => import("../../components/Comments"), {
-//   ssr: false,
-// });
+const Comments = dynamic(() => import("../../components/Comments"), {
+  ssr: false,
+});
 
 const PostWrap = styled.div`
   display: flex;
@@ -52,52 +51,7 @@ const PostContainer = styled.div`
   padding: 16px;
 `;
 
-// const ContentBox = styled.div`
-//   margin-top: 20px;
-// `;
-// const ContentTitle = styled.h3`
-//   font-size: 20px;
-//   color: #eee;
-// `;
-
-// const ContentDesc = styled.p`
-//   margin-top: 20px;
-//   font-size: 12px;
-//   color: #ccc;
-// `;
-
 const Post: NextPage = ({ post, tag, title }: any) => {
-  // console.log("data,data2,data3", post, tag, title);
-  const router = useRouter();
-  // console.log("라우터체크", router);
-  // const [postData, setPostData] = useState<any>();
-
-  // console.log("??????", data);
-
-  // useEffect(() => {
-  //   // url === https://hr.devlog.s3.ap-northeast-2.amazonaws.com/next-s3-uploads/1669958981317:2022-12-05.txt
-  //   fetch(url)
-  //     .then((response) => response.text())
-  //     .then((data: any) => {
-  //       setPostData(data);
-  //     });
-  // }, []);
-
-  // class Content extends React.Component {
-  //   render() {
-  //     const stringData = postData;
-  //     return (
-  //       <div
-  //         className="toastui-editor-contents"
-  //         dangerouslySetInnerHTML={{ __html: stringData }}
-  //       ></div>
-  //     );
-  //   }
-  // }
-  // useEffect(() => {
-  //   console.log(data2[0].post_tag);
-  //   const
-  // }, []);
   return (
     <PostWrap>
       <SEO title={`${title}`} />
@@ -136,11 +90,6 @@ const Post: NextPage = ({ post, tag, title }: any) => {
         </div>
       </PostHeader>
       <PostContainer>
-        {/* <Content />
-        <div style={{ display: "none" }}>
-          <TuiViewer init
-          ialValue={""} />
-        </div> */}
         <MarkdownPreview source={post} />
         <Comments />
       </PostContainer>
@@ -156,7 +105,6 @@ export async function getStaticPaths({ params }: any) {
   const paths = pathRes.map((path: any) => ({
     params: { PostId: path.no.toString() },
   }));
-  // console.log("pathRes", paths);
   return {
     paths,
     fallback: false,
@@ -166,28 +114,22 @@ export async function getStaticPaths({ params }: any) {
 export async function getStaticProps(context: any) {
   // 환경변수로 node에서 허가되지 않은 인증TLS통신을 거부하지 않겠다고 설정
 
-  // console.log("static", context);
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
   // const res = await fetch("http://localhost:3000/api/selectDb");
   // const res = await fetch("https://hr-devlog.vercel.app/api/selectDb");
 
-  // 파라미터로 넣기 ? Host: <host>:<port>
   const res = await axios.get(
     process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
   );
   const data = await res.data;
-  // console.log("res", res);
-  // console.log("data", data);
 
   const searchPost = data.filter(
     (item: any) => item.no === Number(context.params.PostId)
   );
-  // console.log("써치", searchPost);
-  // console.log("context-data", context);
+
   const url = searchPost[0].post_url;
   let postData;
-  // const asdf = await axios.post(url);
 
   await fetch(url)
     .then((response) => response.text())
@@ -195,16 +137,12 @@ export async function getStaticProps(context: any) {
       postData = data;
     });
 
-  // const res2 = await axios.get(
-  //   process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
-  // );
-  // console.log("res2?", res2);
   const tagArr = searchPost[0].post_tag.split(",");
   const tags = tagArr;
   const title = searchPost[0].post_title;
 
   return {
-    props: { post: postData, tag: tags, title: title }, // will be passed to the page component as props
+    props: { post: postData, tag: tags, title: title },
   };
 
   // return {
