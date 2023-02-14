@@ -86,7 +86,14 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     <SessionProvider session={session}>
       <Provider store={store}>
         <Layout>
-          {loading ? (
+          {Component.defaultProps?.auth ? (
+            <Auth>
+              <Component {...pageProps} />
+            </Auth>
+          ) : (
+            <Component {...pageProps} />
+          )}
+          {/* {loading ? (
             <Loading />
           ) : Component.defaultProps?.auth ? (
             <Auth>
@@ -94,7 +101,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
             </Auth>
           ) : (
             <Component {...pageProps} />
-          )}
+          )} */}
         </Layout>
       </Provider>
     </SessionProvider>
