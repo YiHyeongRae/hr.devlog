@@ -19,48 +19,30 @@ const nextConfig = {
   },
 };
 
-module.exports = withPlugins([
-  [removeImports({ ...nextConfig })],
-  [
-    withBundleAnalyzer({
-      compress: true,
-      webpack(nextConfig, { webpack }) {
-        const prod = process.env.NODE_ENV === "production";
-        const plugins = [
-          ...nextConfig.plugins,
-          new webpack.ContextReplacementPlugin(
-            /moment[/\\]locale$/,
-            /^\.\/ko$/
-          ),
-        ];
-        return {
-          ...nextConfig,
-          mode: prod ? "production" : "development",
-          devtool: prod ? "hidden-source-map" : "eval",
-          plugins,
-        };
-      },
-    }),
-  ],
-
-  // your other plugins here
-]);
-// (module.exports = removeImports({
-//   ...nextConfig,
-// })),
-//   withBundleAnalyzer({
-//     compress: true,
-//     webpack(nextConfig, { webpack }) {
-//       const prod = process.env.NODE_ENV === "production";
-//       const plugins = [
-//         ...nextConfig.plugins,
-//         new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /^\.\/ko$/),
-//       ];
-//       return {
-//         ...nextConfig,
-//         mode: prod ? "production" : "development",
-//         devtool: prod ? "hidden-source-map" : "eval",
-//         plugins,
-//       };
-//     },
-//   });
+// module.exports = withPlugins([
+//   [removeImports({ ...nextConfig })],
+//   [
+//     withBundleAnalyzer({
+//       compress: true,
+//       webpack(nextConfig, { webpack }) {
+//         const prod = process.env.NODE_ENV === "production";
+//         const plugins = [
+//           ...nextConfig.plugins,
+//           new webpack.ContextReplacementPlugin(
+//             /moment[/\\]locale$/,
+//             /^\.\/ko$/
+//           ),
+//         ];
+//         return {
+//           ...nextConfig,
+//           mode: prod ? "production" : "development",
+//           devtool: prod ? "hidden-source-map" : "eval",
+//           plugins,
+//         };
+//       },
+//     }),
+//   ],
+// ]);
+module.exports = removeImports({
+  ...nextConfig,
+});
