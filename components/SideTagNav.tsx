@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const SideWrap = styled.div`
   display: flex;
-  width: 200px;
+  /* width: 200px; */
   height: calc(100vh - 32px);
   flex-grow: 0;
 `;
@@ -21,21 +21,20 @@ const SideTagItem = styled.li`
   width: 100%;
   list-style-type: none;
   border-left: 2px solid #fff;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 10px;
+
+  padding: 5px 10px;
   cursor: pointer;
 `;
 
 const SideListWrap = styled.ul`
   /* height: calc(100vh - 54px); */
-  flex-basis: 150px;
+  /* flex-basis: 150px; */
   line-height: 24px;
   font-size: 12px;
   display: flex;
-  padding-left: 5px;
   flex-direction: column;
   background-color: #252527;
+  z-index: 100;
 `;
 
 const SideListTitle = styled.li`
@@ -65,8 +64,9 @@ const PostListWrap = styled.ul`
 const PostTitle = styled.li`
   list-style-type: none;
   font-family: "MapleLight";
-  text-indent: 16px;
   color: #909090;
+
+  padding: 0 16px;
 `;
 interface SideTagNavTypes {
   data: Array<object>;

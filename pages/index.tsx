@@ -37,6 +37,7 @@ const StackWrap = styled.ul`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  flex-wrap: nowrap;
 `;
 
 const TechStack = styled.li`

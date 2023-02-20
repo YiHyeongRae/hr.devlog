@@ -27,7 +27,9 @@ const PostHeader = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 0 16px;
+  padding: 0 32px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const PostTitle = styled.h2`
@@ -37,6 +39,8 @@ const PostTitle = styled.h2`
   font-weight: 700;
   color: #fff;
   font-family: "MapleLight";
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 const TagWrap = styled.ul``;
 
@@ -49,7 +53,7 @@ const PostTag = styled.li`
 const PostContainer = styled.div`
   width: 100%;
   font-family: "MapleLight";
-  padding: 16px;
+  padding: 32px;
 `;
 
 const Post: NextPage = ({ post, tag, title }: any) => {

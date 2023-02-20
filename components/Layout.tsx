@@ -24,6 +24,8 @@ const ContentWrap = styled.div`
 const TapWrap = styled.ul`
   background-color: #2c2d2d;
   display: flex;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 const TapTitle = styled.li`
   list-style-type: none;
