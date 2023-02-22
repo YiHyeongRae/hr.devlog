@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const SideWrap = styled.div`
@@ -96,8 +96,25 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
       `/post/${index}`
     );
   };
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  const forMobile: Function = () => {
+    const user = navigator.userAgent;
+    // noneExpireSetCookie("splash", "none-expire");
+    // const asdf = noneExpireGetCookie("splash");
+    // console.log("none-cookie", asdf);
+    if (user.indexOf("iPhone") > -1 || user.indexOf("Android") > -1) {
+      setIsMobile(true);
+    }
+  };
+
+  useEffect(() => {
+    forMobile();
+  }, []);
+
   return (
-    <SideWrap>
+    <SideWrap style={isMobile ? { marginLeft: "-280px" } : {}}>
       <SideTagWrap>
         <SideTagItem>
           <svg

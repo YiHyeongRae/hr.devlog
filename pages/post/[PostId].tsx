@@ -28,8 +28,8 @@ const PostHeader = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 32px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  /* text-overflow: ellipsis;
+  white-space: nowrap; */
 `;
 
 const PostTitle = styled.h2`
@@ -39,8 +39,8 @@ const PostTitle = styled.h2`
   font-weight: 700;
   color: #fff;
   font-family: "MapleLight";
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  /* text-overflow: ellipsis;
+  white-space: nowrap; */
 `;
 const TagWrap = styled.ul``;
 
