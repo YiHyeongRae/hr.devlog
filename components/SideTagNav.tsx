@@ -7,11 +7,10 @@ const SideWrap = styled.div`
   display: flex;
   /* width: 200px; */
   height: calc(100vh - 32px);
-  flex-basis: 250px;
+  /* flex-basis: 250px; */
 `;
 
 const SideTagWrap = styled.ul`
-  width: 50px;
   display: flex;
 
   flex-direction: column;
@@ -23,11 +22,11 @@ const SideTagItem = styled.li`
   list-style-type: none;
   border-left: 2px solid #fff;
 
-  padding: 5px 10px;
+  padding: 5px;
   cursor: pointer;
 `;
 
-const SideListWrap = styled.ul`
+const SideListWrap = styled.div`
   /* height: calc(100vh - 54px); */
   /* flex-basis: 150px; */
   line-height: 24px;
@@ -37,9 +36,10 @@ const SideListWrap = styled.ul`
   background-color: #252527;
   z-index: 100;
   flex-basis: 200px;
+  position: relative;
 `;
 
-const SideListTitle = styled.li`
+const SideListTitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -53,7 +53,7 @@ const SideListTitle = styled.li`
   white-space: nowrap;
 `;
 
-const SideListItem = styled.li`
+const SideListItem = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -100,33 +100,47 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
     // );
   };
 
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean>();
+  const [menuState, setMenuState] = useState(0);
 
   const forMobile: Function = () => {
     const user = navigator.userAgent;
     // noneExpireSetCookie("splash", "none-expire");
     // const asdf = noneExpireGetCookie("splash");
     // console.log("none-cookie", asdf);
+
     if (user.indexOf("iPhone") > -1 || user.indexOf("Android") > -1) {
-      setIsMobile(true);
+      setIsMobile(true), setMenuState(5);
     }
   };
-
   useEffect(() => {
     forMobile();
   }, []);
 
+  const MenuSelect: Function = (currentMenuState: number) => {
+    if (currentMenuState === menuState) {
+      setMenuState(10);
+    } else {
+      setMenuState(currentMenuState);
+    }
+  };
   return (
-    <SideWrap style={isMobile ? { marginLeft: "-250px" } : {}}>
+    <SideWrap>
       <SideTagWrap>
-        <SideTagItem>
+        <SideTagItem
+          style={{ borderLeft: menuState === 0 ? "2px solid #fff" : "0" }}
+          onClick={() => MenuSelect(0)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            style={{ width: "24px" }}
+            style={{
+              width: "24px",
+              color: menuState === 0 ? "#fff" : "#909090",
+            }}
           >
             <path
               strokeLinecap="round"
@@ -135,14 +149,14 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
             />
           </svg>
         </SideTagItem>
-        <SideTagItem>
+        <SideTagItem style={{ borderLeft: 0 }}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            style={{ width: "24px" }}
+            style={{ width: "24px", color: "#909090" }}
           >
             <path
               strokeLinecap="round"
@@ -151,14 +165,14 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
             />
           </svg>
         </SideTagItem>
-        <SideTagItem>
+        <SideTagItem style={{ borderLeft: 0 }}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            style={{ width: "24px" }}
+            style={{ width: "24px", color: "#909090" }}
           >
             <path
               strokeLinecap="round"
@@ -168,7 +182,9 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
           </svg>
         </SideTagItem>
       </SideTagWrap>
-      <SideListWrap>
+      <SideListWrap
+        style={menuState === 0 ? { display: "flex" } : { display: "none" }}
+      >
         <SideListTitle>
           <p>탐색기</p>
 

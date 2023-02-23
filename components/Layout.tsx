@@ -16,34 +16,48 @@ const fetcher = (url: any) => fetch(url).then((r) => r.json());
 const ContentWrap = styled.div`
   display: flex;
   width: 100%;
+  /* height: 100%; */
   height: calc(100vh - 32px);
   overflow-y: scroll;
+  /* overflow-x: scroll; */
   flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 `;
 
 const TapWrap = styled.ul`
   background-color: #2c2d2d;
+  width: 100%;
   display: flex;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow-x: scroll;
-  -ms-overflow-style: none;
+  flex-wrap: nowrap;
+  /* text-overflow: ellipsis;
+  white-space: nowrap; */
+  /* -ms-overflow-style: none; */
+
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
   }
 `;
+
 const TapTitle = styled.li`
   list-style-type: none;
   font-family: "MapleLight";
   font-size: 12px;
-  line-height: 37.5px;
-
   border-right: 1px solid #252526;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 16px;
+`;
+
+const TapText = styled.p`
+  width: 50px;
+  padding: 10px 0;
+  margin-left: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 const SmallSpinner = styled.p`
@@ -238,16 +252,16 @@ function Layout({ children }: any) {
                         }}
                         onClick={() => selectPost(`/post/${tap.no}`)}
                       >
-                        <p
-                          style={{
-                            width: "100px",
-                            textOverflow: "ellipsis",
-                            overflow: "hidden",
-                            whiteSpace: "nowrap",
-                          }}
+                        <TapText
+                        // style={{
+                        //   width: "100px",
+                        //   textOverflow: "ellipsis",
+                        //   overflow: "hidden",
+                        //   whiteSpace: "nowrap",
+                        // }}
                         >
                           {tap.post_title}
-                        </p>
+                        </TapText>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"

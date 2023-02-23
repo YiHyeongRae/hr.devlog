@@ -134,6 +134,7 @@ table {
 
 #__next {
   min-width: 375px;
+  height: 100vh;
 }
 a {
   color: #000;
