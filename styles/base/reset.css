@@ -135,3 +135,11 @@ table {
 #__next {
   min-width: 375px;
 }
+a {
+  color: #000;
+  text-decoration: none;
+}
+a:visited {
+  color: #000;
+  text-decoration: none;
+}

@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import Link from "next/link";
 
 const SideWrap = styled.div`
   display: flex;
@@ -207,14 +208,21 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
                 return (
                   <PostTitle
                     key={i}
-                    onClick={(e) => selectPost(e, data, data.no)}
+                    // onClick={(e) => selectPost(e, data, data.no)}
                     style={
                       router.asPath.substring(6) === String(data.no)
                         ? { color: "#deb77f", backgroundColor: "#1e1e1f" }
                         : {}
                     }
                   >
-                    {data.post_title}
+                    <Link
+                      href={{ pathname: `/post/${data.no}` }}
+                      as={`/post/${data.no}`}
+                      style={{ color: "#fff" }}
+                      shallow
+                    >
+                      {data.post_title}
+                    </Link>
                   </PostTitle>
                 );
               })}
