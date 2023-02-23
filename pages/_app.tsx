@@ -9,7 +9,7 @@ import { SessionProvider, signIn, useSession } from "next-auth/react";
 import { Suspense, useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import { useRouter } from "next/router";
-import styled from "styled-components";
+import { Analytics } from "@vercel/analytics/react";
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const { store } = wrapper.useWrappedStore(pageProps);
@@ -102,6 +102,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
           ) : (
             <Component {...pageProps} />
           )}
+          <Analytics />
         </Layout>
       </Provider>
     </SessionProvider>
