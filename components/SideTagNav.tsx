@@ -79,7 +79,6 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
 
   const selectPost: Function = (
     e: React.MouseEvent<HTMLLIElement>,
-    content: any,
     index: number
   ) => {
     e.stopPropagation(), boardTap(index);
@@ -90,12 +89,12 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
     //   },
     //   `/post/${index}`
     // );
-    router.push(
-      {
-        pathname: `/post/${index}`,
-      },
-      `/post/${index}`
-    );
+    // router.push(
+    //   {
+    //     pathname: `/post/${index}`,
+    //   },
+    //   `/post/${index}`
+    // );
   };
 
   const [isMobile, setIsMobile] = useState(false);
@@ -206,24 +205,23 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
               data?.map((data: any, i) => {
                 // console.log("data", data);
                 return (
-                  <PostTitle
+                  <Link
+                    href={{ pathname: `/post/${data.no}` }}
+                    as={`/post/${data.no}`}
+                    style={{ color: "#fff" }}
                     key={i}
-                    // onClick={(e) => selectPost(e, data, data.no)}
-                    style={
-                      router.asPath.substring(6) === String(data.no)
-                        ? { color: "#deb77f", backgroundColor: "#1e1e1f" }
-                        : {}
-                    }
+                    onClick={(e) => selectPost(e, data.no)}
                   >
-                    <Link
-                      href={{ pathname: `/post/${data.no}` }}
-                      as={`/post/${data.no}`}
-                      style={{ color: "#fff" }}
-                      shallow
+                    <PostTitle
+                      style={
+                        router.asPath.substring(6) === String(data.no)
+                          ? { color: "#deb77f", backgroundColor: "#1e1e1f" }
+                          : {}
+                      }
                     >
                       {data.post_title}
-                    </Link>
-                  </PostTitle>
+                    </PostTitle>
+                  </Link>
                 );
               })}
           </PostListWrap>
