@@ -34,15 +34,21 @@ const PostHeader = styled.div`
 
 const PostTitle = styled.h2`
   width: 100%;
-  font-size: 25px;
+  font-size: 18px;
   padding: 16px 0;
   font-weight: 700;
   color: #fff;
   font-family: "MapleLight";
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   /* text-overflow: ellipsis;
   white-space: nowrap; */
 `;
-const TagWrap = styled.ul``;
+const TagWrap = styled.ul`
+  width: 100%;
+  margin: 8px 0;
+`;
 
 const PostTag = styled.li`
   display: inline-block;
@@ -62,16 +68,17 @@ const Post: NextPage = ({ post, tag, title }: any) => {
       <SEO title={`${title}`} />
       <PostHeader>
         <PostTitle>
-          <span style={{ color: "#d082c4" }}>Import</span>{" "}
-          <span style={{ color: "#88deff" }}>{`${title}`}</span>{" "}
-          <span style={{ color: "#d082c4" }}>From</span>{" "}
-          <span style={{ color: "#d88e74" }}>{`"../HR-DEVLOG";`}</span>
+          <p style={{ color: "#d082c4", width: "100%" }}>Import</p>{" "}
+          <p style={{ color: "#88deff", width: "100%" }}>{`${title}`}</p>{" "}
+          <p style={{ color: "#d082c4" }}>From</p>{" "}
+          <p style={{ color: "#d88e74" }}>{`"../HR-DEVLOG";`}</p>
         </PostTitle>
         <div
           style={{
             display: "flex",
             fontFamily: "MapleLight",
             fontSize: "14px",
+            flexWrap: "wrap",
           }}
         >
           <p style={{ color: "#379edc", marginRight: "6px" }}>{`const`}</p>
@@ -102,20 +109,6 @@ const Post: NextPage = ({ post, tag, title }: any) => {
   );
 };
 
-export async function getStaticPaths() {
-  const res = await axios.get(
-    process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
-  );
-  const pathRes = res.data;
-  const paths = pathRes.map((path: any) => ({
-    params: { PostId: path.no.toString() },
-  }));
-  return {
-    paths,
-    fallback: false,
-  };
-}
-
 export async function getStaticProps(context: any) {
   // 환경변수로 node에서 허가되지 않은 인증TLS통신을 거부하지 않겠다고 설정
 
@@ -124,10 +117,10 @@ export async function getStaticProps(context: any) {
   // const res = await fetch("http://localhost:3000/api/selectDb");
   // const res = await fetch("https://hr-devlog.vercel.app/api/selectDb");
 
-  const res = await axios.get(
+  const res = await fetch(
     process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
   );
-  const data = await res.data;
+  const data = await res.json();
 
   const searchPost = data.filter(
     (item: any) => item.no === Number(context.params.PostId)
@@ -153,6 +146,21 @@ export async function getStaticProps(context: any) {
   // return {
   //   props: {},
   // };
+}
+
+export async function getStaticPaths() {
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
+  );
+  const pathRes: any = await res.json();
+
+  const paths = pathRes.map((path: any) => ({
+    params: { PostId: path.no.toString() },
+  }));
+  return {
+    paths,
+    fallback: false,
+  };
 }
 
 export default Post;

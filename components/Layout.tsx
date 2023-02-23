@@ -26,6 +26,12 @@ const TapWrap = styled.ul`
   display: flex;
   text-overflow: ellipsis;
   white-space: nowrap;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 const TapTitle = styled.li`
   list-style-type: none;
@@ -232,7 +238,16 @@ function Layout({ children }: any) {
                         }}
                         onClick={() => selectPost(`/post/${tap.no}`)}
                       >
-                        <p>{tap.post_title}</p>
+                        <p
+                          style={{
+                            width: "100px",
+                            textOverflow: "ellipsis",
+                            overflow: "hidden",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {tap.post_title}
+                        </p>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"

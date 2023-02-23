@@ -7,7 +7,7 @@ const SideWrap = styled.div`
   display: flex;
   /* width: 200px; */
   height: calc(100vh - 32px);
-  flex-grow: 0;
+  flex-basis: 250px;
 `;
 
 const SideTagWrap = styled.ul`
@@ -36,6 +36,7 @@ const SideListWrap = styled.ul`
   flex-direction: column;
   background-color: #252527;
   z-index: 100;
+  flex-basis: 200px;
 `;
 
 const SideListTitle = styled.li`
@@ -48,6 +49,8 @@ const SideListTitle = styled.li`
   padding-bottom: 5px; */
   font-family: "MapleLight";
   line-height: 37.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const SideListItem = styled.li`
@@ -114,7 +117,7 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
   }, []);
 
   return (
-    <SideWrap style={isMobile ? { marginLeft: "-280px" } : {}}>
+    <SideWrap style={isMobile ? { marginLeft: "-250px" } : {}}>
       <SideTagWrap>
         <SideTagItem>
           <svg
@@ -205,23 +208,28 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
               data?.map((data: any, i) => {
                 // console.log("data", data);
                 return (
-                  <Link
-                    href={{ pathname: `/post/${data.no}` }}
-                    as={`/post/${data.no}`}
-                    style={{ color: "#fff" }}
+                  <PostTitle
                     key={i}
-                    onClick={(e) => selectPost(e, data.no)}
+                    style={
+                      router.asPath.substring(6) === String(data.no)
+                        ? { backgroundColor: "#1e1e1f" }
+                        : {}
+                    }
                   >
-                    <PostTitle
+                    <Link
+                      href={{ pathname: `/post/${data.no}` }}
+                      as={`/post/${data.no}`}
                       style={
                         router.asPath.substring(6) === String(data.no)
-                          ? { color: "#deb77f", backgroundColor: "#1e1e1f" }
-                          : {}
+                          ? { color: "#deb77f" }
+                          : { color: "#fff" }
                       }
+                      onClick={(e) => selectPost(e, data.no)}
+                      className="Link"
                     >
                       {data.post_title}
-                    </PostTitle>
-                  </Link>
+                    </Link>
+                  </PostTitle>
                 );
               })}
           </PostListWrap>
