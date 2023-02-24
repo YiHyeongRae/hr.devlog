@@ -30,6 +30,7 @@ const TapWrap = styled.ul`
   width: 100%;
   display: flex;
   flex-wrap: nowrap;
+  /* overflow-x: auto; */
   /* text-overflow: ellipsis;
   white-space: nowrap; */
   /* -ms-overflow-style: none; */
@@ -49,6 +50,7 @@ const TapTitle = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
+  /* flex: 0 0 auto; */
 `;
 
 const TapText = styled.p`
