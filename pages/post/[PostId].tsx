@@ -21,6 +21,7 @@ const PostWrap = styled.div`
   width: 100%;
   flex-direction: column;
   background-color: #1e1e1f;
+  overflow-y: scroll;
 `;
 
 const PostHeader = styled.div`
@@ -59,7 +60,7 @@ const PostTag = styled.li`
 const PostContainer = styled.div`
   width: 100%;
   font-family: "MapleLight";
-  padding: 32px;
+  padding: 0 32px;
 `;
 
 const Post: NextPage = ({ post, tag, title }: any) => {

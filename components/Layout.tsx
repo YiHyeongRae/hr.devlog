@@ -13,12 +13,16 @@ import loadConfig from "next/dist/server/config";
 
 const fetcher = (url: any) => fetch(url).then((r) => r.json());
 
+const LayoutWrap = styled.div`
+  height: 100vh;
+`;
+
 const ContentWrap = styled.div`
   display: flex;
   width: 100%;
   /* height: 100%; */
   height: calc(100vh - 32px);
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   /* overflow-x: scroll; */
   flex-direction: column;
   align-items: center;
@@ -30,10 +34,11 @@ const TapWrap = styled.ul`
   width: 100%;
   display: flex;
   flex-wrap: nowrap;
-  /* overflow-x: auto; */
+  overflow-x: scroll;
   /* text-overflow: ellipsis;
   white-space: nowrap; */
   /* -ms-overflow-style: none; */
+  flex-shrink: 0;
 
   scrollbar-width: none;
   &::-webkit-scrollbar {
@@ -46,7 +51,9 @@ const TapTitle = styled.li`
   font-family: "MapleLight";
   font-size: 12px;
   border-right: 1px solid #252526;
-
+  padding: 10px 0;
+  flex-basis: 100px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,8 +62,8 @@ const TapTitle = styled.li`
 
 const TapText = styled.p`
   width: 50px;
-  padding: 10px 0;
-  margin-left: 16px;
+
+  /* margin-left: 16px; */
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -218,7 +225,7 @@ function Layout({ children }: any) {
       <SmallSpinner />
     </SpinnerWrap>
   ) : (
-    <div className="Layout">
+    <LayoutWrap className="Layout">
       <Header />
       {/* <Nav /> */}
       <div
@@ -271,10 +278,9 @@ function Layout({ children }: any) {
                           strokeWidth={1.5}
                           stroke="currentColor"
                           style={{
+                            cursor: "pointer",
                             width: "18px",
                             height: "18px",
-                            margin: "0 10px",
-                            cursor: "pointer",
                           }}
                           onClick={(e) => {
                             [e.stopPropagation(), deletePost(tap.no)];
@@ -299,7 +305,7 @@ function Layout({ children }: any) {
       </div>
 
       <Footer />
-    </div>
+    </LayoutWrap>
   );
 }
 
