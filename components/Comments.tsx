@@ -20,7 +20,7 @@ const Comments = () => {
     scriptEl.setAttribute("label", "Blog-comment");
 
     commentsRef.current?.appendChild(scriptEl);
-  }, [router]);
+  }, []);
 
   return <section ref={commentsRef} />;
 };
