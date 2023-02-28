@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import "@uiw/react-markdown-preview/markdown.css";
 import dynamic from "next/dynamic";
@@ -64,6 +64,10 @@ const PostContainer = styled.div`
 `;
 
 const Post: NextPage = ({ post, tag, title }: any) => {
+  useEffect(() => {
+    const test = document.getElementsByClassName("test");
+    console.log(test);
+  }, []);
   return (
     <PostWrap>
       <SEO title={`${title}`} />
@@ -103,7 +107,7 @@ const Post: NextPage = ({ post, tag, title }: any) => {
         </div>
       </PostHeader>
       <PostContainer>
-        <MarkdownPreview source={post} />
+        <MarkdownPreview source={post} className="test" />
         <Comments />
       </PostContainer>
     </PostWrap>

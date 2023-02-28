@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
 
 const Comments = () => {
-  const commentsRef = useRef<HTMLElement | null>(null);
+  const commentsRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
   // 아래 코드는 다크모드 적용을 위한 내용이기에 생략해도 무관하다.
 
@@ -22,7 +22,7 @@ const Comments = () => {
     commentsRef.current?.appendChild(scriptEl);
   }, []);
 
-  return <section ref={commentsRef} />;
+  return <div ref={commentsRef} />;
 };
 
 export default Comments;
