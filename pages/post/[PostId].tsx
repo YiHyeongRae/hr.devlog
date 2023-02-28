@@ -6,15 +6,15 @@ import "@uiw/react-markdown-preview/markdown.css";
 import dynamic from "next/dynamic";
 import SEO from "../../components/SEO";
 import axios from "axios";
-import Comments from "../../components/Comments";
+// import Comments from "../../components/Comments";
 
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
 });
 
-// const Comments = dynamic(() => import("../../components/Comments"), {
-//   ssr: false,
-// });
+const Comments = dynamic(() => import("../../components/Comments"), {
+  ssr: false,
+});
 
 const PostWrap = styled.div`
   display: flex;
@@ -108,6 +108,7 @@ const Post: NextPage = ({ post, tag, title }: any) => {
       </PostHeader>
       <PostContainer>
         <MarkdownPreview source={post} className="test" />
+
         <Comments />
       </PostContainer>
     </PostWrap>
