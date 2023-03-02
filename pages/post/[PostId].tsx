@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import SEO from "../../components/SEO";
 import axios from "axios";
 // import Comments from "../../components/Comments";
+import Editor from "../../components/MDEditor/MDEditor";
 
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
@@ -64,9 +65,32 @@ const PostContainer = styled.div`
 `;
 
 const Post: NextPage = ({ post, tag, title }: any) => {
+  const commentsRef = useRef<HTMLDivElement | null>(null);
+
+  const loadCommnets: Function = () => {
+    console.log(1);
+    const commentsEl = commentsRef.current?.firstChild;
+    console.log(2);
+
+    if (commentsEl) commentsRef.current?.removeChild(commentsEl);
+    console.log(3);
+
+    const scriptEl = document.createElement("script");
+    scriptEl.src = "https://utteranc.es/client.js";
+    scriptEl.async = true;
+    scriptEl.crossOrigin = "anonymous";
+    scriptEl.setAttribute("repo", "YiHyeongRae/hr.devlog-comment");
+    scriptEl.setAttribute("issue-term", "pathname");
+    scriptEl.setAttribute("theme", `dark-blue`);
+    scriptEl.setAttribute("label", "Blog-comment");
+    console.log(4);
+
+    commentsRef.current?.appendChild(scriptEl);
+    console.log(5);
+  };
+
   useEffect(() => {
-    const test = document.getElementsByClassName("test");
-    console.log(test);
+    loadCommnets();
   }, []);
   return (
     <PostWrap>
@@ -107,9 +131,8 @@ const Post: NextPage = ({ post, tag, title }: any) => {
         </div>
       </PostHeader>
       <PostContainer>
-        <MarkdownPreview source={post} className="test" />
-
-        <Comments />
+        <MarkdownPreview source={post} />
+        <div ref={commentsRef} />
       </PostContainer>
     </PostWrap>
   );
