@@ -30,7 +30,7 @@ const Login: Function = () => {
     );
   };
   return (
-    <div className="content-wrap">
+    <div className="content-wrap" style={{ width: "100%" }}>
       <form>
         <fieldset>
           <legend>Admin Login</legend>

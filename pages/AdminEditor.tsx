@@ -161,7 +161,7 @@ const AdminEditor: NextPage = () => {
     "abcdef.jpeg",
   ]);
   return (
-    <>
+    <div style={{ width: "100%" }}>
       {/* <h2>ADMIN EDITOR</h2> */}
       {/* <p style={{ textAlign: "center", fontSize: 20 }}>
         홈에서 보여지는 카드 모양 미리보기
@@ -339,7 +339,7 @@ const AdminEditor: NextPage = () => {
           }
         `}
       </style>
-    </>
+    </div>
   );
 };
 
