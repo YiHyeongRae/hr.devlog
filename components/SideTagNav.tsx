@@ -124,13 +124,10 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
       setMenuState(currentMenuState);
     }
   };
-
-  const [listWidth, setListWidth] = useState<number | string>();
   useEffect(() => {
     console.log(document.getElementById("side-list-wrap")?.clientWidth);
 
     const getWidth = document.getElementById("side-list-wrap")?.clientWidth;
-    setListWidth(getWidth);
   }, [menuState]);
   return (
     <SideWrap>

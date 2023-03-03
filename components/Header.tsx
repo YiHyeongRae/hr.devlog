@@ -61,6 +61,7 @@ const Header = () => {
       signOut();
     }
   };
+
   return (
     <HeaderWrap>
       <TrafficLightWrap>

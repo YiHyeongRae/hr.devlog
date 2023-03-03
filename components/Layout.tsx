@@ -237,6 +237,7 @@ function Layout({ children }: any) {
           flexDirection: "row",
           backgroundColor: "#1e1e1f",
           minHeight: "100vh",
+          overflow: "hidden",
         }}
       >
         <SideTagNav data={data} boardTap={boardTapHandler} />
