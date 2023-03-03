@@ -25,6 +25,13 @@
 ![Github](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white)
 
 <div align="center" style="display: block; font-size: 2.5em; font-weight: bold; margin-block-start: 1em; margin-block-end: 1em;">
+  <div>
+    <img src="https://user-images.githubusercontent.com/118327239/222647360-675a5222-c2d4-457b-90f2-3ba90d3f8a08.svg" alt="별 이미지" style="margin-bottom:5px;"/>
+    <img src="https://user-images.githubusercontent.com/118327239/222647360-675a5222-c2d4-457b-90f2-3ba90d3f8a08.svg" alt="별 이미지" style="margin-bottom:10px;"/>
+    <img src="https://user-images.githubusercontent.com/118327239/222647360-675a5222-c2d4-457b-90f2-3ba90d3f8a08.svg" alt="별 이미지" style="margin-bottom:15px;"/>
+    <img src="https://user-images.githubusercontent.com/118327239/222647360-675a5222-c2d4-457b-90f2-3ba90d3f8a08.svg" alt="별 이미지" style="margin-bottom:10px;"/>
+    <img src="https://user-images.githubusercontent.com/118327239/222647360-675a5222-c2d4-457b-90f2-3ba90d3f8a08.svg" alt="별 이미지" style="margin-bottom:5px;"/>
+  </div>
   <p><strong>Welcome HR.DEVLOG</strong></p>
   <p>개발 기록을 남기는 개인 블로그 입니다.</p>
 </div>
