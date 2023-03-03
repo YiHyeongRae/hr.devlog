@@ -69,8 +69,16 @@ const PostTitle = styled.li`
   list-style-type: none;
   font-family: "MapleLight";
   color: #909090;
+`;
 
-  padding: 0 16px;
+const TooltipBox = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 10px;
+  background-color: #323233;
+  border-radius: 5px;
 `;
 interface SideTagNavTypes {
   data: Array<object>;
@@ -124,13 +132,30 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
       setMenuState(currentMenuState);
     }
   };
-  useEffect(() => {
-    console.log(document.getElementById("side-list-wrap")?.clientWidth);
 
-    const getWidth = document.getElementById("side-list-wrap")?.clientWidth;
-  }, [menuState]);
+  const [hoverState, setHoverState] = useState<boolean>(false);
+  const [hoverTitle, setHoverTitle] = useState<string>("");
+  const [{ cordiX, cordiY }, setCordi] = useState({ cordiX: 0, cordiY: 0 });
+  const titleHover: Function = (e: React.MouseEvent<HTMLLinkElement>) => {
+    setHoverState(true),
+      setCordi({
+        cordiX: e.currentTarget.offsetLeft,
+        cordiY: e.currentTarget.offsetTop,
+      }),
+      setHoverTitle(e.currentTarget.innerText);
+  };
+
   return (
     <SideWrap>
+      {hoverState && (
+        <TooltipBox
+          className="tool-tip"
+          style={{ left: cordiX + 159, top: cordiY + 40 }}
+        >
+          {hoverTitle}
+        </TooltipBox>
+      )}
+
       <SideTagWrap>
         <SideTagItem
           style={{ borderLeft: menuState === 0 ? "2px solid #fff" : "0" }}
@@ -241,12 +266,16 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
                     <Link
                       href={{ pathname: `/post/${data.no}` }}
                       as={`/post/${data.no}`}
-                      style={
-                        router.asPath.substring(6) === String(data.no)
-                          ? { color: "#deb77f" }
-                          : { color: "#fff" }
-                      }
+                      style={{
+                        color:
+                          router.asPath.substring(6) === String(data.no)
+                            ? "#deb77f"
+                            : "#fff",
+                        padding: "0 16px",
+                      }}
                       onClick={(e) => selectPost(e, data.no)}
+                      onMouseOver={(e) => titleHover(e)}
+                      onMouseOut={() => setHoverState(false)}
                       className="Link"
                     >
                       {data.post_title}
