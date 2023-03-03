@@ -25,7 +25,6 @@
 ![Github](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white)
 
 <div align="center" style="display: block; font-size: 2.5em; font-weight: bold; margin-block-start: 1em; margin-block-end: 1em;">
-  ![HAProxy](http://is.am/5c68)
   <p><strong>Welcome HR.DEVLOG</strong></p>
   <p>개발 기록을 남기는 개인 블로그 입니다.</p>
 </div>
