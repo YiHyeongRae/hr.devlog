@@ -16,7 +16,7 @@
 
 <span><img src="https://img.shields.io/badge/-Node.js-23F7DF1E?style=for-the-badge&logo=Node.js&logoColor=white&color=339933"></span>
 <span><img src="https://img.shields.io/badge/-MySQL-23F7DF1E?style=for-the-badge&logo=MySQL&logoColor=white&color=4479A1"></span>
-<span><img src="https://img.shields.io/badge/-MySQL-23F7DF1E?style=for-the-badge&logo=AWS&logoColor=white&color=FF9901"></span>
+<span><img src="https://img.shields.io/badge/-AWS-23F7DF1E?style=for-the-badge&logo=AWS&logoColor=white&color=FF9901"></span>
 
 ### Environment
 
