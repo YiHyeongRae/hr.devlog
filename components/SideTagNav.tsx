@@ -79,6 +79,20 @@ const TooltipBox = styled.div`
   padding: 10px;
   background-color: #323233;
   border-radius: 5px;
+  border-top-left-radius: 0;
+
+  &::before {
+    content: "";
+    display: block;
+    border: 8px solid #323233;
+    border-left-color: transparent;
+    border-top-color: transparent;
+    border-right-color: #323233;
+    border-bottom-color: transparent;
+    position: absolute;
+    left: -16px;
+    top: 0;
+  }
 `;
 interface SideTagNavTypes {
   data: Array<object>;
@@ -137,6 +151,7 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
   const [hoverTitle, setHoverTitle] = useState<string>("");
   const [{ cordiX, cordiY }, setCordi] = useState({ cordiX: 0, cordiY: 0 });
   const titleHover: Function = (e: React.MouseEvent<HTMLLinkElement>) => {
+    console.log(e.currentTarget.offsetWidth);
     setHoverState(true),
       setCordi({
         cordiX: e.currentTarget.offsetLeft,
@@ -272,10 +287,11 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
                             ? "#deb77f"
                             : "#fff",
                         padding: "0 16px",
+                        display: "block",
                       }}
                       onClick={(e) => selectPost(e, data.no)}
-                      onMouseOver={(e) => titleHover(e)}
-                      onMouseOut={() => setHoverState(false)}
+                      onMouseEnter={(e) => titleHover(e)}
+                      onMouseLeave={() => setHoverState(false)}
                       className="Link"
                     >
                       {data.post_title}
