@@ -93,7 +93,9 @@ const Post: NextPage = ({ post, tag, title }: any) => {
       <PostHeader>
         <PostTitle>
           <p style={{ color: "#d082c4", width: "100%" }}>Import</p>{" "}
-          <p style={{ color: "#88deff", width: "100%" }}>{`${title}`}</p>{" "}
+          <p
+            style={{ color: "#88deff", width: "100%", lineHeight: 2 }}
+          >{`${title}`}</p>{" "}
           <p style={{ color: "#d082c4" }}>From</p>{" "}
           <p style={{ color: "#d88e74" }}>{`"../HR-DEVLOG";`}</p>
         </PostTitle>
@@ -112,7 +114,7 @@ const Post: NextPage = ({ post, tag, title }: any) => {
               tag.map((tags: any, i: any) => {
                 //  dconsole.log(tags);
                 return (
-                  <PostTag key={i}>
+                  <PostTag key={i} style={{ lineHeight: 2 }}>
                     {tag.length - 1 === i ? `${tags}` : `${tags},`}
                   </PostTag>
                 );
