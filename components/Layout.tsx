@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import { useRouter } from "next/router";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import useSWRImmutable from "swr/immutable";
 import useSWR from "swr";
@@ -14,14 +14,16 @@ import loadConfig from "next/dist/server/config";
 const fetcher = (url: any) => fetch(url).then((r) => r.json());
 
 const LayoutWrap = styled.div`
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 `;
 
 const ContentWrap = styled.div`
   display: flex;
   width: 100%;
   /* height: 100%; */
-  height: calc(100vh - 32px);
+  /* height: calc(100vh - 32px); */
   /* overflow-y: scroll; */
   /* overflow-x: scroll; */
   flex-direction: column;
@@ -220,6 +222,7 @@ function Layout({ children }: any) {
     setCookie("TapState", JSON.stringify(filteringCookie));
     router.push(filtering.length === 0 ? "/" : `/post/${filtering[0].no}`);
   };
+
   return isLoading ? (
     <SpinnerWrap>
       <SmallSpinner />
@@ -233,6 +236,7 @@ function Layout({ children }: any) {
           display: "flex",
           flexDirection: "row",
           backgroundColor: "#1e1e1f",
+          minHeight: "100vh",
         }}
       >
         <SideTagNav data={data} boardTap={boardTapHandler} />

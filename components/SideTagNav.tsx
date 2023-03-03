@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 
 const SideWrap = styled.div`
   display: flex;
   /* width: 200px; */
-  height: calc(100vh - 32px);
+  /* height: calc(100vh - 32px); */
   /* flex-basis: 250px; */
 `;
 
@@ -124,6 +124,14 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
       setMenuState(currentMenuState);
     }
   };
+
+  const [listWidth, setListWidth] = useState<number | string>();
+  useEffect(() => {
+    console.log(document.getElementById("side-list-wrap")?.clientWidth);
+
+    const getWidth = document.getElementById("side-list-wrap")?.clientWidth;
+    setListWidth(getWidth);
+  }, [menuState]);
   return (
     <SideWrap>
       <SideTagWrap>
@@ -183,6 +191,7 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
         </SideTagItem>
       </SideTagWrap>
       <SideListWrap
+        id="side-list-wrap"
         style={menuState === 0 ? { display: "flex" } : { display: "none" }}
       >
         <SideListTitle>

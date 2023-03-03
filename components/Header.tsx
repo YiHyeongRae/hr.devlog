@@ -10,6 +10,7 @@ const HeaderWrap = styled.div`
   padding: 6px 16px;
   flex-direction: row;
   justify-content: space-between;
+  width: 100%;
 `;
 
 const Logo = styled.h1`

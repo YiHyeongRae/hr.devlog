@@ -68,12 +68,9 @@ const Post: NextPage = ({ post, tag, title }: any) => {
   const commentsRef = useRef<HTMLDivElement | null>(null);
 
   const loadCommnets: Function = () => {
-    console.log(1);
     const commentsEl = commentsRef.current?.firstChild;
-    console.log(2);
 
     if (commentsEl) commentsRef.current?.removeChild(commentsEl);
-    console.log(3);
 
     const scriptEl = document.createElement("script");
     scriptEl.src = "https://utteranc.es/client.js";
@@ -83,15 +80,13 @@ const Post: NextPage = ({ post, tag, title }: any) => {
     scriptEl.setAttribute("issue-term", "pathname");
     scriptEl.setAttribute("theme", `dark-blue`);
     scriptEl.setAttribute("label", "Blog-comment");
-    console.log(4);
 
     commentsRef.current?.appendChild(scriptEl);
-    console.log(5);
   };
 
   useEffect(() => {
     loadCommnets();
-  }, []);
+  });
   return (
     <PostWrap>
       <SEO title={`${title}`} />
