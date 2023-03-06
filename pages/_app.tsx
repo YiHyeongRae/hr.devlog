@@ -11,6 +11,7 @@ import Loading from "../components/Loading";
 import { useRouter } from "next/router";
 import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
+import * as gtag from "../lib/gtag";
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const { store } = wrapper.useWrappedStore(pageProps);
@@ -74,12 +75,17 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      gtag.pageview(url);
+    };
     router.events.on("routeChangeStart", () => setLoading(true));
-    router.events.on("routeChangeComplete", () => setLoading(false));
+    router.events.on("routeChangeComplete", () => setLoading(false)),
+      handleRouteChange;
     router.events.on("routeChangeError", () => setLoading(false));
     return () => {
       router.events.off("routeChangeStart", () => setLoading(true));
-      router.events.off("routeChangeComplete", () => setLoading(false));
+      router.events.off("routeChangeComplete", () => setLoading(false)),
+        handleRouteChange;
       router.events.off("routeChangeError", () => setLoading(false));
     };
   }, [router.events]);
@@ -90,17 +96,23 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
           <Script
             strategy="afterInteractive"
             src="https://www.googletagmanager.com/gtag/js?id=G-YF2VYNR7J7"
+            async
           />
-          <Script id="google-analytics" strategy="afterInteractive">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js',new Date());
-              gtag('config','G-YF2VYNR7J7',{
-                page_path : window.location.pathname,
-              });
-            `}
-          </Script>
+          <Script
+            id="google-analytics"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-YF2VYNR7J7', {
+              page_path: window.location.pathname,
+            });
+          `,
+            }}
+          />
+
           {/* {Component.defaultProps?.auth ? (
             <Auth>
               <Component {...pageProps} />
