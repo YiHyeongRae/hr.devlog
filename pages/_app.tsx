@@ -95,7 +95,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         <Layout>
           <Script
             strategy="afterInteractive"
-            src="https://www.googletagmanager.com/gtag/js?id=G-YF2VYNR7J7"
+            src="https://www.googletagmanager.com/gtag/js?id=G-PMSB1F57B3"
             async
           />
           <Script
@@ -106,7 +106,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-YF2VYNR7J7', {
+            gtag('config', 'G-PMSB1F57B3', {
               page_path: window.location.pathname,
             });
           `,
