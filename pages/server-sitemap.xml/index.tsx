@@ -7,7 +7,7 @@ export const getServerSideProps: any = async (ctx: any) => {
   // const urls = await fetch('https//example.com/api')
   const fields = [
     {
-      loc: "https://example.com", // Absolute url
+      loc: "https://example123.com", // Absolute url
       lastmod: new Date().toISOString(),
       // changefreq
       // priority
