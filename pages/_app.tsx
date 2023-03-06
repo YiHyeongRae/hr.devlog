@@ -10,6 +10,7 @@ import { Suspense, useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import { useRouter } from "next/router";
 import { Analytics } from "@vercel/analytics/react";
+import Script from "next/script";
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const { store } = wrapper.useWrappedStore(pageProps);
@@ -86,6 +87,20 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     <SessionProvider session={session}>
       <Provider store={store}>
         <Layout>
+          <Script
+            strategy="afterInteractive"
+            src="https://www.googletagmanager.com/gtag/js?id=G-YF2VYNR7J7"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js',new Date());
+              gtag('config','G-YF2VYNR7J7',{
+                page_path : window.location.pathname,
+              });
+            `}
+          </Script>
           {/* {Component.defaultProps?.auth ? (
             <Auth>
               <Component {...pageProps} />
