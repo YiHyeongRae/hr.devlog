@@ -8,6 +8,7 @@ import SEO from "../../components/SEO";
 import axios from "axios";
 // import Comments from "../../components/Comments";
 import Editor from "../../components/MDEditor/MDEditor";
+import AdsTerminal from "../../components/AdsTerminal";
 
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
@@ -129,8 +130,10 @@ const Post: NextPage = ({ post, tag, title }: any) => {
       </PostHeader>
       <PostContainer>
         <MarkdownPreview source={post} />
+
         <div ref={commentsRef} />
       </PostContainer>
+      <AdsTerminal />
     </PostWrap>
   );
 };
