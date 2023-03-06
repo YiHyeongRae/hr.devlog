@@ -133,7 +133,7 @@ const Post: NextPage = ({ post, tag, title }: any) => {
 
         <div ref={commentsRef} />
       </PostContainer>
-      <AdsTerminal />
+      {/* <AdsTerminal /> */}
     </PostWrap>
   );
 };
