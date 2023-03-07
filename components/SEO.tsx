@@ -18,13 +18,25 @@ const SEO = ({ title }: SEOTYPES) => {
         />
         <meta name="title" content="hr-devlog" />
         <meta name="description" content="개발 기록을 남기는 개인 블로그" />
+        <link rel="canonical" href="https://hr-devlog.vercel.app" />
+        <meta name="robots" content="noindex, nofollow" />
+        <meta property="og:url" content="https://hr-devlog.vercel.app" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="hr-devlog" />
+        <meta property="og:title" content={`${title} - hr.devlog`} />
         <meta
           property="og:description"
           content="개발 기록을 남기는 개인 블로그"
-        />{" "}
-        <meta property="og:url" content="https://hr-devlog.vercel.app/" />
+        />
+        <meta property="og:image" content="" />
+        {/* <meta name="twitter:card" content="summary_large_image"/> */}
+        <meta property="twitter:domain" content="hr-devlog.vercel.app" />
+        <meta property="twitter:url" content="https://hr-devlog.vercel.app" />
+        <meta name="twitter:title" content={`${title} - hr.devlog`} />
+        <meta
+          name="twitter:description"
+          content="개발 기록을 남기는 개인 블로그"
+        />
+        <meta name="twitter:image" content="" />
       </Head>
     </>
   );
