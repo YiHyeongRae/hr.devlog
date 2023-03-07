@@ -8,13 +8,25 @@ import { ICommand } from "@uiw/react-md-editor/lib/commands";
 
 import styled from "styled-components";
 
-const PostTitle = styled.div`
+const CateTitle = styled.div`
   display: flex;
 
   align-items: center;
   width: 100%;
   font-size: 25px;
   padding: 16px 0;
+  font-weight: 700;
+  color: #fff;
+  font-family: "MapleLight";
+`;
+
+const PostTitle = styled.div`
+  display: flex;
+
+  align-items: center;
+  width: 100%;
+  font-size: 25px;
+  padding-top: 16px;
   font-weight: 700;
   color: #fff;
   font-family: "MapleLight";
@@ -233,10 +245,27 @@ const AdminEditor: NextPage = () => {
                 margin: "0 6px",
                 flexBasis: 100,
               }}
-            />{" "}
+            />
             {/* <span style={{ color: "#d082c4" }}>From</span>{" "}
             <span style={{ color: "#d88e74" }}>{`"../HR-DEVLOG";`}</span> */}
           </PostTitle>
+          <CateTitle>
+            <p style={{ color: "#d082c4", flexShrink: 0 }}>export default</p>
+            <input
+              type="text"
+              placeholder="CATEGORY OF POST"
+              onChange={(e) => console.log(1)}
+              style={{
+                color: "#88deff",
+                border: 0,
+                flexGrow: 0,
+                background: "none",
+                fontSize: 25,
+                margin: "0 6px",
+                flexBasis: 100,
+              }}
+            />{" "}
+          </CateTitle>
           <TagTitle>
             <p style={{ color: "#d082c4", flexShrink: 0 }}>export</p>
             <p style={{ color: "#379edc", marginRight: "6px" }}>&nbsp;const</p>
