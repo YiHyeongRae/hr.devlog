@@ -53,7 +53,7 @@ const SideListTitle = styled.div`
   white-space: nowrap;
 `;
 
-const SideListItem = styled.div`
+const SideListCateWrap = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -249,7 +249,7 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
             />
           </svg>
         </SideListTitle>
-        <SideListItem>
+        <SideListCateWrap>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -300,7 +300,111 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
                 );
               })}
           </PostListWrap>
-        </SideListItem>
+        </SideListCateWrap>
+        <SideListCateWrap>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            style={{ width: "14px" }}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M8.25 4.5l7.5 7.5-7.5 7.5"
+            />
+          </svg>
+          <p>Front</p>
+          <PostListWrap>
+            {data &&
+              data?.map((data: any, i) => {
+                // console.log("data", data);
+                return (
+                  <PostTitle
+                    key={i}
+                    style={
+                      router.asPath.substring(6) === String(data.no)
+                        ? { backgroundColor: "#1e1e1f" }
+                        : {}
+                    }
+                  >
+                    <Link
+                      href={{ pathname: `/post/${data.no}` }}
+                      as={`/post/${data.no}`}
+                      style={{
+                        color:
+                          router.asPath.substring(6) === String(data.no)
+                            ? "#deb77f"
+                            : "#fff",
+                        padding: "0 16px",
+                        display: "block",
+                      }}
+                      onClick={(e) => selectPost(e, data.no)}
+                      onMouseEnter={(e) => titleHover(e)}
+                      onMouseLeave={() => setHoverState(false)}
+                      className="Link"
+                    >
+                      {data.post_title}
+                    </Link>
+                  </PostTitle>
+                );
+              })}
+          </PostListWrap>
+        </SideListCateWrap>
+        <SideListCateWrap>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            style={{ width: "14px" }}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M8.25 4.5l7.5 7.5-7.5 7.5"
+            />
+          </svg>
+          <p>Back</p>
+          <PostListWrap>
+            {data &&
+              data?.map((data: any, i) => {
+                // console.log("data", data);
+                return (
+                  <PostTitle
+                    key={i}
+                    style={
+                      router.asPath.substring(6) === String(data.no)
+                        ? { backgroundColor: "#1e1e1f" }
+                        : {}
+                    }
+                  >
+                    <Link
+                      href={{ pathname: `/post/${data.no}` }}
+                      as={`/post/${data.no}`}
+                      style={{
+                        color:
+                          router.asPath.substring(6) === String(data.no)
+                            ? "#deb77f"
+                            : "#fff",
+                        padding: "0 16px",
+                        display: "block",
+                      }}
+                      onClick={(e) => selectPost(e, data.no)}
+                      onMouseEnter={(e) => titleHover(e)}
+                      onMouseLeave={() => setHoverState(false)}
+                      className="Link"
+                    >
+                      {data.post_title}
+                    </Link>
+                  </PostTitle>
+                );
+              })}
+          </PostListWrap>
+        </SideListCateWrap>
       </SideListWrap>
     </SideWrap>
   );
