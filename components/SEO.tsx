@@ -19,7 +19,7 @@ const SEO = ({ title }: SEOTYPES) => {
         <meta name="title" content="hr-devlog" />
         <meta name="description" content="개발 기록을 남기는 개인 블로그" />
         <link rel="canonical" href="https://hr-devlog.vercel.app" />
-        <meta name="robots" content="noindex, nofollow" />
+        <meta name="robots" content="index, nofollow" />
         <meta property="og:url" content="https://hr-devlog.vercel.app" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={`${title} - hr.devlog`} />
