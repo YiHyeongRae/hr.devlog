@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import { GetStaticPropsContext, NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
@@ -9,6 +9,7 @@ import axios from "axios";
 // import Comments from "../../components/Comments";
 import Editor from "../../components/MDEditor/MDEditor";
 import AdsTerminal from "../../components/AdsTerminal";
+import { GetStaticProps } from "next";
 
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
@@ -64,8 +65,13 @@ const PostContainer = styled.div`
   font-family: "MapleLight";
   padding: 0 32px;
 `;
-
-const Post: NextPage = ({ post, tag, title }: any) => {
+interface PostTypes {
+  post: string;
+  tag: Array<string>;
+  title: string;
+}
+const Post: NextPage<PostTypes> = ({ post, tag, title }) => {
+  console.log("1", post, tag, title);
   const commentsRef = useRef<HTMLDivElement | null>(null);
 
   const loadCommnets: Function = () => {
@@ -112,8 +118,8 @@ const Post: NextPage = ({ post, tag, title }: any) => {
           <p style={{ color: "#ea68dc" }}>{`{`}</p>
           <TagWrap>
             {tag &&
-              tag.map((tags: any, i: any) => {
-                //  dconsole.log(tags);
+              tag.map((tags: string, i: number) => {
+                console.log("?", tags, i);
                 return (
                   <PostTag key={i} style={{ lineHeight: 2 }}>
                     {tag.length - 1 === i ? `${tags}` : `${tags},`}
@@ -138,7 +144,7 @@ const Post: NextPage = ({ post, tag, title }: any) => {
   );
 };
 
-export async function getStaticProps(context: any) {
+export async function getStaticProps({ params }: GetStaticPropsContext) {
   // 환경변수로 node에서 허가되지 않은 인증TLS통신을 거부하지 않겠다고 설정
 
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
@@ -152,7 +158,7 @@ export async function getStaticProps(context: any) {
   const data = await res.json();
 
   const searchPost = data.filter(
-    (item: any) => item.no === Number(context.params.PostId)
+    (item: any) => item.no === Number(params?.PostId)
   );
 
   const url = searchPost[0].post_url;
@@ -181,7 +187,7 @@ export async function getStaticPaths() {
   const res = await fetch(
     process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
   );
-  const pathRes: any = await res.json();
+  const pathRes: Array<object> = await res.json();
 
   const paths = pathRes.map((path: any) => ({
     params: { PostId: path.no.toString() },
