@@ -16,7 +16,7 @@ const SEO = ({ title }: SEOTYPES) => {
           name="viewport"
           content="width=device-width, initial-scale=1 maximum-scale=1, user-scalable=0"
         />
-        <meta name="title" content="hr-devlog" />
+        <meta name="title" content={`${title} - hr.devlog`} />
         <meta name="description" content="개발 기록을 남기는 개인 블로그" />
         <link rel="canonical" href="https://hr-devlog.vercel.app" />
         <meta name="robots" content="index, nofollow" />
