@@ -103,6 +103,7 @@ const AdminEditor: NextPage = () => {
     day < 10 ? `0${day}` : day
   }.txt`;
 
+  const [postCate, setPostCate] = useState<string>();
   const [postTitle, setPostTitle] = useState<string>();
   const [postTag, setPostTag] = useState<string>();
 
@@ -125,6 +126,7 @@ const AdminEditor: NextPage = () => {
       const response = await axios
         .post(process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/regist/postReg", {
           data: {
+            postCate: postCate,
             postTitle: postTitle,
             postTag: postTag,
             urlKey: url.url,
@@ -230,6 +232,23 @@ const AdminEditor: NextPage = () => {
       <div data-color-mode="dark">
         <div className="wmde-markdown-var"> </div>
         <div className="title-editor">
+          <CateTitle>
+            <p style={{ color: "#d082c4", flexShrink: 0 }}>export default</p>
+            <input
+              type="text"
+              placeholder="CATEGORY OF POST"
+              onChange={(e) => setPostCate(e.currentTarget.value)}
+              style={{
+                color: "#88deff",
+                border: 0,
+                flexGrow: 0,
+                background: "none",
+                fontSize: 25,
+                margin: "0 6px",
+                flexBasis: 100,
+              }}
+            />{" "}
+          </CateTitle>
           <PostTitle>
             <p style={{ color: "#d082c4", flexShrink: 0 }}>export default</p>
             <input
@@ -249,23 +268,7 @@ const AdminEditor: NextPage = () => {
             {/* <span style={{ color: "#d082c4" }}>From</span>{" "}
             <span style={{ color: "#d88e74" }}>{`"../HR-DEVLOG";`}</span> */}
           </PostTitle>
-          <CateTitle>
-            <p style={{ color: "#d082c4", flexShrink: 0 }}>export default</p>
-            <input
-              type="text"
-              placeholder="CATEGORY OF POST"
-              onChange={(e) => console.log(1)}
-              style={{
-                color: "#88deff",
-                border: 0,
-                flexGrow: 0,
-                background: "none",
-                fontSize: 25,
-                margin: "0 6px",
-                flexBasis: 100,
-              }}
-            />{" "}
-          </CateTitle>
+
           <TagTitle>
             <p style={{ color: "#d082c4", flexShrink: 0 }}>export</p>
             <p style={{ color: "#379edc", marginRight: "6px" }}>&nbsp;const</p>
