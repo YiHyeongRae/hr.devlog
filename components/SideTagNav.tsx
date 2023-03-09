@@ -150,12 +150,29 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
   const [hoverState, setHoverState] = useState<boolean>(false);
   const [hoverTitle, setHoverTitle] = useState<string>("");
   const [{ cordiX, cordiY }, setCordi] = useState({ cordiX: 0, cordiY: 0 });
+
   const titleHover: Function = (e: React.MouseEvent<HTMLLinkElement>) => {
-    console.log(e.currentTarget.offsetWidth);
+    // console.log("client", e.clientX, e.clientY);
+    // console.log("screen", e.screenX, e.screenY);
+    // console.log("page", e.pageX, e.pageY);
+    // console.log(
+    //   "offset left,top",
+    //   e.currentTarget.offsetLeft,
+    //   e.currentTarget.offsetTop
+    // );
+    // console.log(
+    //   "offset width,height",
+    //   e.currentTarget.offsetWidth,
+    //   e.currentTarget.offsetHeight
+    // );
     setHoverState(true),
       setCordi({
-        cordiX: e.currentTarget.offsetLeft,
-        cordiY: e.currentTarget.offsetTop,
+        // cordiX: e.currentTarget.offsetLeft,
+        // cordiY: e.currentTarget.offsetTop,
+        // cordiX: e.pageX,
+        // cordiY: e.pageY,
+        cordiX: e.clientX,
+        cordiY: e.clientY,
       }),
       setHoverTitle(e.currentTarget.innerText);
   };
@@ -165,7 +182,8 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
       {hoverState && (
         <TooltipBox
           className="tool-tip"
-          style={{ left: cordiX + 159, top: cordiY + 40 }}
+          // style={{ left: cordiX + 159, top: cordiY + 40 }}
+          style={{ left: cordiX + 10, top: cordiY + 10 }}
         >
           {hoverTitle}
         </TooltipBox>
@@ -277,6 +295,8 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
                         ? { backgroundColor: "#1e1e1f" }
                         : {}
                     }
+                    onMouseEnter={(e) => titleHover(e)}
+                    onMouseLeave={() => setHoverState(false)}
                   >
                     <Link
                       href={{ pathname: `/post/${data.no}` }}
@@ -290,8 +310,6 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
                         display: "block",
                       }}
                       onClick={(e) => selectPost(e, data.no)}
-                      onMouseEnter={(e) => titleHover(e)}
-                      onMouseLeave={() => setHoverState(false)}
                       className="Link"
                     >
                       {data.post_title}
@@ -329,6 +347,8 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
                         ? { backgroundColor: "#1e1e1f" }
                         : {}
                     }
+                    onMouseEnter={(e) => titleHover(e)}
+                    onMouseLeave={() => setHoverState(false)}
                   >
                     <Link
                       href={{ pathname: `/post/${data.no}` }}
@@ -342,8 +362,6 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
                         display: "block",
                       }}
                       onClick={(e) => selectPost(e, data.no)}
-                      onMouseEnter={(e) => titleHover(e)}
-                      onMouseLeave={() => setHoverState(false)}
                       className="Link"
                     >
                       {data.post_title}
@@ -381,6 +399,8 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
                         ? { backgroundColor: "#1e1e1f" }
                         : {}
                     }
+                    onMouseEnter={(e) => titleHover(e)}
+                    onMouseLeave={() => setHoverState(false)}
                   >
                     <Link
                       href={{ pathname: `/post/${data.no}` }}
@@ -394,8 +414,6 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
                         display: "block",
                       }}
                       onClick={(e) => selectPost(e, data.no)}
-                      onMouseEnter={(e) => titleHover(e)}
-                      onMouseLeave={() => setHoverState(false)}
                       className="Link"
                     >
                       {data.post_title}
