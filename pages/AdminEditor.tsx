@@ -126,7 +126,7 @@ const AdminEditor: NextPage = () => {
       const response = await axios
         .post(process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/regist/postReg", {
           data: {
-            postCate: postCate,
+            postCate: postCate?.toLowerCase(),
             postTitle: postTitle,
             postTag: postTag,
             urlKey: url.url,
@@ -237,7 +237,11 @@ const AdminEditor: NextPage = () => {
             <input
               type="text"
               placeholder="CATEGORY OF POST"
-              onChange={(e) => setPostCate(e.currentTarget.value)}
+              onChange={(e) =>
+                setPostCate(
+                  e.currentTarget.value.replace(".", "").toLowerCase()
+                )
+              }
               style={{
                 color: "#88deff",
                 border: 0,
