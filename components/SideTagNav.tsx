@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
-import { Item } from "aws-sdk/clients/simpledb";
 
 const SideWrap = styled.div`
   display: flex;
@@ -96,10 +95,6 @@ const TooltipBox = styled.div`
     top: 0;
   }
 `;
-interface SideTagNavTypes {
-  data: Array<object>;
-  boardTap: Function;
-}
 
 interface DataTypes {
   post_cate: string;
@@ -110,6 +105,11 @@ interface DataTypes {
   view: number;
   no: number;
 }
+interface SideTagNavTypes {
+  data: Array<DataTypes>;
+  boardTap: Function;
+}
+
 function SideTagNav({ data, boardTap }: SideTagNavTypes) {
   // console.log("sideTageNav", data);
   // console.log(data, boardTap);
@@ -167,13 +167,14 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
 
   const cateHandler: Function = (e: React.MouseEvent<HTMLElement>) => {
     const copyCateArr = [...cateArr];
+    console.log("copyCateArr1", copyCateArr);
 
     if (cateArr.indexOf(e.currentTarget.innerText) === -1) {
       copyCateArr.push(e.currentTarget.innerText);
       setCateArr(copyCateArr);
     } else {
       const newArr = copyCateArr.filter(
-        (item: any) => item !== e.currentTarget.innerText
+        (item: string) => item !== e.currentTarget.innerText
       );
       setCateArr(newArr);
     }
@@ -317,8 +318,8 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
             <PostListWrap>
               {data &&
                 data
-                  ?.filter((item: any) => item.post_cate === "hrdevlog")
-                  .map((data: any, i: number) => {
+                  ?.filter((item: DataTypes) => item.post_cate === "hrdevlog")
+                  .map((data: DataTypes, i: number) => {
                     // console.log("data", data);
                     return (
                       <PostTitle
@@ -375,8 +376,8 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
             <PostListWrap>
               {data &&
                 data
-                  ?.filter((item: any) => item.post_cate === "frontend")
-                  .map((data: any, i) => {
+                  ?.filter((item: DataTypes) => item.post_cate === "frontend")
+                  .map((data: DataTypes, i: number) => {
                     // console.log("data", data);
                     return (
                       <PostTitle
@@ -433,8 +434,8 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
             <PostListWrap>
               {data &&
                 data
-                  ?.filter((item: any) => item.post_cate === "backend")
-                  .map((data: any, i) => {
+                  ?.filter((item: DataTypes) => item.post_cate === "backend")
+                  .map((data: DataTypes, i: number) => {
                     // console.log("data", data);
                     return (
                       <PostTitle
