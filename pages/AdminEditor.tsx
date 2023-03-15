@@ -147,16 +147,16 @@ const AdminEditor: NextPage = () => {
     setPostTag(e.currentTarget.value);
   };
 
-  const [thumbNail, setThumbNail] = useState<any>();
-  const thumnailInput = useRef<any>(null);
-  const fileTest: Function = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = thumnailInput.current.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setThumbNail(reader.result);
-    };
-  };
+  // const [thumbNail, setThumbNail] = useState<any>();
+  // const thumnailInput = useRef<any>(null);
+  // const fileTest: Function = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = thumnailInput.current.files[0];
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(file);
+  //   reader.onloadend = () => {
+  //     setThumbNail(reader.result);
+  //   };
+  // };
 
   const [importImgList, setImportImgList] = useState([
     "blabla.jpg",
