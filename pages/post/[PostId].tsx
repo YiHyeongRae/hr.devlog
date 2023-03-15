@@ -10,6 +10,7 @@ import axios from "axios";
 import Editor from "../../components/MDEditor/MDEditor";
 import AdsTerminal from "../../components/AdsTerminal";
 import { GetStaticProps } from "next";
+import { DataTypes } from "../../components/SideTagNav";
 
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
@@ -71,7 +72,6 @@ interface PostTypes {
   title: string;
 }
 const Post: NextPage<PostTypes> = ({ post, tag, title }) => {
-  console.log("1", post, tag, title);
   const commentsRef = useRef<HTMLDivElement | null>(null);
 
   const loadCommnets: Function = () => {
@@ -119,7 +119,6 @@ const Post: NextPage<PostTypes> = ({ post, tag, title }) => {
           <TagWrap>
             {tag &&
               tag.map((tags: string, i: number) => {
-                console.log("?", tags, i);
                 return (
                   <PostTag key={i} style={{ lineHeight: 2 }}>
                     {tag.length - 1 === i ? `${tags}` : `${tags},`}
@@ -156,9 +155,8 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
     process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
   );
   const data = await res.json();
-
   const searchPost = data.filter(
-    (item: any) => item.no === Number(params?.PostId)
+    (item: DataTypes) => item.no === Number(params?.PostId)
   );
 
   const url = searchPost[0].post_url;
@@ -166,7 +164,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
 
   await fetch(url)
     .then((response) => response.text())
-    .then((data: any) => {
+    .then((data: string) => {
       postData = data;
     });
 
@@ -187,9 +185,8 @@ export async function getStaticPaths() {
   const res = await fetch(
     process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/selectDb"
   );
-  const pathRes: Array<object> = await res.json();
-
-  const paths = pathRes.map((path: any) => ({
+  const pathRes: Array<DataTypes> = await res.json();
+  const paths = pathRes.map((path: DataTypes) => ({
     params: { PostId: path.no.toString() },
   }));
   return {
