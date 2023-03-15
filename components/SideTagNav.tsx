@@ -96,7 +96,7 @@ const TooltipBox = styled.div`
   }
 `;
 
-interface DataTypes {
+export interface DataTypes {
   post_cate: string;
   post_tag: string;
   post_title: string;
