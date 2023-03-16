@@ -371,7 +371,7 @@ const AdminEditor: NextPage = () => {
           }
           li {
             margin-bottom: 10px;
-            font-family: MapleLight;
+            font-family: "MapleLight";
           }
         `}
       </style>
