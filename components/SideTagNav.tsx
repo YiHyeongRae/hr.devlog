@@ -111,28 +111,13 @@ interface SideTagNavTypes {
 }
 
 function SideTagNav({ data, boardTap }: SideTagNavTypes) {
-  // console.log("sideTageNav", data);
-  // console.log(data, boardTap);
   const router = useRouter();
 
   const selectPost: Function = (
     e: React.MouseEvent<HTMLLIElement>,
     index: number
   ) => {
-    e.stopPropagation(), boardTap(index);
-    // router.push(
-    //   {
-    //     pathname: `/post/${index}`,
-    //     query: { post_url: content.post_url },
-    //   },
-    //   `/post/${index}`
-    // );
-    // router.push(
-    //   {
-    //     pathname: `/post/${index}`,
-    //   },
-    //   `/post/${index}`
-    // );
+    boardTap(index);
   };
 
   const [isMobile, setIsMobile] = useState<boolean>();
@@ -140,9 +125,6 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
 
   const forMobile: Function = () => {
     const user = navigator.userAgent;
-    // noneExpireSetCookie("splash", "none-expire");
-    // const asdf = noneExpireGetCookie("splash");
-    // console.log("none-cookie", asdf);
 
     if (user.indexOf("iPhone") > -1 || user.indexOf("Android") > -1) {
       setIsMobile(true), setMenuState(5);
@@ -181,25 +163,8 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
   };
 
   const titleHover: Function = (e: React.MouseEvent<HTMLLinkElement>) => {
-    // console.log("client", e.clientX, e.clientY);
-    // console.log("screen", e.screenX, e.screenY);
-    // console.log("page", e.pageX, e.pageY);
-    // console.log(
-    //   "offset left,top",
-    //   e.currentTarget.offsetLeft,
-    //   e.currentTarget.offsetTop
-    // );
-    // console.log(
-    //   "offset width,height",
-    //   e.currentTarget.offsetWidth,
-    //   e.currentTarget.offsetHeight
-    // );
     setHoverState(true),
       setCordi({
-        // cordiX: e.currentTarget.offsetLeft,
-        // cordiY: e.currentTarget.offsetTop,
-        // cordiX: e.pageX,
-        // cordiY: e.pageY,
         cordiX: e.clientX,
         cordiY: e.clientY,
       }),
