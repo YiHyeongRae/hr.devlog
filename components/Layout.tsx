@@ -1,17 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import { useRouter } from "next/router";
-import { Suspense, useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import useSWRImmutable from "swr/immutable";
 import useSWR from "swr";
 import Footer from "./Footer";
 import Header from "./Header";
 import SideTagNav from "./SideTagNav";
-import { getCookie, setCookie } from "cookies-next";
+import { getCookie, setCookie, CookieValueTypes } from "cookies-next";
 import loadConfig from "next/dist/server/config";
+import { DataTypes } from "../components/SideTagNav";
 
-const fetcher = (url: any) => fetch(url).then((r) => r.json());
+const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 const LayoutWrap = styled.div`
   min-height: 100vh;
@@ -98,7 +99,7 @@ const SpinnerWrap = styled.div`
   justify-content: center;
 `;
 
-function Layout({ children }: any) {
+function Layout(props: { children: React.ReactNode }) {
   // const fetcher = (url: string) => axios.get(url).then((res) => res.data);
   const router = useRouter();
 
@@ -108,8 +109,7 @@ function Layout({ children }: any) {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
-
-  const [BoardTap, setBoardTap] = useState<Array<object>>([]);
+  const [BoardTap, setBoardTap] = useState<DataTypes[]>([]);
   // console.log("boardTap?", BoardTap);
   const boardTapHandler: Function = (index: number) => {
     const cookieArr = [];
@@ -117,31 +117,36 @@ function Layout({ children }: any) {
     // console.log("BoardTap", index);
 
     // setCookie("TapState", JSON.stringify(cookieArr));
-    const getCookieTapState: any = getCookie("TapState");
+    const getCookieTapState: CookieValueTypes = getCookie("TapState");
+
     if (getCookieTapState === undefined) {
       setCookie("TapState", JSON.stringify(cookieArr));
     } else {
-      const parseJsonArr = JSON.parse(getCookieTapState);
-      if (!parseJsonArr.some((item: any) => item === index)) {
+      const parseJsonArr: Array<number> = JSON.parse(String(getCookieTapState));
+      if (!parseJsonArr.some((item: number) => item === index)) {
         parseJsonArr.push(index);
         setCookie("TapState", JSON.stringify(parseJsonArr));
       }
       // console.log("getTapState Parse", JSON.parse(getCookieTapState));
     }
-    const afterCookie: any = getCookie("TapState");
-    const parseJsonArr = JSON.parse(afterCookie);
+    const afterCookie: CookieValueTypes = getCookie("TapState");
+    const parseJsonArr = JSON.parse(String(afterCookie));
     // console.log("TapState Parse", JSON.parse(getTapState));
     // console.log("boardTapHandler", index);
-    const newArr: any = [...BoardTap];
-    // console.log("newArr1", newArr);
+    const newArr: DataTypes[] = [...BoardTap];
+    console.log("newArr1", newArr);
 
     // console.log("parseJsonArr", parseJsonArr);
 
-    parseJsonArr.map((index: any) => {
-      const search = newArr.some((item: any) => item.no === Number(index));
-      console.log(search);
+    parseJsonArr.map((index: number) => {
+      const search = newArr.some(
+        (item: DataTypes) => item.no === Number(index)
+      );
+
       if (!search) {
-        const filter = data.filter((item: any) => item.no === Number(index));
+        const filter = data.filter(
+          (item: DataTypes) => item.no === Number(index)
+        );
         newArr.push(filter[0]);
       }
     });
@@ -159,16 +164,20 @@ function Layout({ children }: any) {
   useEffect(() => {
     // console.log("cookie로 tap 생성하기");
     const newArr = [...BoardTap];
-    const refreshCookie: any = getCookie("TapState");
+    const refreshCookie: CookieValueTypes = getCookie("TapState");
 
     if (refreshCookie !== undefined) {
-      const parseJsonArr = JSON.parse(refreshCookie);
-      parseJsonArr.map((index: any) => {
-        const search = newArr.some((item: any) => item.no === Number(index));
+      const parseJsonArr = JSON.parse(String(refreshCookie));
+      parseJsonArr.map((index: number) => {
+        const search = newArr.some(
+          (item: DataTypes) => item.no === Number(index)
+        );
         // console.log(data);
         // console.log("?", isLoading);
         if (!search) {
-          const filter = data?.filter((item: any) => item.no === Number(index));
+          const filter = data?.filter(
+            (item: DataTypes) => item.no === Number(index)
+          );
 
           // console.log("useEffect filter", filter);
           filter !== undefined ? newArr.push(filter[0]) : {};
@@ -187,7 +196,7 @@ function Layout({ children }: any) {
     // console.log("?", index.substring(6));
     // console.log("selectPost");
     const search = data.filter(
-      (item: any) => item.no === Number(index.substring(6))
+      (item: DataTypes) => item.no === Number(index.substring(6))
     );
     //console.log(search);
     // console.log(index);
@@ -209,15 +218,19 @@ function Layout({ children }: any) {
   const deletePost: Function = (index: number) => {
     // console.log("받아온 tap.no", index);
     const newArr = [...BoardTap];
-    const getCookieTapState: any = getCookie("TapState");
+    const getCookieTapState: CookieValueTypes = getCookie("TapState");
 
-    const filtering: any = newArr.filter((item: any) => item.no !== index);
+    const filtering: DataTypes[] = newArr.filter(
+      (item: DataTypes) => item.no !== index
+    );
     // console.log("필터링", filtering);
     //console.log("delete filtering", filtering);
     setBoardTap(filtering);
-    const parseJsonArr = JSON.parse(getCookieTapState);
-    //  console.log("delete cookie parse", parseJsonArr);
-    const filteringCookie = parseJsonArr.filter((item: any) => item !== index);
+    const parseJsonArr: Array<number> = JSON.parse(String(getCookieTapState));
+    // console.log("delete cookie parse", parseJsonArr);
+    const filteringCookie = parseJsonArr.filter(
+      (item: number) => item !== index
+    );
     // console.log(filteringCookie);
     setCookie("TapState", JSON.stringify(filteringCookie));
     router.push(filtering.length === 0 ? "/" : `/post/${filtering[0].no}`);
@@ -246,7 +259,7 @@ function Layout({ children }: any) {
             {router.pathname !== "/AdminEditor" ? (
               <TapWrap>
                 {BoardTap &&
-                  BoardTap.map((tap: any, i: any) => {
+                  BoardTap.map((tap: DataTypes, i: number) => {
                     // console.log("tap", tap);
                     // console.log("substring", router.asPath.substring(6));
 
@@ -304,7 +317,7 @@ function Layout({ children }: any) {
             ) : (
               <></>
             )}
-            {children}
+            {props.children}
           </ContentWrap>
         }
       </div>
