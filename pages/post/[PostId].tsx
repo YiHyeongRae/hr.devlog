@@ -1,22 +1,13 @@
 import { GetStaticPropsContext, NextPage } from "next";
-import { useRouter } from "next/router";
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import "@uiw/react-markdown-preview/markdown.css";
 import dynamic from "next/dynamic";
 import SEO from "../../components/SEO";
-import axios from "axios";
-// import Comments from "../../components/Comments";
-import Editor from "../../components/MDEditor/MDEditor";
-import AdsTerminal from "../../components/AdsTerminal";
-import { GetStaticProps } from "next";
+
 import { DataTypes } from "../../components/SideTagNav";
 
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
-  ssr: false,
-});
-
-const Comments = dynamic(() => import("../../components/Comments"), {
   ssr: false,
 });
 
@@ -72,8 +63,10 @@ interface PostTypes {
   title: string;
 }
 const Post: NextPage<PostTypes> = ({ post, tag, title }) => {
+  // utterances를 불러올 div ref
   const commentsRef = useRef<HTMLDivElement | null>(null);
 
+  // utterances script 로드
   const loadCommnets: Function = () => {
     const commentsEl = commentsRef.current?.firstChild;
 
@@ -91,6 +84,7 @@ const Post: NextPage<PostTypes> = ({ post, tag, title }) => {
     commentsRef.current?.appendChild(scriptEl);
   };
 
+  // useEffect로 utterances 실행
   useEffect(() => {
     loadCommnets();
   });
