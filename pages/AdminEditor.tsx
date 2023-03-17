@@ -16,7 +16,7 @@ const CateTitle = styled.div`
   font-size: 25px;
   padding: 16px 0;
   font-weight: 700;
-  color: #fff;
+  color: #fff; 
   font-family: "MapleLight";
 `;
 
