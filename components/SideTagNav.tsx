@@ -20,7 +20,7 @@ const SideTagWrap = styled.ul`
 const SideTagItem = styled.li`
   width: 100%;
   list-style-type: none;
-  border-left: 2px solid #fff;
+  border-left: 2px solid #323232;
 
   padding: 5px;
   cursor: pointer;
@@ -185,7 +185,7 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
 
       <SideTagWrap>
         <SideTagItem
-          style={{ borderLeft: menuState === 0 ? "2px solid #fff" : "0" }}
+          style={{ borderColor: menuState === 0 ? "#fff" : "#323232" }}
           onClick={() => MenuSelect(0)}
         >
           <svg
