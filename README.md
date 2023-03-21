@@ -2,27 +2,41 @@
   <strong>HR-DEVLOG</strong>
 </h1>
 
-### Front-End Stack
 
-<span><img src="https://img.shields.io/badge/-Next.js-23F7DF1E?style=for-the-badge&logo=Next.js&logoColor=white&color=000000"></span>
-<span><img src="https://img.shields.io/badge/-React-23F7DF1E?style=for-the-badge&logo=React&logoColor=white&color=61DAFB"></span>
+### FrontEnd
+<div style="display:flex;">
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=fff"/>
+<img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=Next.js&logoColor=fff"/>
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=fff"/>
+<img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styled-components&logoColor=fff"/>
+</div>
+  
+#
+ 
+### BackEnd
+<div style="display:flex">
+<img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=fff"/>
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=fff"/>
+<img src="https://img.shields.io/badge/AmazonAWS-232F3E?style=for-the-badge&logo=AmazonAWS&logoColor=fff"/>
+<img src="https://img.shields.io/badge/AmazonS3-569A31?style=for-the-badge&logo=AmazonS3&logoColor=fff"/>
+<img src="https://img.shields.io/badge/AmazonRDS-527FFF?style=for-the-badge&logo=AmazonRDS&logoColor=fff"/>
+</div>
 
-<!-- <span><img src="https://img.shields.io/badge/-ReactRouter-23F7DF1E?style=for-the-badge&logo=ReactRouter&logoColor=white&color=CA4245"></span> -->
+#
 
-<span><img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white"></span>
-<span><img src="https://img.shields.io/badge/-styledComponents-23F7DF1E?style=for-the-badge&logo=styledComponents&logoColor=white&color=DB7093"></span>
+### Deploy
+<div style="display:flex;">
+  <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=Vercel&logoColor=fff"/>
+</div>
 
-### Back-End Stack
-
-<span><img src="https://img.shields.io/badge/-Node.js-23F7DF1E?style=for-the-badge&logo=Node.js&logoColor=white&color=339933"></span>
-<span><img src="https://img.shields.io/badge/-MySQL-23F7DF1E?style=for-the-badge&logo=MySQL&logoColor=white&color=4479A1"></span>
-<span><img src="https://img.shields.io/badge/-AWS-23F7DF1E?style=for-the-badge&logo=AWS&logoColor=white&color=FF9901"></span>
+#
 
 ### Environment
-
-![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-007ACC?style=for-the-badge&logo=Visual%20Studio%20Code&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white)
-![Github](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white)
+<div style="display:flex;">
+<img src="https://img.shields.io/badge/VisualStudioCode-007ACC?style=for-the-badge&logo=VisualStudioCode&logoColor=fff"/>
+<img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=fff"/>
+<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=fff"/>
+</div>
 
 <div align="center" style="display: block; font-size: 2.5em; font-weight: bold; margin-block-start: 1em; margin-block-end: 1em;">
   <div>
