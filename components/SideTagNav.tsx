@@ -141,7 +141,7 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
       setMenuState(currentMenuState);
     }
   };
-
+  // 커밋확인용 주석
   const [hoverState, setHoverState] = useState<boolean>(false);
   const [hoverTitle, setHoverTitle] = useState<string>("");
   const [{ cordiX, cordiY }, setCordi] = useState({ cordiX: 0, cordiY: 0 });
