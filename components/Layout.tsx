@@ -109,6 +109,8 @@ function Layout(props: { children: React.ReactNode }) {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
+
+  console.log("?Data?", data);
   const [BoardTap, setBoardTap] = useState<DataTypes[]>([]);
   // console.log("boardTap?", BoardTap);
   const boardTapHandler: Function = (index: number) => {
@@ -168,6 +170,7 @@ function Layout(props: { children: React.ReactNode }) {
 
     if (refreshCookie !== undefined) {
       const parseJsonArr = JSON.parse(String(refreshCookie));
+      console.log("parseJsonArr", parseJsonArr);
       parseJsonArr.map((index: number) => {
         const search = newArr.some(
           (item: DataTypes) => item.no === Number(index)
@@ -178,7 +181,7 @@ function Layout(props: { children: React.ReactNode }) {
           const filter = data?.filter(
             (item: DataTypes) => item.no === Number(index)
           );
-
+          console.log("filter?", filter);
           // console.log("useEffect filter", filter);
           filter !== undefined ? newArr.push(filter[0]) : {};
           // newArr.push(filter[0]);
