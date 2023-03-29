@@ -110,7 +110,7 @@ function Layout(props: { children: React.ReactNode }) {
     revalidateOnReconnect: false,
   });
 
-  console.log("?Data?", data);
+  // console.log("?Data?", data);
   const [BoardTap, setBoardTap] = useState<DataTypes[]>([]);
   // console.log("boardTap?", BoardTap);
   const boardTapHandler: Function = (index: number) => {
@@ -167,19 +167,20 @@ function Layout(props: { children: React.ReactNode }) {
     // console.log("cookie로 tap 생성하기");
     const newArr = [...BoardTap];
     const refreshCookie: CookieValueTypes = getCookie("TapState");
-
+    console.log("1", newArr);
     if (refreshCookie !== undefined) {
       const parseJsonArr = JSON.parse(String(refreshCookie));
       console.log("parseJsonArr", parseJsonArr);
+      console.log("2newArr", newArr);
       parseJsonArr.map((index: number) => {
         const search = newArr.some(
-          (item: DataTypes) => item.no === Number(index)
+          (item: DataTypes) => item && item.no === Number(index)
         );
         // console.log(data);
         // console.log("?", isLoading);
         if (!search) {
           const filter = data?.filter(
-            (item: DataTypes) => item.no === Number(index)
+            (item: DataTypes) => item && item.no === Number(index)
           );
           console.log("filter?", filter);
           // console.log("useEffect filter", filter);
@@ -199,7 +200,7 @@ function Layout(props: { children: React.ReactNode }) {
     // console.log("?", index.substring(6));
     // console.log("selectPost");
     const search = data.filter(
-      (item: DataTypes) => item.no === Number(index.substring(6))
+      (item: DataTypes) => item.no === Number(item && index.substring(6))
     );
     //console.log(search);
     // console.log(index);
@@ -224,7 +225,7 @@ function Layout(props: { children: React.ReactNode }) {
     const getCookieTapState: CookieValueTypes = getCookie("TapState");
 
     const filtering: DataTypes[] = newArr.filter(
-      (item: DataTypes) => item.no !== index
+      (item: DataTypes) => item && item.no !== index
     );
     // console.log("필터링", filtering);
     //console.log("delete filtering", filtering);
@@ -232,7 +233,7 @@ function Layout(props: { children: React.ReactNode }) {
     const parseJsonArr: Array<number> = JSON.parse(String(getCookieTapState));
     // console.log("delete cookie parse", parseJsonArr);
     const filteringCookie = parseJsonArr.filter(
-      (item: number) => item !== index
+      (item: number) => item && item !== index
     );
     // console.log(filteringCookie);
     setCookie("TapState", JSON.stringify(filteringCookie));
@@ -272,15 +273,15 @@ function Layout(props: { children: React.ReactNode }) {
                         style={{
                           cursor: "pointer",
                           color:
-                            router.asPath.substring(6) === String(tap.no)
+                            router.asPath.substring(6) === String(tap && tap.no)
                               ? "#deb77f"
                               : "#909090",
                           backgroundColor:
-                            router.asPath.substring(6) === String(tap.no)
+                            router.asPath.substring(6) === String(tap && tap.no)
                               ? "#1e1e1f"
                               : "",
                         }}
-                        onClick={() => selectPost(`/post/${tap.no}`)}
+                        onClick={() => selectPost(`/post/${tap && tap.no}`)}
                       >
                         <TapText
                         // style={{
@@ -290,7 +291,7 @@ function Layout(props: { children: React.ReactNode }) {
                         //   whiteSpace: "nowrap",
                         // }}
                         >
-                          {tap.post_title}
+                          {tap && tap.post_title}
                         </TapText>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -304,7 +305,7 @@ function Layout(props: { children: React.ReactNode }) {
                             height: "18px",
                           }}
                           onClick={(e) => {
-                            [e.stopPropagation(), deletePost(tap.no)];
+                            [e.stopPropagation(), deletePost(tap && tap.no)];
                           }}
                         >
                           <path
