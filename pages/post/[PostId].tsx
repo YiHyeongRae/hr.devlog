@@ -168,6 +168,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
 
   return {
     props: { post: postData, tag: tags, title: title },
+    revalidate: 5,
   };
 
   // return {
@@ -185,7 +186,7 @@ export async function getStaticPaths() {
   }));
   return {
     paths,
-    fallback: false,
+    fallback: "blocking",
   };
 }
 
