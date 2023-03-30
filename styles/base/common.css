@@ -32,7 +32,7 @@
 }
 
 .Link {
-  width: 117px;
+  /* width: 117px; */
   display: block;
   text-overflow: ellipsis;
   white-space: nowrap;
