@@ -62,9 +62,11 @@ interface PostTypes {
   post: string;
   tag: Array<string>;
   title: string;
+  date: string;
 }
-const Post: NextPage<PostTypes> = ({ post, tag, title }) => {
+const Post: NextPage<PostTypes> = ({ post, tag, title, date }) => {
   // utterances를 불러올 div ref
+  console.log("?", post, tag, title, date);
   const commentsRef = useRef<HTMLDivElement | null>(null);
 
   // utterances script 로드
@@ -127,6 +129,24 @@ const Post: NextPage<PostTypes> = ({ post, tag, title }) => {
           <p style={{ color: "#ea68dc" }}>( )</p>
           <p>{`;`}</p>
         </div>
+        <div
+          style={{
+            display: "flex",
+            fontFamily: "MapleLight",
+            fontSize: "14px",
+            flexWrap: "wrap",
+            margin: "10px 0",
+          }}
+        >
+          <p style={{ color: "#379edc", marginRight: "6px" }}>{`const`}</p>
+          <p style={{ color: "#ea68dc" }}>{`{`}</p>
+          <p style={{ margin: "0 10px", color: "#00c4ff" }}>{date}</p>
+          <p style={{ color: "#ea68dc", marginRight: "6px" }}>{`}`}</p>
+          <p style={{ marginRight: "6px" }}>=</p>
+          <p style={{ color: "#d7d89f" }}>{`useHRDEVLOG`}</p>
+          <p style={{ color: "#ea68dc" }}>( )</p>
+          <p>{`;`}</p>
+        </div>
       </PostHeader>
       <PostContainer>
         <MarkdownPreview source={post} />
@@ -162,13 +182,13 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
     .then((data: string) => {
       postData = data;
     });
-
   const tagArr = searchPost[0].post_tag.split(",");
   const tags = tagArr;
   const title = searchPost[0].post_title;
-
+  const date = data[0].date;
+  console.log("??", data[0].date);
   return {
-    props: { post: postData, tag: tags, title: title },
+    props: { post: postData, tag: tags, title: title, date: date },
     revalidate: 5,
   };
 
