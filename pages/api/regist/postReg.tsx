@@ -21,7 +21,7 @@ const db = require("../../../common/config/db");
 export default function postReg(req: NextApiRequest, res: NextApiResponse) {
   console.log("postReg console =====", req);
   db.query(
-    `INSERT INTO blog_post (post_title,post_tag,post_url,post_cate) VALUES ("${req.body.data.postTitle}","${req.body.data.postTag}","${req.body.data.urlKey}","${req.body.data.postCate}")`,
+    `INSERT INTO blog_post (post_title,post_tag,post_url,post_cate,date) VALUES ("${req.body.data.postTitle}","${req.body.data.postTag}","${req.body.data.urlKey}","${req.body.data.postCate}","${req.body.data.postDate}")`,
     function (err: any, result: any) {
       if (err) {
         console.log("인서트 에러", err);
