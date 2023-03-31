@@ -19,6 +19,7 @@ const Tap = styled.li`
   font-family: "MapleLight";
   font-size: 13px;
   padding: 5px;
+  cursor: pointer;
 `;
 function AdsTerminal() {
   return (

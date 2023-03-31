@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import SEO from "../../components/SEO";
 
 import { DataTypes } from "../../components/SideTagNav";
+import AdsTerminal from "../../components/AdsTerminal";
 
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
