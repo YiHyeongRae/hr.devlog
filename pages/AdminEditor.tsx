@@ -16,7 +16,7 @@ const CateTitle = styled.div`
   font-size: 25px;
   padding: 16px 0;
   font-weight: 700;
-  color: #fff; 
+  color: #fff;
   font-family: "MapleLight";
 `;
 
@@ -102,6 +102,11 @@ const AdminEditor: NextPage = () => {
   const uniqName = `${getTime}:${year}-${month < 10 ? `0${month}` : month}-${
     day < 10 ? `0${day}` : day
   }.txt`;
+  const registerDate = `${year}.${month < 10 ? `0${month}` : month}.${
+    day < 10 ? `0${day}` : day
+  }`;
+
+  console.log("uniqName", registerDate);
 
   const [postCate, setPostCate] = useState<string>();
   const [postTitle, setPostTitle] = useState<string>();
@@ -130,6 +135,7 @@ const AdminEditor: NextPage = () => {
             postTitle: postTitle,
             postTag: postTag,
             urlKey: url.url,
+            postDate: registerDate,
           },
         })
         .then(() => alert("업로드가 완료됐습니다."));
