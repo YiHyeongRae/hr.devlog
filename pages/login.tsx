@@ -1,7 +1,29 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import Router, { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
+const PopupWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: #323233;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+`;
+
+const PopupContent = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+const PopupTitle = styled.p``;
 const Login: Function = () => {
   interface userDataType {
     userId: string | undefined;
@@ -29,6 +51,25 @@ const Login: Function = () => {
       }
     );
   };
+
+  const [cert, setCert] = useState<string>();
+  const [certState, setCertState] = useState<boolean>(true);
+  const checkCert: Function = () => {
+    if (cert !== process.env.NEXT_PUBLIC_LOGIN_CONFIRM) {
+      alert("Good-Bye,Stranger");
+      router.replace("/");
+    } else {
+      setCertState(false);
+    }
+  };
+  // useEffect(() => {
+  //   const confirmMaster = prompt();
+
+  //   if (confirmMaster !== "dev.yihr") {
+  //     alert("Good-Bye,Stranger");
+  //     router.replace("/");
+  //   }
+  // }, []);
   return (
     <div className="content-wrap" style={{ width: "100%" }}>
       <form>
@@ -64,6 +105,23 @@ const Login: Function = () => {
           </p>
         </fieldset>
       </form>
+      {certState && (
+        <PopupWrapper>
+          <PopupContent>
+            <PopupTitle>Who Are You?</PopupTitle>
+
+            <input
+              type="text"
+              style={{ margin: "10px 0" }}
+              onChange={(e) => setCert(e.currentTarget.value)}
+            />
+            <button type="button" onClick={() => checkCert()}>
+              확인
+            </button>
+          </PopupContent>
+        </PopupWrapper>
+      )}
+
       <style jsx>
         {`
           form {
