@@ -65,6 +65,9 @@ const SideListCateWrap = styled.div`
 
 const PostListWrap = styled.ul`
   width: 100%;
+
+  // overflow-y:scroll;
+  // max-height:120px;
 `;
 const PostTitle = styled.li`
   list-style-type: none;
