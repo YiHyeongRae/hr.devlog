@@ -58,15 +58,24 @@ const PostContainer = styled.div`
   font-family: "MapleLight";
   padding: 0 32px;
 `;
+interface PostDataTypes {
+  date: string;
+  like: number;
+  no: number;
+  post_cate: string;
+  post_tage: string;
+  post_title: string;
+  post_url: string;
+  view: number;
+}
 interface PostTypes {
   post: string;
   tag: Array<string>;
-  title: string;
-  date: string;
+
+  data: Array<PostDataTypes>;
 }
-const Post: NextPage<PostTypes> = ({ post, tag, title, date }) => {
+const Post: NextPage<PostTypes> = ({ post, tag, data }) => {
   // utterances를 불러올 div ref
-  console.log("?", post, tag, title, date);
   const commentsRef = useRef<HTMLDivElement | null>(null);
 
   // utterances script 로드
@@ -93,13 +102,13 @@ const Post: NextPage<PostTypes> = ({ post, tag, title, date }) => {
   });
   return (
     <PostWrap>
-      <SEO title={`${title}`} />
+      <SEO title={`${data[0].post_title}`} />
       <PostHeader>
         <PostTitle>
           <p style={{ color: "#d082c4", width: "100%" }}>Import</p>{" "}
           <p
             style={{ color: "#88deff", width: "100%", lineHeight: 2 }}
-          >{`${title}`}</p>{" "}
+          >{`${data[0].post_title}`}</p>{" "}
           <p style={{ color: "#d082c4" }}>From</p>{" "}
           <p style={{ color: "#d88e74" }}>{`"../HR-DEVLOG";`}</p>
         </PostTitle>
@@ -140,7 +149,27 @@ const Post: NextPage<PostTypes> = ({ post, tag, title, date }) => {
         >
           <p style={{ color: "#379edc", marginRight: "6px" }}>{`const`}</p>
           <p style={{ color: "#ea68dc" }}>{`{`}</p>
-          <p style={{ margin: "0 10px", color: "#00c4ff" }}>{date}</p>
+          <p
+            style={{ margin: "0 10px", color: "#00c4ff" }}
+          >{`date, ${data[0].date}`}</p>
+          <p style={{ color: "#ea68dc", marginRight: "6px" }}>{`}`}</p>
+          <p style={{ marginRight: "6px" }}>=</p>
+          <p style={{ color: "#d7d89f" }}>{`useHRDEVLOG`}</p>
+          <p style={{ color: "#ea68dc" }}>( )</p>
+          <p>{`;`}</p>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            fontFamily: "MapleLight",
+            fontSize: "14px",
+            flexWrap: "wrap",
+            margin: "10px 0",
+          }}
+        >
+          <p style={{ color: "#379edc", marginRight: "6px" }}>{`const`}</p>
+          <p style={{ color: "#ea68dc" }}>{`{`}</p>
+          <p style={{ margin: "0 10px", color: "#00c4ff" }}>{`view, 0`}</p>
           <p style={{ color: "#ea68dc", marginRight: "6px" }}>{`}`}</p>
           <p style={{ marginRight: "6px" }}>=</p>
           <p style={{ color: "#d7d89f" }}>{`useHRDEVLOG`}</p>
@@ -186,9 +215,8 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
   const tags = tagArr;
   const title = searchPost[0].post_title;
   const date = data[0].date;
-  console.log("??", data[0].date);
   return {
-    props: { post: postData, tag: tags, title: title, date: date },
+    props: { post: postData, tag: tags, title: title, date: date, data: data },
     revalidate: 5,
   };
 
