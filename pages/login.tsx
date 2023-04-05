@@ -62,6 +62,14 @@ const Login: Function = () => {
       setCertState(false);
     }
   };
+
+  const enterCert: Function = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      if (cert !== "") {
+        checkCert();
+      }
+    }
+  };
   // useEffect(() => {
   //   const confirmMaster = prompt();
 
@@ -114,6 +122,8 @@ const Login: Function = () => {
               type="text"
               style={{ margin: "10px 0" }}
               onChange={(e) => setCert(e.currentTarget.value)}
+              onKeyDown={(e) => enterCert(e)}
+              autoFocus
             />
             <button type="button" onClick={() => checkCert()}>
               확인
