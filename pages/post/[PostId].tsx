@@ -7,7 +7,8 @@ import SEO from "../../components/SEO";
 
 import { DataTypes } from "../../components/SideTagNav";
 import AdsTerminal from "../../components/AdsTerminal";
-import { getCookies, setCookie } from "cookies-next";
+import { getCookie, getCookies, setCookie } from "cookies-next";
+import axios from "axios";
 
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
@@ -75,6 +76,11 @@ interface PostTypes {
 
   data: Array<PostDataTypes>;
 }
+
+type ViewCheckTypes = {
+  no: number;
+  expire: string;
+};
 const Post: NextPage<PostTypes> = ({ post, tag, data }) => {
   // utterances를 불러올 div ref
 
@@ -99,6 +105,18 @@ const Post: NextPage<PostTypes> = ({ post, tag, data }) => {
   };
 
   // useEffect로 utterances 실행
+
+  const updateView: Function = async (no: number | string) => {
+    try {
+      await axios.post(process.env.NEXT_PUBLIC_ORIGIN_HOST + "/api/post/view", {
+        data: {
+          postNo: no,
+        },
+      });
+    } catch (error: any) {
+      console.log("조회수 증가 실패", error);
+    }
+  };
   useEffect(() => {
     loadCommnets();
 
@@ -117,7 +135,78 @@ const Post: NextPage<PostTypes> = ({ post, tag, data }) => {
     const date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
-    const day = date.getDate() + 1;
+    const day = date.getDate();
+
+    const today = `${year}-${month < 10 ? `0${month}` : month}-${
+      day < 10 ? `0${day}` : day
+    }`;
+
+    // 게시글 만료일 설정
+    const expireView = `${year}-${month < 10 ? `0${month}` : month}-${
+      day + 7 < 10 ? `0${day}` : day + 7
+    }`;
+    console.log("게시글 중복방지 설정 만료일", expireView);
+
+    // 현재 게시글 정보 object 생성
+    const viewCheck: ViewCheckTypes = {
+      no: data[0].no,
+      expire: expireView,
+    };
+
+    // 쿠키 만료일 설정
+    const expireCookie = `${year}-${month < 10 ? `0${month}` : month}-${
+      day + 14 < 10 ? `0${day}` : day + 14
+    }`;
+
+    // console.log("hr-view 쿠키 만료일", expireCookie);
+    // 쿠키에 박혀있는걸 가져온다면 이거
+    const viewCheckArr: Array<ViewCheckTypes> = getCookie("hr-view")
+      ? JSON.parse(String(getCookie("hr-view")))
+      : [];
+    // console.log("현재 게시글 정보 object", viewCheck);
+
+    // console.log(
+    //   "현재 개사굴 no 가 있는지 체크\nfilter 돌리기 때문에 length !== 0 이라면 중복방지 설정된 상태",
+    //   viewCheckArr?.filter((item: ViewCheckTypes) => item.no === data[0].no)
+    // );
+
+    console.log(
+      "가져온 쿠키",
+      getCookie("hr-view") ? JSON.parse(String(getCookie("hr-view"))) : []
+    );
+
+    if (
+      viewCheckArr.filter((item: ViewCheckTypes) => item.no === data[0].no)
+        .length === 0
+    ) {
+      // alert("조회수 증가 UP");
+      const copyViewCheckArr = [...viewCheckArr];
+      copyViewCheckArr.push(viewCheck);
+      setCookie("hr-view", JSON.stringify(copyViewCheckArr), {
+        expires: new Date(expireCookie),
+      });
+
+      console.log(
+        "현재 게시글 조회수가 1 증가하고, 쿠키에 조회수 중복 방지가 설정되었습니다."
+      );
+
+      updateView(data[0].no);
+    } else {
+      console.log(
+        "현재 게시글 조회수 중복방지가 설정되어있으므로, 조회수는 증가하지 않았습니다."
+      );
+
+      // 만료날짜가 오늘과 겹치지 않는 것만 추출
+      const checkExpire = viewCheckArr.filter(
+        (item: ViewCheckTypes) =>
+          new Date(item.expire).getTime() !== new Date(today).getTime()
+      );
+
+      // 만료된 정보 삭제를 위해 쿠키 다시 셋팅
+      setCookie("hr-view", JSON.stringify(checkExpire), {
+        expires: new Date(expireCookie),
+      });
+    }
     // **** 조회수 중복방지 ****
     // 한개의 쿠키 및 오브젝트로 관리
     // 쿠키의 expire는 고정, 쿠키 안의 object에 각 게시글별 object 따로 설정
