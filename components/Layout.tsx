@@ -136,7 +136,7 @@ function Layout(props: { children: React.ReactNode }) {
     // console.log("TapState Parse", JSON.parse(getTapState));
     // console.log("boardTapHandler", index);
     const newArr: DataTypes[] = [...BoardTap];
-    console.log("newArr1", newArr);
+    // console.log("newArr1", newArr);
 
     // console.log("parseJsonArr", parseJsonArr);
 
@@ -167,11 +167,11 @@ function Layout(props: { children: React.ReactNode }) {
     // console.log("cookie로 tap 생성하기");
     const newArr = [...BoardTap];
     const refreshCookie: CookieValueTypes = getCookie("TapState");
-    console.log("1", newArr);
+    // console.log("1", newArr);
     if (refreshCookie !== undefined) {
       const parseJsonArr = JSON.parse(String(refreshCookie));
-      console.log("parseJsonArr", parseJsonArr);
-      console.log("2newArr", newArr);
+      // console.log("parseJsonArr", parseJsonArr);
+      // console.log("2newArr", newArr);
       parseJsonArr.map((index: number) => {
         const search = newArr.some(
           (item: DataTypes) => item && item.no === Number(index)
@@ -182,7 +182,7 @@ function Layout(props: { children: React.ReactNode }) {
           const filter = data?.filter(
             (item: DataTypes) => item && item.no === Number(index)
           );
-          console.log("filter?", filter);
+          // console.log("filter?", filter);
           // console.log("useEffect filter", filter);
           filter !== undefined ? newArr.push(filter[0]) : {};
           // newArr.push(filter[0]);
