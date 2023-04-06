@@ -119,19 +119,22 @@ const Post: NextPage<PostTypes> = ({ post, tag, data }) => {
   };
   useEffect(() => {
     loadCommnets();
-
-    // console.log("get Cookies", getCookies());
-    // let test = "";
-    // console.log(
-    //   "@@@@@@",
-    //   Object.keys(getCookies()).filter((item: any) =>
-    //     item.includes("hr-view") ? (test = item) : ""
-    //   )
-    // );
-    // console.log("들어가나?", test);
-    // const viewArray = [1, 2, 3, 4, 5];
-    // const testJson = JSON.stringify(viewArray);
-    // console.log("??", testJson);
+    // **** 조회수 중복방지 ****
+    // 한개의 쿠키 및 오브젝트로 관리
+    // 쿠키의 expire는 고정, 쿠키 안의 object에 각 게시글별 object 따로 설정
+    // isChecked : [
+    //   {
+    //     no:8
+    //     expire:2023-04-05
+    //   },
+    //   {
+    //     no:10
+    //     expire:2023-04-08
+    //   },
+    // ]
+    // no, expire 비교해서 object 안에 해당 게시글 no 있을 시 조회수 증가 X
+    // 해당 no 없을 시 조회수 증가 및 object 안에 key-value 설정
+    // 쿠키를 읽을 때 expire 만료되었다면 해당 key-value 삭제
     const date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -207,30 +210,6 @@ const Post: NextPage<PostTypes> = ({ post, tag, data }) => {
         expires: new Date(expireCookie),
       });
     }
-    // **** 조회수 중복방지 ****
-    // 한개의 쿠키 및 오브젝트로 관리
-    // 쿠키의 expire는 고정, 쿠키 안의 object에 각 게시글별 object 따로 설정
-    // isChecked : [
-    //   {
-    //     no:8
-    //     expire:2023-04-05
-    //   },
-    //   {
-    //     no:10
-    //     expire:2023-04-08
-    //   },
-    // ]
-    // no, expire 비교해서 object 안에 해당 게시글 no 있을 시 조회수 증가 X
-    // 해당 no 없을 시 조회수 증가 및 object 안에 key-value 설정
-    // 쿠키를 읽을 때 expire 만료되었다면 해당 key-value 삭제
-
-    // const cookieNameWithDate = `hr-view:${year}-${
-    //   month < 10 ? `0${month}` : month
-    // }-${day < 10 ? `0${day}` : day}`;
-    // console.log(cookieNameWithDate);
-    // setCookie(`${cookieNameWithDate}`, testJson, {
-    //   expires: new Date(cookieNameWithDate),
-    // });
   });
 
   return (
@@ -251,6 +230,7 @@ const Post: NextPage<PostTypes> = ({ post, tag, data }) => {
             fontFamily: "MapleLight",
             fontSize: "14px",
             flexWrap: "wrap",
+            marginBottom: "6px",
           }}
         >
           <p style={{ color: "#379edc", marginRight: "6px" }}>{`const`}</p>
@@ -277,7 +257,7 @@ const Post: NextPage<PostTypes> = ({ post, tag, data }) => {
             fontFamily: "MapleLight",
             fontSize: "14px",
             flexWrap: "wrap",
-            margin: "10px 0",
+            lineHeight: "30px",
           }}
         >
           <p style={{ color: "#379edc", marginRight: "6px" }}>{`const`}</p>
@@ -297,7 +277,7 @@ const Post: NextPage<PostTypes> = ({ post, tag, data }) => {
             fontFamily: "MapleLight",
             fontSize: "14px",
             flexWrap: "wrap",
-            margin: "10px 0",
+            lineHeight: "30px",
           }}
         >
           <p style={{ color: "#379edc", marginRight: "6px" }}>{`const`}</p>
