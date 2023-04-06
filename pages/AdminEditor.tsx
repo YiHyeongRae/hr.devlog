@@ -5,7 +5,7 @@ import { useS3Upload } from "next-s3-upload";
 import axios from "axios";
 import Editor from "../components/MDEditor/MDEditor";
 import { ICommand } from "@uiw/react-md-editor/lib/commands";
-
+import useSWR from "swr";
 import styled from "styled-components";
 
 const CateTitle = styled.div`
@@ -69,7 +69,15 @@ const TapTitle = styled.li`
   justify-content: center;
   padding-left: 16px;
 `;
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json());
 const AdminEditor: NextPage = () => {
+  const { data, isLoading } = useSWR("/api/selectDb", fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
+
   // const title3: ICommand = {
   //   name: "title3",
   //   keyCommand: "title3",
@@ -123,6 +131,7 @@ const AdminEditor: NextPage = () => {
             headers: {},
             body: {
               fileName: uniqName,
+              no: data[0].no + 1,
             },
           },
         },
