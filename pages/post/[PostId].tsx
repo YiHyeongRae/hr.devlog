@@ -31,7 +31,7 @@ const PostHeader = styled.div`
   white-space: nowrap; */
 `;
 
-const PostTitle = styled.h2`
+const PostTitle = styled.div`
   width: 100%;
   font-size: 18px;
   padding: 16px 0;
@@ -215,6 +215,7 @@ const Post: NextPage<PostTypes> = ({ post, tag, data }) => {
   return (
     <PostWrap>
       <SEO title={`${data[0].post_title}`} />
+      <h2>{data[0].post_title}</h2>
       <PostHeader>
         <PostTitle>
           <p style={{ color: "#d082c4", width: "100%" }}>Import</p>{" "}
