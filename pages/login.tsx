@@ -1,6 +1,6 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import Router, { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 const PopupWrapper = styled.div`
@@ -41,6 +41,7 @@ const Login: Function = () => {
     e.keyCode === 13 ? signIn("admin", { userId, userPw }) : {};
   };
 
+  const idRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const login: Function = async () => {
     await signIn("admin", { userId, userPw, redirect: false }).then(
@@ -60,6 +61,9 @@ const Login: Function = () => {
       router.replace("/");
     } else {
       setCertState(false);
+      if (idRef.current) {
+        idRef.current.focus();
+      }
     }
   };
 
@@ -93,6 +97,7 @@ const Login: Function = () => {
               }
               autoComplete="off"
               onKeyDown={(e) => enterLogin(e)}
+              ref={idRef}
             />
           </p>
           <p>
