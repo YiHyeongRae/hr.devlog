@@ -28,6 +28,10 @@ import {
 } from "@uiw/react-md-editor/lib/commands";
 import { useS3Upload } from "next-s3-upload";
 import aws from "aws-sdk";
+import axios from "axios";
+import useSWR from "swr";
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
   ssr: false,
@@ -38,6 +42,14 @@ interface EditorTypes {
   setImportImgList: Function;
 }
 const Editor: Function = ({ setS3File, setImportImgList }: EditorTypes) => {
+  const [postData, setPostData] = useState();
+  const { data, isLoading } = useSWR("/api/selectDb", fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
+
+  console.log(data);
   const { uploadToS3 } = useS3Upload();
   const [imgList, setImgList] = useState<Array<string>>([]);
   const [imgKey, setImgKey] = useState<Array<string>>([]);
@@ -89,6 +101,7 @@ const Editor: Function = ({ setS3File, setImportImgList }: EditorTypes) => {
             body: {
               type: "image",
               fileName: fileInput?.current.files[0].name,
+              no: data[0].no + 1,
             },
           },
         },
@@ -215,6 +228,9 @@ const Editor: Function = ({ setS3File, setImportImgList }: EditorTypes) => {
           );
         })}
       </ul> */}
+      <div style={{ textAlign: "center" }}>
+        현재 작성되고 있는 글의 no : {data[0].no + 1}
+      </div>
       <MDEditor
         value={md}
         onChange={setMd}
