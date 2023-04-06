@@ -74,15 +74,17 @@ interface PostDataTypes {
 interface PostTypes {
   post: string;
   tag: Array<string>;
-
+  title: string;
   data: Array<PostDataTypes>;
+  date: string;
+  view: number;
 }
 
 type ViewCheckTypes = {
   no: number;
   expire: string;
 };
-const Post: NextPage<PostTypes> = ({ post, tag, data }) => {
+const Post: NextPage<PostTypes> = ({ post, tag, data, title, date, view }) => {
   // utterances를 불러올 div ref
 
   const commentsRef = useRef<HTMLDivElement | null>(null);
@@ -215,14 +217,14 @@ const Post: NextPage<PostTypes> = ({ post, tag, data }) => {
 
   return (
     <PostWrap>
-      <SEO title={`${data[0].post_title}`} />
-      <h2>{data[0].post_title}</h2>
+      <SEO title={`${title}`} />
+      <h2>{title}</h2>
       <PostHeader>
         <PostTitle>
           <p style={{ color: "#d082c4", width: "100%" }}>Import</p>{" "}
           <p
             style={{ color: "#88deff", width: "100%", lineHeight: 2 }}
-          >{`${data[0].post_title}`}</p>{" "}
+          >{`${title}`}</p>{" "}
           <p style={{ color: "#d082c4" }}>From</p>{" "}
           <p style={{ color: "#d88e74" }}>{`"../HR-DEVLOG";`}</p>
         </PostTitle>
@@ -266,7 +268,7 @@ const Post: NextPage<PostTypes> = ({ post, tag, data }) => {
           <p style={{ color: "#ea68dc" }}>{`{`}</p>
           <p
             style={{ margin: "0 10px", color: "#00c4ff" }}
-          >{`date, ${data[0].date}`}</p>
+          >{`date, ${date}`}</p>
           <p style={{ color: "#ea68dc", marginRight: "6px" }}>{`}`}</p>
           <p style={{ marginRight: "6px" }}>=</p>
           <p style={{ color: "#d7d89f" }}>{`useHRDEVLOG`}</p>
@@ -286,7 +288,7 @@ const Post: NextPage<PostTypes> = ({ post, tag, data }) => {
           <p style={{ color: "#ea68dc" }}>{`{`}</p>
           <p
             style={{ margin: "0 10px", color: "#00c4ff" }}
-          >{`view, ${data[0].view}`}</p>
+          >{`view, ${view}`}</p>
           <p style={{ color: "#ea68dc", marginRight: "6px" }}>{`}`}</p>
           <p style={{ marginRight: "6px" }}>=</p>
           <p style={{ color: "#d7d89f" }}>{`useHRDEVLOG`}</p>
@@ -331,9 +333,17 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
   const tagArr = searchPost[0].post_tag.split(",");
   const tags = tagArr;
   const title = searchPost[0].post_title;
-  const date = data[0].date;
+  const date = searchPost[0].date;
+  const view = searchPost[0].view;
   return {
-    props: { post: postData, tag: tags, title: title, date: date, data: data },
+    props: {
+      post: postData,
+      tag: tags,
+      title: title,
+      date: date,
+      data: data,
+      view: view,
+    },
     revalidate: 5,
   };
 
