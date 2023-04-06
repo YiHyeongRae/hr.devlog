@@ -5,3 +5,6 @@ function preview() {
 }
 
 export default preview;
+preview.defaultProps = {
+  auth: true,
+};
