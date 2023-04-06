@@ -59,6 +59,7 @@ const PostContainer = styled.div`
   width: 100%;
   font-family: "MapleLight";
   padding: 0 32px;
+  padding-top: 16px;
 `;
 interface PostDataTypes {
   date: string;
