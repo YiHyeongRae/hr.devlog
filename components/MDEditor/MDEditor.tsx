@@ -99,7 +99,6 @@ const Editor: Function = ({ setS3File, setImportImgList }: EditorTypes) => {
           request: {
             headers: {},
             body: {
-              type: "image",
               fileName: fileInput?.current.files[0].name,
               no: data[0].no + 1,
             },
