@@ -14,7 +14,7 @@ const DescTitle = styled.div`
   align-items: center;
   width: 100%;
   font-size: 25px;
-  padding: 16px 0;
+
   font-weight: 700;
   color: #fff;
   font-family: "MapleLight";
@@ -26,7 +26,7 @@ const CateTitle = styled.div`
   align-items: center;
   width: 100%;
   font-size: 25px;
-  padding: 16px 0;
+
   font-weight: 700;
   color: #fff;
   font-family: "MapleLight";
@@ -38,7 +38,7 @@ const PostTitle = styled.div`
   align-items: center;
   width: 100%;
   font-size: 25px;
-  padding-top: 16px;
+
   font-weight: 700;
   color: #fff;
   font-family: "MapleLight";
@@ -261,6 +261,25 @@ const AdminEditor: NextPage = () => {
       <div data-color-mode="dark">
         <div className="wmde-markdown-var"> </div>
         <div className="title-editor">
+          <PostTitle>
+            <p style={{ color: "#d082c4", flexShrink: 0 }}>export default</p>
+            <input
+              type="text"
+              placeholder="TITLE OF POST"
+              onChange={(e) => setPostTitle(e.currentTarget.value)}
+              style={{
+                color: "#88deff",
+                border: 0,
+                flexGrow: 0,
+                background: "none",
+                fontSize: 25,
+                margin: "0 6px",
+                flexBasis: 100,
+              }}
+            />
+            {/* <span style={{ color: "#d082c4" }}>From</span>{" "}
+            <span style={{ color: "#d88e74" }}>{`"../HR-DEVLOG";`}</span> */}
+          </PostTitle>
           <DescTitle>
             <p style={{ color: "#d082c4", flexShrink: 0 }}>export default</p>
             <input
@@ -299,26 +318,6 @@ const AdminEditor: NextPage = () => {
               }}
             />{" "}
           </CateTitle>
-          <PostTitle>
-            <p style={{ color: "#d082c4", flexShrink: 0 }}>export default</p>
-            <input
-              type="text"
-              placeholder="TITLE OF POST"
-              onChange={(e) => setPostTitle(e.currentTarget.value)}
-              style={{
-                color: "#88deff",
-                border: 0,
-                flexGrow: 0,
-                background: "none",
-                fontSize: 25,
-                margin: "0 6px",
-                flexBasis: 100,
-              }}
-            />
-            {/* <span style={{ color: "#d082c4" }}>From</span>{" "}
-            <span style={{ color: "#d88e74" }}>{`"../HR-DEVLOG";`}</span> */}
-          </PostTitle>
-
           <TagTitle>
             <p style={{ color: "#d082c4", flexShrink: 0 }}>export</p>
             <p style={{ color: "#379edc", marginRight: "6px" }}>&nbsp;const</p>
