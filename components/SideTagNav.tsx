@@ -279,48 +279,45 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
               d="M8.25 4.5l7.5 7.5-7.5 7.5"
             />
           </svg>
-          <p onClick={(e) => cateHandler(e)} style={{ flexGrow: 1 }}>
-            HR.DEVLOG
-          </p>
-          {cateArr.indexOf("HR.DEVLOG") !== -1 && (
-            <PostListWrap>
-              {data &&
-                data
-                  ?.filter((item: DataTypes) => item.post_cate === "hrdevlog")
-                  .map((data: DataTypes, i: number) => {
-                    // console.log("data", data);
-                    return (
-                      <PostTitle
-                        key={i}
-                        style={
-                          router.asPath.substring(6) === String(data.no)
-                            ? { backgroundColor: "#1e1e1f" }
-                            : {}
-                        }
-                        onMouseEnter={(e) => titleHover(e)}
-                        onMouseLeave={() => setHoverState(false)}
+          <p style={{ flexGrow: 1 }}>HR.DEVLOG</p>
+
+          <PostListWrap>
+            {data &&
+              data
+                ?.filter((item: DataTypes) => item.post_cate === "hrdevlog")
+                .map((data: DataTypes, i: number) => {
+                  // console.log("data", data);
+                  return (
+                    <PostTitle
+                      key={i}
+                      style={
+                        router.asPath.substring(6) === String(data.no)
+                          ? { backgroundColor: "#1e1e1f" }
+                          : {}
+                      }
+                      onMouseEnter={(e) => titleHover(e)}
+                      onMouseLeave={() => setHoverState(false)}
+                    >
+                      <Link
+                        href={{ pathname: `/post/${data.no}` }}
+                        as={`/post/${data.no}`}
+                        style={{
+                          color:
+                            router.asPath.substring(6) === String(data.no)
+                              ? "#deb77f"
+                              : "#fff",
+                          padding: "0 16px",
+                          display: "block",
+                        }}
+                        onClick={(e) => selectPost(e, data.no)}
+                        className="Link"
                       >
-                        <Link
-                          href={{ pathname: `/post/${data.no}` }}
-                          as={`/post/${data.no}`}
-                          style={{
-                            color:
-                              router.asPath.substring(6) === String(data.no)
-                                ? "#deb77f"
-                                : "#fff",
-                            padding: "0 16px",
-                            display: "block",
-                          }}
-                          onClick={(e) => selectPost(e, data.no)}
-                          className="Link"
-                        >
-                          {data.post_title}
-                        </Link>
-                      </PostTitle>
-                    );
-                  })}
-            </PostListWrap>
-          )}
+                        {data.post_title}
+                      </Link>
+                    </PostTitle>
+                  );
+                })}
+          </PostListWrap>
         </SideListCateWrap>
         <SideListCateWrap>
           <svg
@@ -337,48 +334,45 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
               d="M8.25 4.5l7.5 7.5-7.5 7.5"
             />
           </svg>
-          <p onClick={(e) => cateHandler(e)} style={{ flexGrow: 1 }}>
-            Front
-          </p>
-          {cateArr.indexOf("Front") !== -1 && (
-            <PostListWrap>
-              {data &&
-                data
-                  ?.filter((item: DataTypes) => item.post_cate === "frontend")
-                  .map((data: DataTypes, i: number) => {
-                    // console.log("data", data);
-                    return (
-                      <PostTitle
-                        key={i}
-                        style={
-                          router.asPath.substring(6) === String(data.no)
-                            ? { backgroundColor: "#1e1e1f" }
-                            : {}
-                        }
-                        onMouseEnter={(e) => titleHover(e)}
-                        onMouseLeave={() => setHoverState(false)}
+          <p style={{ flexGrow: 1 }}>Front</p>
+
+          <PostListWrap>
+            {data &&
+              data
+                ?.filter((item: DataTypes) => item.post_cate === "frontend")
+                .map((data: DataTypes, i: number) => {
+                  // console.log("data", data);
+                  return (
+                    <PostTitle
+                      key={i}
+                      style={
+                        router.asPath.substring(6) === String(data.no)
+                          ? { backgroundColor: "#1e1e1f" }
+                          : {}
+                      }
+                      onMouseEnter={(e) => titleHover(e)}
+                      onMouseLeave={() => setHoverState(false)}
+                    >
+                      <Link
+                        href={{ pathname: `/post/${data.no}` }}
+                        as={`/post/${data.no}`}
+                        style={{
+                          color:
+                            router.asPath.substring(6) === String(data.no)
+                              ? "#deb77f"
+                              : "#fff",
+                          padding: "0 16px",
+                          display: "block",
+                        }}
+                        onClick={(e) => selectPost(e, data.no)}
+                        className="Link"
                       >
-                        <Link
-                          href={{ pathname: `/post/${data.no}` }}
-                          as={`/post/${data.no}`}
-                          style={{
-                            color:
-                              router.asPath.substring(6) === String(data.no)
-                                ? "#deb77f"
-                                : "#fff",
-                            padding: "0 16px",
-                            display: "block",
-                          }}
-                          onClick={(e) => selectPost(e, data.no)}
-                          className="Link"
-                        >
-                          {data.post_title}
-                        </Link>
-                      </PostTitle>
-                    );
-                  })}
-            </PostListWrap>
-          )}
+                        {data.post_title}
+                      </Link>
+                    </PostTitle>
+                  );
+                })}
+          </PostListWrap>
         </SideListCateWrap>
         <SideListCateWrap>
           <svg
@@ -395,48 +389,45 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
               d="M8.25 4.5l7.5 7.5-7.5 7.5"
             />
           </svg>
-          <p onClick={(e) => cateHandler(e)} style={{ flexGrow: 1 }}>
-            Back
-          </p>
-          {cateArr.indexOf("Back") !== -1 && (
-            <PostListWrap>
-              {data &&
-                data
-                  ?.filter((item: DataTypes) => item.post_cate === "backend")
-                  .map((data: DataTypes, i: number) => {
-                    // console.log("data", data);
-                    return (
-                      <PostTitle
-                        key={i}
-                        style={
-                          router.asPath.substring(6) === String(data.no)
-                            ? { backgroundColor: "#1e1e1f" }
-                            : {}
-                        }
-                        onMouseEnter={(e) => titleHover(e)}
-                        onMouseLeave={() => setHoverState(false)}
+          <p style={{ flexGrow: 1 }}>Back</p>
+
+          <PostListWrap>
+            {data &&
+              data
+                ?.filter((item: DataTypes) => item.post_cate === "backend")
+                .map((data: DataTypes, i: number) => {
+                  // console.log("data", data);
+                  return (
+                    <PostTitle
+                      key={i}
+                      style={
+                        router.asPath.substring(6) === String(data.no)
+                          ? { backgroundColor: "#1e1e1f" }
+                          : {}
+                      }
+                      onMouseEnter={(e) => titleHover(e)}
+                      onMouseLeave={() => setHoverState(false)}
+                    >
+                      <Link
+                        href={{ pathname: `/post/${data.no}` }}
+                        as={`/post/${data.no}`}
+                        style={{
+                          color:
+                            router.asPath.substring(6) === String(data.no)
+                              ? "#deb77f"
+                              : "#fff",
+                          padding: "0 16px",
+                          display: "block",
+                        }}
+                        onClick={(e) => selectPost(e, data.no)}
+                        className="Link"
                       >
-                        <Link
-                          href={{ pathname: `/post/${data.no}` }}
-                          as={`/post/${data.no}`}
-                          style={{
-                            color:
-                              router.asPath.substring(6) === String(data.no)
-                                ? "#deb77f"
-                                : "#fff",
-                            padding: "0 16px",
-                            display: "block",
-                          }}
-                          onClick={(e) => selectPost(e, data.no)}
-                          className="Link"
-                        >
-                          {data.post_title}
-                        </Link>
-                      </PostTitle>
-                    );
-                  })}
-            </PostListWrap>
-          )}
+                        {data.post_title}
+                      </Link>
+                    </PostTitle>
+                  );
+                })}
+          </PostListWrap>
         </SideListCateWrap>
         <SideListCateWrap>
           <svg
@@ -453,48 +444,45 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
               d="M8.25 4.5l7.5 7.5-7.5 7.5"
             />
           </svg>
-          <p onClick={(e) => cateHandler(e)} style={{ flexGrow: 1 }}>
-            Etc
-          </p>
-          {cateArr.indexOf("Etc") !== -1 && (
-            <PostListWrap>
-              {data &&
-                data
-                  ?.filter((item: DataTypes) => item.post_cate === "etc")
-                  .map((data: DataTypes, i: number) => {
-                    // console.log("data", data);
-                    return (
-                      <PostTitle
-                        key={i}
-                        style={
-                          router.asPath.substring(6) === String(data.no)
-                            ? { backgroundColor: "#1e1e1f" }
-                            : {}
-                        }
-                        onMouseEnter={(e) => titleHover(e)}
-                        onMouseLeave={() => setHoverState(false)}
+          <p style={{ flexGrow: 1 }}>Etc</p>
+
+          <PostListWrap>
+            {data &&
+              data
+                ?.filter((item: DataTypes) => item.post_cate === "etc")
+                .map((data: DataTypes, i: number) => {
+                  // console.log("data", data);
+                  return (
+                    <PostTitle
+                      key={i}
+                      style={
+                        router.asPath.substring(6) === String(data.no)
+                          ? { backgroundColor: "#1e1e1f" }
+                          : {}
+                      }
+                      onMouseEnter={(e) => titleHover(e)}
+                      onMouseLeave={() => setHoverState(false)}
+                    >
+                      <Link
+                        href={{ pathname: `/post/${data.no}` }}
+                        as={`/post/${data.no}`}
+                        style={{
+                          color:
+                            router.asPath.substring(6) === String(data.no)
+                              ? "#deb77f"
+                              : "#fff",
+                          padding: "0 16px",
+                          display: "block",
+                        }}
+                        onClick={(e) => selectPost(e, data.no)}
+                        className="Link"
                       >
-                        <Link
-                          href={{ pathname: `/post/${data.no}` }}
-                          as={`/post/${data.no}`}
-                          style={{
-                            color:
-                              router.asPath.substring(6) === String(data.no)
-                                ? "#deb77f"
-                                : "#fff",
-                            padding: "0 16px",
-                            display: "block",
-                          }}
-                          onClick={(e) => selectPost(e, data.no)}
-                          className="Link"
-                        >
-                          {data.post_title}
-                        </Link>
-                      </PostTitle>
-                    );
-                  })}
-            </PostListWrap>
-          )}
+                        {data.post_title}
+                      </Link>
+                    </PostTitle>
+                  );
+                })}
+          </PostListWrap>
         </SideListCateWrap>
       </SideListWrap>
     </SideWrap>
