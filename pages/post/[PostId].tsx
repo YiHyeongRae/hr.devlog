@@ -193,8 +193,9 @@ const Post: NextPage<PostTypes> = ({
     );
 
     if (
-      viewCheckArr.filter((item: ViewCheckTypes) => item.no === data[0].no)
-        .length === 0
+      viewCheckArr.filter(
+        (item: ViewCheckTypes) => item.no === Number(router.query.PostId)
+      ).length === 0
     ) {
       // alert("조회수 증가 UP");
       const copyViewCheckArr = [...viewCheckArr];
