@@ -78,13 +78,22 @@ interface PostTypes {
   data: Array<PostDataTypes>;
   date: string;
   view: number;
+  desciprtion: string;
 }
 
 type ViewCheckTypes = {
   no: number;
   expire: string;
 };
-const Post: NextPage<PostTypes> = ({ post, tag, data, title, date, view }) => {
+const Post: NextPage<PostTypes> = ({
+  post,
+  tag,
+  data,
+  title,
+  date,
+  view,
+  desciprtion,
+}) => {
   // utterances를 불러올 div ref
 
   const commentsRef = useRef<HTMLDivElement | null>(null);
@@ -217,7 +226,7 @@ const Post: NextPage<PostTypes> = ({ post, tag, data, title, date, view }) => {
 
   return (
     <PostWrap>
-      <SEO title={`${title}`} />
+      <SEO title={`${title}`} desc={desciprtion} />
       <h2>{title}</h2>
       <PostHeader>
         <PostTitle>
@@ -335,6 +344,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
   const title = searchPost[0].post_title;
   const date = searchPost[0].date;
   const view = searchPost[0].view;
+  const desciprtion = searchPost[0].description;
   return {
     props: {
       post: postData,
@@ -343,6 +353,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
       date: date,
       data: data,
       view: view,
+      desciprtion: desciprtion,
     },
     revalidate: 5,
   };
