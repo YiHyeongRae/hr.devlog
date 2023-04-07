@@ -9,6 +9,7 @@ import { DataTypes } from "../../components/SideTagNav";
 import AdsTerminal from "../../components/AdsTerminal";
 import { getCookie, getCookies, setCookie } from "cookies-next";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
@@ -95,7 +96,7 @@ const Post: NextPage<PostTypes> = ({
   desciprtion,
 }) => {
   // utterances를 불러올 div ref
-
+  const router = useRouter();
   const commentsRef = useRef<HTMLDivElement | null>(null);
 
   // utterances script 로드
@@ -129,6 +130,7 @@ const Post: NextPage<PostTypes> = ({
       console.log("조회수 증가 실패", error);
     }
   };
+  console.log(router);
   useEffect(() => {
     loadCommnets();
     // **** 조회수 중복방지 ****
@@ -164,7 +166,7 @@ const Post: NextPage<PostTypes> = ({
 
     // 현재 게시글 정보 object 생성
     const viewCheck: ViewCheckTypes = {
-      no: data[0].no,
+      no: Number(router.query.PostId),
       expire: expireView,
     };
 
@@ -205,7 +207,7 @@ const Post: NextPage<PostTypes> = ({
         "현재 게시글 조회수가 1 증가하고, 쿠키에 조회수 중복 방지가 설정되었습니다."
       );
 
-      updateView(data[0].no);
+      updateView(Number(router.query.PostId));
     } else {
       console.log(
         "현재 게시글 조회수 중복방지가 설정되어있으므로, 조회수는 증가하지 않았습니다."
