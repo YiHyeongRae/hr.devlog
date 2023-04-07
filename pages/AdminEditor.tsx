@@ -8,6 +8,18 @@ import { ICommand } from "@uiw/react-md-editor/lib/commands";
 import useSWR from "swr";
 import styled from "styled-components";
 
+const DescTitle = styled.div`
+  display: flex;
+
+  align-items: center;
+  width: 100%;
+  font-size: 25px;
+  padding: 16px 0;
+  font-weight: 700;
+  color: #fff;
+  font-family: "MapleLight";
+`;
+
 const CateTitle = styled.div`
   display: flex;
 
@@ -120,6 +132,7 @@ const AdminEditor: NextPage = () => {
   const [postCate, setPostCate] = useState<string>();
   const [postTitle, setPostTitle] = useState<string>();
   const [postTag, setPostTag] = useState<string>();
+  const [postDesc, setPostDesc] = useState<string>();
 
   const [tag, setTag] = useState<string[]>();
 
@@ -145,6 +158,7 @@ const AdminEditor: NextPage = () => {
             postTag: postTag,
             urlKey: url.url,
             postDate: registerDate,
+            postDesc: postDesc,
           },
         })
         .then(() => alert("업로드가 완료됐습니다."));
@@ -247,6 +261,23 @@ const AdminEditor: NextPage = () => {
       <div data-color-mode="dark">
         <div className="wmde-markdown-var"> </div>
         <div className="title-editor">
+          <DescTitle>
+            <p style={{ color: "#d082c4", flexShrink: 0 }}>export default</p>
+            <input
+              type="text"
+              placeholder="DESC OF POST"
+              onChange={(e) => setPostDesc(e.currentTarget.value)}
+              style={{
+                color: "#88deff",
+                border: 0,
+                flexGrow: 0,
+                background: "none",
+                fontSize: 25,
+                margin: "0 6px",
+                flexBasis: 100,
+              }}
+            />{" "}
+          </DescTitle>
           <CateTitle>
             <p style={{ color: "#d082c4", flexShrink: 0 }}>export default</p>
             <input
