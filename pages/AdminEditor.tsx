@@ -78,6 +78,7 @@ const AdminEditor: NextPage = () => {
     revalidateOnReconnect: false,
   });
 
+  console.log(data);
   // const title3: ICommand = {
   //   name: "title3",
   //   keyCommand: "title3",
@@ -131,7 +132,6 @@ const AdminEditor: NextPage = () => {
             headers: {},
             body: {
               fileName: uniqName,
-              no: data[0].no + 1,
             },
           },
         },
