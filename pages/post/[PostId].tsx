@@ -27,7 +27,7 @@ const PostHeader = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 0 32px;
+  padding: 0 16px;
   /* text-overflow: ellipsis;
   white-space: nowrap; */
 `;
@@ -59,7 +59,7 @@ const PostTag = styled.li`
 const PostContainer = styled.div`
   width: 100%;
   font-family: "MapleLight";
-  padding: 0 32px;
+  padding: 0 16px;
   padding-top: 16px;
 `;
 interface PostDataTypes {
