@@ -283,9 +283,11 @@ const Post: NextPage<PostTypes> = ({
           >{`date, ${date}`}</p>
           <p style={{ color: "#ea68dc", marginRight: "6px" }}>{`}`}</p>
           <p style={{ marginRight: "6px" }}>=</p>
-          <p style={{ color: "#d7d89f" }}>{`useHRDEVLOG`}</p>
-          <p style={{ color: "#ea68dc" }}>( )</p>
-          <p>{`;`}</p>
+          <div style={{ display: "flex" }}>
+            <p style={{ color: "#d7d89f" }}>{`useHRDEVLOG`}</p>
+            <p style={{ color: "#ea68dc" }}>( )</p>
+            <p>{`;`}</p>
+          </div>
         </div>
         <div
           style={{
