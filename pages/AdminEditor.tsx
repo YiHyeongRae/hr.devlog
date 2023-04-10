@@ -90,7 +90,6 @@ const AdminEditor: NextPage = () => {
     revalidateOnReconnect: false,
   });
 
-  console.log(data);
   // const title3: ICommand = {
   //   name: "title3",
   //   keyCommand: "title3",
