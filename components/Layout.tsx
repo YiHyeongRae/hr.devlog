@@ -22,7 +22,7 @@ const LayoutWrap = styled.div`
 
 const ContentWrap = styled.div`
   display: flex;
-  width: 100%;
+  width: calc(100% - 36px);
   /* height: 100%; */
   /* height: calc(100vh - 32px); */
   /* overflow-y: scroll; */
