@@ -11,7 +11,16 @@
 
 .wmde-markdown {
   background-color: #1e1e1f !important;
+  padding: 0 16px !important;
 }
+@media screen and (max-width: 414px) {
+  .wmde-markdown {
+    background-color: #1e1e1f !important;
+    font-size: 13px !important;
+    padding: 0 16px !important;
+  }
+}
+
 .w-md-editor {
   background-color: #1e1e24 !important;
   height: 500px !important;
@@ -20,6 +29,11 @@
 .w-md-editor-toolbar {
   background-color: #1e1e24 !important;
 }
+
+/* pre code span {
+  display: flex !important;
+  flex-wrap: wrap !important;
+} */
 
 @keyframes fadeInOut {
   0% {
