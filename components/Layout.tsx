@@ -125,6 +125,7 @@ function Layout(props: { children: React.ReactNode }) {
       setCookie("TapState", JSON.stringify(cookieArr));
     } else {
       const parseJsonArr: Array<number> = JSON.parse(String(getCookieTapState));
+
       if (!parseJsonArr.some((item: number) => item === index)) {
         parseJsonArr.push(index);
         setCookie("TapState", JSON.stringify(parseJsonArr));
@@ -149,6 +150,7 @@ function Layout(props: { children: React.ReactNode }) {
         const filter = data.filter(
           (item: DataTypes) => item.no === Number(index)
         );
+
         newArr.push(filter[0]);
       }
     });
@@ -172,6 +174,7 @@ function Layout(props: { children: React.ReactNode }) {
       const parseJsonArr = JSON.parse(String(refreshCookie));
       // console.log("parseJsonArr", parseJsonArr);
       // console.log("2newArr", newArr);
+
       parseJsonArr.map((index: number) => {
         const search = newArr.some(
           (item: DataTypes) => item && item.no === Number(index)
@@ -184,7 +187,10 @@ function Layout(props: { children: React.ReactNode }) {
           );
           // console.log("filter?", filter);
           // console.log("useEffect filter", filter);
-          filter !== undefined ? newArr.push(filter[0]) : {};
+          if (filter !== undefined && filter.length !== 0) {
+            newArr.push(filter[0]);
+          }
+          // filter !== undefined ? newArr.push(filter[0]) : {};
           // newArr.push(filter[0]);
         }
       });
