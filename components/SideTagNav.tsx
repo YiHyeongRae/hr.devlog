@@ -209,7 +209,7 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
             />
           </svg>
         </SideTagItem>
-        <SideTagItem style={{ borderLeft: 0 }}>
+        <SideTagItem>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -225,7 +225,7 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
             />
           </svg>
         </SideTagItem>
-        <SideTagItem style={{ borderLeft: 0 }}>
+        <SideTagItem>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
