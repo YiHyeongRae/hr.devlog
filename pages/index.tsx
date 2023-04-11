@@ -139,7 +139,7 @@ const Home = () => {
           <TechStack color="#61dbfb" style={{ color: "#333" }}>
             REACT
           </TechStack>
-          <TechStack color="#fff" style={{ color: "#333" }}>
+          <TechStack color="#000" style={{ color: "#fff" }}>
             NEXT.JS
           </TechStack>
           <TechStack color="#026cb3">TYPESCRIPT</TechStack>
