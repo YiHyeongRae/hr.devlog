@@ -7,7 +7,7 @@ import SEO from "../../components/SEO";
 
 import { DataTypes } from "../../components/SideTagNav";
 import AdsTerminal from "../../components/AdsTerminal";
-import { getCookie, getCookies, setCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 import axios from "axios";
 import { useRouter } from "next/router";
 
@@ -130,7 +130,6 @@ const Post: NextPage<PostTypes> = ({
       console.log("조회수 증가 실패", error);
     }
   };
-  console.log(router);
   useEffect(() => {
     loadCommnets();
     // **** 조회수 중복방지 ****
@@ -159,10 +158,19 @@ const Post: NextPage<PostTypes> = ({
     }`;
 
     // 게시글 만료일 설정
-    const expireView = `${year}-${month < 10 ? `0${month}` : month}-${
-      day + 7 < 10 ? `0${day}` : day + 7
-    }`;
-    console.log("게시글 중복방지 설정 만료일", expireView);
+
+    const after7DaysTimeStemp =
+      new Date(today).getTime() + 7 * 24 * 60 * 60 * 1000;
+
+    const after7DaysYear = new Date(after7DaysTimeStemp).getFullYear();
+    const after7DaysMonth = new Date(after7DaysTimeStemp).getMonth() + 1;
+    const after7DaysDay = new Date(after7DaysTimeStemp).getDate();
+
+    const expireView = `${after7DaysYear}-${
+      after7DaysMonth < 10 ? `0${after7DaysMonth}` : after7DaysMonth
+    }-${after7DaysDay < 10 ? `0${after7DaysDay}` : after7DaysDay}`;
+
+    // console.log("게시글 중복방지 설정 만료일", expireView);
 
     // 현재 게시글 정보 object 생성
     const viewCheck: ViewCheckTypes = {
@@ -171,9 +179,17 @@ const Post: NextPage<PostTypes> = ({
     };
 
     // 쿠키 만료일 설정
-    const expireCookie = `${year}-${month < 10 ? `0${month}` : month}-${
-      day + 14 < 10 ? `0${day}` : day + 14
-    }`;
+
+    const after14DaysTimeStemp =
+      new Date(today).getTime() + 14 * 24 * 60 * 60 * 1000;
+
+    const after14DaysYear = new Date(after14DaysTimeStemp).getFullYear();
+    const after14DaysMonth = new Date(after14DaysTimeStemp).getMonth() + 1;
+    const after14DaysDay = new Date(after14DaysTimeStemp).getDate();
+
+    const expireCookie = `${after14DaysYear}-${
+      after14DaysMonth < 10 ? `0${after14DaysMonth}` : after14DaysMonth
+    }-${after14DaysDay < 10 ? `0${after14DaysDay}` : after14DaysDay}`;
 
     // console.log("hr-view 쿠키 만료일", expireCookie);
     // 쿠키에 박혀있는걸 가져온다면 이거
@@ -187,10 +203,10 @@ const Post: NextPage<PostTypes> = ({
     //   viewCheckArr?.filter((item: ViewCheckTypes) => item.no === data[0].no)
     // );
 
-    console.log(
-      "가져온 쿠키",
-      getCookie("hr-view") ? JSON.parse(String(getCookie("hr-view"))) : []
-    );
+    // console.log(
+    //   "가져온 쿠키",
+    //   getCookie("hr-view") ? JSON.parse(String(getCookie("hr-view"))) : []
+    // );
 
     if (
       viewCheckArr.filter(
@@ -204,15 +220,15 @@ const Post: NextPage<PostTypes> = ({
         expires: new Date(expireCookie),
       });
 
-      console.log(
-        "현재 게시글 조회수가 1 증가하고, 쿠키에 조회수 중복 방지가 설정되었습니다."
-      );
+      // console.log(
+      //   "현재 게시글 조회수가 1 증가하고, 쿠키에 조회수 중복 방지가 설정되었습니다."
+      // );
 
       updateView(Number(router.query.PostId));
     } else {
-      console.log(
-        "현재 게시글 조회수 중복방지가 설정되어있으므로, 조회수는 증가하지 않았습니다."
-      );
+      // console.log(
+      //   "현재 게시글 조회수 중복방지가 설정되어있으므로, 조회수는 증가하지 않았습니다."
+      // );
 
       // 만료날짜가 오늘과 겹치지 않는 것만 추출
       const checkExpire = viewCheckArr.filter(
