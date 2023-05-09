@@ -126,7 +126,7 @@ const AdminEditor: NextPage = () => {
     day < 10 ? `0${day}` : day
   }`;
 
-  console.log("uniqName", registerDate);
+  // console.log("uniqName", registerDate);
 
   const [postCate, setPostCate] = useState<string>();
   const [postTitle, setPostTitle] = useState<string>();
