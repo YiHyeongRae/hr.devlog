@@ -327,7 +327,10 @@ const Post: NextPage<PostTypes> = ({
         </div>
       </PostHeader>
       <PostContainer>
-        <MarkdownPreview source={post} />
+        <MarkdownPreview
+          source={post}
+          warpperElement={{ "data-color-mode": "dark" }}
+        />
 
         <div ref={commentsRef} />
       </PostContainer>
