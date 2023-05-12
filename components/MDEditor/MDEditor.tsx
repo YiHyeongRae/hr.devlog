@@ -107,7 +107,12 @@ const Editor: Function = ({ setS3File, setImportImgList }: EditorTypes) => {
         },
       });
       console.log("img-key?", res);
-      setMd(`${currentText}\n![](${res.url})`);
+      console.log("substring ", res.url.replace("hr.devlog.", ""));
+      const replaceUrl = res.url.replace("hr.devlog.", "");
+      console.log("hr.devlog 빼기", replaceUrl);
+      const addBucketName = replaceUrl.replace(/(.{39})/g, "$1/hr.devlog");
+      console.log("/hr-devlog 넣기", addBucketName);
+      setMd(`${currentText}\n![](${addBucketName})`);
       const copyImgArr = imgList;
       const copyKeyArr = imgKey;
       copyImgArr.push(res.url);
