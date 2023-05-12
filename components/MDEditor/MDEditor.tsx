@@ -50,8 +50,8 @@ const Editor: Function = ({ setS3File, setImportImgList }: EditorTypes) => {
   });
 
   // console.log(data);
-  // const { uploadToS3 } = useS3Upload();
-  const { uploadToS3 } = usePresignedUpload();
+  const { uploadToS3 } = useS3Upload();
+  // const { uploadToS3 } = usePresignedUpload();
   const [imgList, setImgList] = useState<Array<string>>([]);
   const [imgKey, setImgKey] = useState<Array<string>>([]);
   const [currentText, setCurrentText] = useState();
