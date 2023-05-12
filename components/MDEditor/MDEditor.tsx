@@ -26,7 +26,7 @@ import {
   orderedListCommand,
   checkedListCommand,
 } from "@uiw/react-md-editor/lib/commands";
-import { useS3Upload } from "next-s3-upload";
+import { usePresignedUpload, useS3Upload } from "next-s3-upload";
 import aws from "aws-sdk";
 import axios from "axios";
 import useSWR from "swr";
@@ -50,7 +50,8 @@ const Editor: Function = ({ setS3File, setImportImgList }: EditorTypes) => {
   });
 
   // console.log(data);
-  const { uploadToS3 } = useS3Upload();
+  // const { uploadToS3 } = useS3Upload();
+  const { uploadToS3 } = usePresignedUpload();
   const [imgList, setImgList] = useState<Array<string>>([]);
   const [imgKey, setImgKey] = useState<Array<string>>([]);
   const [currentText, setCurrentText] = useState();
