@@ -20,9 +20,6 @@ const EditorView = styled.div`
   width: 50%;
 `;
 function Editor() {
-  const router = useRouter();
-
-  console.log("editor", router);
   const viewerRef = useRef(null);
 
   const [userText, setUserText] = useState<string>("");
@@ -35,14 +32,42 @@ function Editor() {
 
     const tagRegExp = /(`p|`div|`span)/g;
 
-    const mnfText = [{}];
+    const mnfText: any = [];
+    // console.log(texts);
+
     texts.map((item) => {
-      const tagName = item.match(tagRegExp);
-      // const tagName2 = tagName && tagName.substring(2);
-      console.log(item);
-      console.log("map으로 봐보자", item.startsWith("p", 1));
-      // console.log("백틱 제거해보자", tagName.substring(2));
+      const endIndex = item.indexOf(")");
+      // console.log("index", endIndex);
+
+      // console.log(item.substring(0, endIndex));
+
+      const centenceObj = {
+        tag: item.substring(0, endIndex),
+        desc: item.substring(endIndex + 2),
+      };
+
+      mnfText.push(centenceObj);
     });
+
+    // console.log(mnfText);
+
+    const textArr: any = [];
+
+    mnfText.map((item: any) => {
+      let tagTransLate;
+      switch (item.tag) {
+        case "디브":
+          tagTransLate = "div";
+          break;
+        default:
+          tagTransLate = item.tag;
+          break;
+      }
+      const htmlString = `<${tagTransLate}>${item.desc}</${tagTransLate}>`;
+      textArr.push(htmlString);
+    });
+
+    setTextToView(textArr);
   };
 
   // useEffect(() => {
@@ -61,7 +86,9 @@ function Editor() {
   // }, [userText]);
 
   // console.log(userText.split("\n"));
-  // console.log(textToView);
+  console.log("?", textToView);
+  console.log("?!!", textToView?.toString().replace(",", ""));
+
   return (
     <div style={{ width: "100%" }}>
       <h1>editor</h1>
@@ -70,7 +97,12 @@ function Editor() {
         <EditorEdit>
           <EditArea onChange={(e) => textHandler(e)} />
         </EditorEdit>
-        <EditorView ref={viewerRef}>{`${textToView?.toString()}`}</EditorView>
+        <EditorView
+          ref={viewerRef}
+          dangerouslySetInnerHTML={{
+            __html: String(textToView?.toString().replace(",", "")),
+          }}
+        ></EditorView>
       </EditorWrapper>
     </div>
   );
