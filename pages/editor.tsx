@@ -25,8 +25,6 @@ function Editor() {
   const [userText, setUserText] = useState<string>("");
   const [textToView, setTextToView] = useState<string[]>();
   const textHandler: Function = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    console.log(e);
-
     // console.log(viewerRef.current);
     const texts = e.currentTarget.value.split("\n");
 
@@ -92,7 +90,7 @@ function Editor() {
   return (
     <div style={{ width: "100%" }}>
       <h1>editor</h1>
-
+      {/* 
       <EditorWrapper>
         <EditorEdit>
           <EditArea onChange={(e) => textHandler(e)} />
@@ -104,6 +102,8 @@ function Editor() {
           }}
         ></EditorView>
       </EditorWrapper>
+      */}
+      <p>잠정 중단</p>
     </div>
   );
 }
