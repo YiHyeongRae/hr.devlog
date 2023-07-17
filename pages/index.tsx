@@ -51,6 +51,7 @@ const TechStack = styled.li`
 `;
 
 const Home = () => {
+  // console.log("Comeback commit")
   // console.log("홈 서버사이드 리스트", list);
 
   const modal = useSelector(
