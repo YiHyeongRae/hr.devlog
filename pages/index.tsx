@@ -1,11 +1,7 @@
-import { NextPage } from "next";
-import { useSession } from "next-auth/react";
-import MainCircleList from "../components/MainCircleList";
 import SEO from "../components/SEO";
 import { useSelector } from "react-redux";
 import { ReducerStates } from "../redux/store";
 import Modal from "../components/Modal";
-import axios from "axios";
 import styled from "styled-components";
 
 const ContentWrap = styled.div`
@@ -158,7 +154,6 @@ const Home = () => {
           </TechStack>
         </StackWrap>
       </WelcomeWrap>
-      {/* <MainCircleList data={list} /> */}
       <Modal modal={modal} />
     </ContentWrap>
   );
