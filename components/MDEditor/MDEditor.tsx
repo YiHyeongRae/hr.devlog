@@ -106,12 +106,12 @@ const Editor: Function = ({ setS3File, setImportImgList }: EditorTypes) => {
           },
         },
       });
-      console.log("img-key?", res);
-      console.log("substring ", res.url.replace("hr.devlog.", ""));
+      // console.log("img-key?", res);
+      // console.log("substring ", res.url.replace("hr.devlog.", ""));
       const replaceUrl = res.url.replace("hr.devlog.", "");
-      console.log("hr.devlog 빼기", replaceUrl);
+      // console.log("hr.devlog 빼기", replaceUrl);
       const addBucketName = replaceUrl.replace(/(.{39})/g, "$1/hr.devlog");
-      console.log("/hr-devlog 넣기", addBucketName);
+      // console.log("/hr-devlog 넣기", addBucketName);
       setMd(`${currentText}\n![](${addBucketName})`);
       const copyImgArr = imgList;
       const copyKeyArr = imgKey;
@@ -120,7 +120,7 @@ const Editor: Function = ({ setS3File, setImportImgList }: EditorTypes) => {
       setImportImgList(copyImgArr);
       setImgKey(copyKeyArr);
     } catch (error: any) {
-      console.log(error);
+      // console.log(error);
       alert("사진 업로드에 실패했습니다.");
     }
   };
@@ -150,7 +150,7 @@ const Editor: Function = ({ setS3File, setImportImgList }: EditorTypes) => {
         { Bucket: "hr.devlog", Key: imgKey[idx] },
         (err, data) => {
           console.error("???", err);
-          console.log("!!!", data);
+          // console.log("!!!", data);
         }
       );
 

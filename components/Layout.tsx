@@ -11,6 +11,7 @@ import SideTagNav from "./SideTagNav";
 import { getCookie, setCookie, CookieValueTypes } from "cookies-next";
 import loadConfig from "next/dist/server/config";
 import { DataTypes } from "../components/SideTagNav";
+import { postInfo } from "../data/post/postInfo";
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
@@ -111,7 +112,7 @@ function Layout(props: { children: React.ReactNode }) {
   });
 
   // console.log("?Data?", data);
-  const [BoardTap, setBoardTap] = useState<DataTypes[]>([]);
+  const [BoardTap, setBoardTap] = useState<any[]>([]);
   // console.log("boardTap?", BoardTap);
   const boardTapHandler: Function = (index: number) => {
     const cookieArr = [];
@@ -125,7 +126,6 @@ function Layout(props: { children: React.ReactNode }) {
       setCookie("TapState", JSON.stringify(cookieArr));
     } else {
       const parseJsonArr: Array<number> = JSON.parse(String(getCookieTapState));
-
       if (!parseJsonArr.some((item: number) => item === index)) {
         parseJsonArr.push(index);
         setCookie("TapState", JSON.stringify(parseJsonArr));
@@ -134,27 +134,43 @@ function Layout(props: { children: React.ReactNode }) {
     }
     const afterCookie: CookieValueTypes = getCookie("TapState");
     const parseJsonArr = JSON.parse(String(afterCookie));
+    // console.log("parseJsonArr", parseJsonArr);
+
     // console.log("TapState Parse", JSON.parse(getTapState));
     // console.log("boardTapHandler", index);
-    const newArr: DataTypes[] = [...BoardTap];
+    const newArr: any[] = [...BoardTap];
     // console.log("newArr1", newArr);
 
     // console.log("parseJsonArr", parseJsonArr);
 
-    parseJsonArr.map((index: number) => {
-      const search = newArr.some(
-        (item: DataTypes) => item.no === Number(index)
-      );
+    parseJsonArr.map((index: any) => {
+      const search = newArr.some((item: any) => item.no === index);
+      // console.log("search ??", search);
 
       if (!search) {
-        const filter = data.filter(
-          (item: DataTypes) => item.no === Number(index)
-        );
+        const info = postInfo.get(index);
+        const tapObject = {
+          post_title: info?.title,
+          no: info?.postId,
+        };
 
-        newArr.push(filter[0]);
+        newArr.push(tapObject);
       }
     });
-    // console.log("newArr", newArr);
+    // parseJsonArr.map((index: number) => {
+    //   const search = newArr.some(
+    //     (item: DataTypes) => item.no === Number(index)
+    //   );
+
+    //   if (!search) {
+    //     const filter = data.filter(
+    //       (item: DataTypes) => item.no === Number(index)
+    //     );
+
+    //     newArr.push(filter[0]);
+    //   }
+    // });
+
     setBoardTap(newArr);
     // const search = data.filter((item: any) => item.no === Number(index));
     // // console.log(search);
@@ -174,40 +190,54 @@ function Layout(props: { children: React.ReactNode }) {
       const parseJsonArr = JSON.parse(String(refreshCookie));
       // console.log("parseJsonArr", parseJsonArr);
       // console.log("2newArr", newArr);
+      console.log("useEffect", parseJsonArr);
+      parseJsonArr.map((index: any) => {
+        const search = newArr.some((item: any) => item.no === index);
+        // console.log("search ??", search);
 
-      parseJsonArr.map((index: number) => {
-        const search = newArr.some(
-          (item: DataTypes) => item && item.no === Number(index)
-        );
-        // console.log(data);
-        // console.log("?", isLoading);
         if (!search) {
-          const filter = data?.filter(
-            (item: DataTypes) => item && item.no === Number(index)
-          );
-          // console.log("filter?", filter);
-          // console.log("useEffect filter", filter);
-          if (filter !== undefined && filter.length !== 0) {
-            newArr.push(filter[0]);
-          }
-          // filter !== undefined ? newArr.push(filter[0]) : {};
-          // newArr.push(filter[0]);
+          const info = postInfo.get(index);
+          const tapObject = {
+            post_title: info?.title,
+            no: info?.postId,
+          };
+
+          newArr.push(tapObject);
         }
       });
+      // parseJsonArr.map((index: number) => {
+      //   const search = newArr.some(
+      //     (item: any) => item && item.no === Number(index)
+      //   );
+      //   // console.log(data);
+      //   // console.log("?", isLoading);
+      //   if (!search) {
+      //     const filter = data?.filter(
+      //       (item: DataTypes) => item && item.no === Number(index)
+      //     );
+      //     // console.log("filter?", filter);
+      //     // console.log("useEffect filter", filter);
+      //     if (filter !== undefined && filter.length !== 0) {
+      //       newArr.push(filter[0]);
+      //     }
+      //     // filter !== undefined ? newArr.push(filter[0]) : {};
+      //     // newArr.push(filter[0]);
+      //   }
+      // });
       setBoardTap(newArr);
     }
   }, [isLoading]);
 
   // 쿠키에는 post_no 만 저장
   // 쿠키에서 no 가져와서 boardTap 에 no에 맞는 data 꽃아주기
-  const selectPost: Function = (index: string) => {
+  const selectPost: Function = (path: string) => {
     // console.log("????", index);
     // console.log(data);
     // console.log("?", index.substring(6));
     // console.log("selectPost");
-    const search = data.filter(
-      (item: DataTypes) => item.no === Number(item && index.substring(6))
-    );
+    // const search = data.filter(
+    //   (item: DataTypes) => item.no === Number(item && index.substring(6))
+    // );
     //console.log(search);
     // console.log(index);
     // router.push(
@@ -217,12 +247,13 @@ function Layout(props: { children: React.ReactNode }) {
     //   },
     //   `/post/${index.substring(6)}`
     // );
-    router.push(
-      {
-        pathname: `/post/${index.substring(6)}`,
-      },
-      `/post/${index.substring(6)}`
-    );
+    // router.push(
+    //   {
+    //     pathname: `/post/${index.substring(6)}`,
+    //   },
+    //   `/post/${index.substring(6)}`
+    // );
+    router.push(path);
   };
 
   const deletePost: Function = (index: number) => {
@@ -245,7 +276,7 @@ function Layout(props: { children: React.ReactNode }) {
     setCookie("TapState", JSON.stringify(filteringCookie));
     router.push(filtering.length === 0 ? "/" : `/post/${filtering[0].no}`);
   };
-
+  console.log("boardTap? :::", BoardTap);
   return isLoading ? (
     <SpinnerWrap>
       <SmallSpinner />

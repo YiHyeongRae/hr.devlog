@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Layout from "../components/Layout";
-import "../public/static/font/font.css";
+// import "../public/static/font/font.css";
 import wrapper from "../redux/store";
 import { Provider } from "react-redux";
 
@@ -137,7 +137,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
           ) : (
             <Component {...pageProps} />
           )} */}
-          {loading ? (
+          {/* {loading ? (
             <Loading />
           ) : Component.defaultProps?.auth ? (
             <Auth>
@@ -145,7 +145,8 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
             </Auth>
           ) : (
             <Component {...pageProps} />
-          )}
+          )} */}
+          <Component {...pageProps} />
           <Analytics />
         </Layout>
       </Provider>

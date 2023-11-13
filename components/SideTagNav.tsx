@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import { postInfo } from "../data/post/postInfo";
 
 const SideWrap = styled.div`
   display: flex;
@@ -152,7 +153,6 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
 
   const cateHandler: Function = (e: React.MouseEvent<HTMLElement>) => {
     const copyCateArr = [...cateArr];
-    console.log("copyCateArr1", copyCateArr);
 
     if (cateArr.indexOf(e.currentTarget.innerText) === -1) {
       copyCateArr.push(e.currentTarget.innerText);
@@ -173,6 +173,32 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
       }),
       setHoverTitle(e.currentTarget.innerText);
   };
+  const [category, setCategory] = useState<any>({
+    gretting: [],
+    front: [],
+    back: [],
+    etc: [],
+  });
+
+  useEffect(() => {
+    const copyCategory = { ...category };
+    const separateCategory = [];
+    // console.log("size?", postInfo.size);
+    for (let i = 1; i < postInfo.size + 1; i++) {
+      separateCategory.push(postInfo.get(String(i)));
+    }
+
+    copyCategory.gretting = separateCategory.filter(
+      (item) => item?.category === "greeting"
+    );
+    copyCategory.front = separateCategory.filter(
+      (item) => item?.category === "front"
+    );
+
+    setCategory(copyCategory);
+  }, []);
+
+  // console.log("category?", category);
 
   return (
     <SideWrap>
@@ -282,41 +308,37 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
           <p style={{ flexGrow: 1 }}>HR.DEVLOG</p>
 
           <PostListWrap>
-            {data &&
-              data
-                ?.filter((item: DataTypes) => item.post_cate === "hrdevlog")
-                .map((data: DataTypes, i: number) => {
-                  // console.log("data", data);
-                  return (
-                    <PostTitle
-                      key={i}
-                      style={
-                        router.asPath.substring(6) === String(data.no)
-                          ? { backgroundColor: "#1e1e1f" }
-                          : {}
-                      }
-                      onMouseEnter={(e) => titleHover(e)}
-                      onMouseLeave={() => setHoverState(false)}
-                    >
-                      <Link
-                        href={{ pathname: `/post/${data.no}` }}
-                        as={`/post/${data.no}`}
-                        style={{
-                          color:
-                            router.asPath.substring(6) === String(data.no)
-                              ? "#deb77f"
-                              : "#fff",
-                          padding: "0 16px",
-                          display: "block",
-                        }}
-                        onClick={(e) => selectPost(e, data.no)}
-                        className="Link"
-                      >
-                        {data.post_title}
-                      </Link>
-                    </PostTitle>
-                  );
-                })}
+            {category.gretting.map((data: any, i: number) => {
+              return (
+                <PostTitle
+                  key={i}
+                  style={
+                    router.asPath.substring(6) === String(data.postId)
+                      ? { backgroundColor: "#1e1e1f" }
+                      : {}
+                  }
+                  onMouseEnter={(e) => titleHover(e)}
+                  onMouseLeave={() => setHoverState(false)}
+                >
+                  <Link
+                    href={{ pathname: `/post/${data.postId}` }}
+                    as={`/post/${data.postId}`}
+                    style={{
+                      color:
+                        router.asPath.substring(6) === String(data.postId)
+                          ? "#deb77f"
+                          : "#fff",
+                      padding: "0 16px",
+                      display: "block",
+                    }}
+                    onClick={(e) => selectPost(e, data.postId)}
+                    className="Link"
+                  >
+                    {data.title}
+                  </Link>
+                </PostTitle>
+              );
+            })}
           </PostListWrap>
         </SideListCateWrap>
         <SideListCateWrap>
@@ -337,41 +359,38 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
           <p style={{ flexGrow: 1 }}>Front</p>
 
           <PostListWrap>
-            {data &&
-              data
-                ?.filter((item: DataTypes) => item.post_cate === "frontend")
-                .map((data: DataTypes, i: number) => {
-                  // console.log("data", data);
-                  return (
-                    <PostTitle
-                      key={i}
-                      style={
-                        router.asPath.substring(6) === String(data.no)
-                          ? { backgroundColor: "#1e1e1f" }
-                          : {}
-                      }
-                      onMouseEnter={(e) => titleHover(e)}
-                      onMouseLeave={() => setHoverState(false)}
-                    >
-                      <Link
-                        href={{ pathname: `/post/${data.no}` }}
-                        as={`/post/${data.no}`}
-                        style={{
-                          color:
-                            router.asPath.substring(6) === String(data.no)
-                              ? "#deb77f"
-                              : "#fff",
-                          padding: "0 16px",
-                          display: "block",
-                        }}
-                        onClick={(e) => selectPost(e, data.no)}
-                        className="Link"
-                      >
-                        {data.post_title}
-                      </Link>
-                    </PostTitle>
-                  );
-                })}
+            {category.front.map((data: any, i: number) => {
+              // console.log("front data", data);
+              return (
+                <PostTitle
+                  key={i}
+                  style={
+                    router.asPath.substring(6) === String(data.postId)
+                      ? { backgroundColor: "#1e1e1f" }
+                      : {}
+                  }
+                  onMouseEnter={(e) => titleHover(e)}
+                  onMouseLeave={() => setHoverState(false)}
+                >
+                  <Link
+                    href={{ pathname: `/post/${data.postId}` }}
+                    as={`/post/${data.postId}`}
+                    style={{
+                      color:
+                        router.asPath.substring(6) === String(data.postId)
+                          ? "#deb77f"
+                          : "#fff",
+                      padding: "0 16px",
+                      display: "block",
+                    }}
+                    onClick={(e) => selectPost(e, data.postId)}
+                    className="Link"
+                  >
+                    {data.title}
+                  </Link>
+                </PostTitle>
+              );
+            })}
           </PostListWrap>
         </SideListCateWrap>
         <SideListCateWrap>
@@ -392,7 +411,7 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
           <p style={{ flexGrow: 1 }}>Back</p>
 
           <PostListWrap>
-            {data &&
+            {/* {data &&
               data
                 ?.filter((item: DataTypes) => item.post_cate === "backend")
                 .map((data: DataTypes, i: number) => {
@@ -426,7 +445,7 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
                       </Link>
                     </PostTitle>
                   );
-                })}
+                })} */}
           </PostListWrap>
         </SideListCateWrap>
         <SideListCateWrap>
@@ -447,7 +466,7 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
           <p style={{ flexGrow: 1 }}>Etc</p>
 
           <PostListWrap>
-            {data &&
+            {/* {data &&
               data
                 ?.filter((item: DataTypes) => item.post_cate === "etc")
                 .map((data: DataTypes, i: number) => {
@@ -481,7 +500,7 @@ function SideTagNav({ data, boardTap }: SideTagNavTypes) {
                       </Link>
                     </PostTitle>
                   );
-                })}
+                })} */}
           </PostListWrap>
         </SideListCateWrap>
       </SideListWrap>

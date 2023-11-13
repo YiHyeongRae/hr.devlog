@@ -84,8 +84,8 @@ function Editor() {
   // }, [userText]);
 
   // console.log(userText.split("\n"));
-  console.log("?", textToView);
-  console.log("?!!", textToView?.toString().replace(",", ""));
+  // console.log("?", textToView);
+  // console.log("?!!", textToView?.toString().replace(",", ""));
 
   return (
     <div style={{ width: "100%" }}>

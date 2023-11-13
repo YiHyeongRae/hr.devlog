@@ -124,12 +124,12 @@ function Modal({ modal }: { modal: number }) {
     const idx = inputArr.length - 1;
 
     if (test && test[idx] === inputArr[idx]) {
-      console.log("비교해봅시다", test[idx], inputArr[idx]);
-      console.log(
-        "thats right",
-        inputArr[idx],
-        keyRef?.current[idx]?.getAttribute("key-words")
-      );
+      // console.log("비교해봅시다", test[idx], inputArr[idx]);
+      // console.log(
+      //   "thats right",
+      //   inputArr[idx],
+      //   keyRef?.current[idx]?.getAttribute("key-words")
+      // );
       keyRef.current[idx].style.backgroundColor = "#ff0";
       keyRef.current[idx].style.color = "#000";
 
@@ -156,8 +156,8 @@ function Modal({ modal }: { modal: number }) {
       }
       setTest(copyArr);
     }
-    console.log("테스트", test);
-    console.log("inputArr, idx", inputArr, idx);
+    // console.log("테스트", test);
+    // console.log("inputArr, idx", inputArr, idx);
   };
 
   // useEffect(() => {
