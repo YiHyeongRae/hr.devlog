@@ -1,3 +1,8 @@
+
+<h1 align="center" style="display: block; font-size: 2.5em; font-weight: bold; margin-block-start: 1em; margin-block-end: 1em;">
+  <strong>티스토리로 이전 중이며 기존 블로그는 폐지했습니다.</strong>
+</h1>
+
 <h1 align="center" style="display: block; font-size: 2.5em; font-weight: bold; margin-block-start: 1em; margin-block-end: 1em;">
   <strong>HR-DEVLOG</strong>
 </h1>
